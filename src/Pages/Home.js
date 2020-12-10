@@ -3,6 +3,18 @@ import React from 'react';
 import '../Styles/App.css';
 import '../Styles/star.css';
 
+const button = () => {
+  return(
+    <div id="btn">
+      <div id='stars'></div>
+      <div id='stars2'></div>
+      <div id='stars3'></div>
+      
+      <a id='btntext' type="button" href="#text" > Let's Dive In</a>
+    </div>
+  )
+}
+
 const App = () => (
   <div>
     
@@ -15,17 +27,14 @@ const App = () => (
             <span>
               MUKUND GOHIL
             </span>
-            <br />
-            <span>
-              &
-            </span>
-            <br />
-            <span>
-              KHUSHBU SOLANKI
-            </span>
-            <br />
-            <a type="button" href="#text" > Hello </a>
           </div>
+          <div id='description'>
+            <span>
+              I am Not Perfect, but I am a Limited Edition
+            </span>
+          </div>
+          
+            {button()}
       
     </div>
 
