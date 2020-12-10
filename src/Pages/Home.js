@@ -5,13 +5,15 @@ import '../Styles/star.css';
 
 const button = () => {
   return(
-    <div id="btn">
+    <a href="#text" >
+    <div id="btn" onClick={()=>"#text"} >
       <div id='stars'></div>
       <div id='stars2'></div>
       <div id='stars3'></div>
       
-      <a id='btntext' type="button" href="#text" > Let's Dive In</a>
+      <a id='btntext'  > Let's Dive In</a>
     </div>
+    </a>
   )
 }
 
