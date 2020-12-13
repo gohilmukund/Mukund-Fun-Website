@@ -1,23 +1,25 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 // import logo from '../assets/Images/logo.svg';
 import '../Styles/App.css';
 import '../Styles/star.css';
 
 const button = () => {
   return(
-    <a href="#text" >
+    <Link to="/Portfolio">
     <div id="btn" onClick={()=>"#text"} >
       <div id='stars'></div>
       <div id='stars2'></div>
       <div id='stars3'></div>
       
       <a id='btntext'  > Let's Dive In</a>
+      {/* <Link to="/Portfolio">Let's Dive</Link> */}
     </div>
-    </a>
+    </Link>
   )
 }
 
-const App = () => (
+const Home = () => (
   <div>
     
       <div id='container' style={{height:"100vh", overflow:"hidden"}} >
@@ -40,11 +42,7 @@ const App = () => (
       
     </div>
 
-    <div id="text" height='100vh'>
-        <h1> Hello World</h1>
-    </div>
-
   </div>
 );
 
-export default App;
+export default Home;

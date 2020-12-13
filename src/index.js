@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './Pages/Home';
+import Home from './Pages/Home';
 import * as serviceWorker from './serviceWorker';
 import * as firebase from 'firebase';
+import Portfolio from './Pages/Portfolio';
+import BasicExample from './Components/Navigation';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDat7NFSCyGQs801U5rIVm66euKgr12AT4",
@@ -20,7 +22,9 @@ firebase.initializeApp(firebaseConfig);
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    {/* <Home /> */}
+    {/* <Portfolio /> */}
+    <BasicExample />
   </React.StrictMode>,
   document.getElementById('root')
 );
