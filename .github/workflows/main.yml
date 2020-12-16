@@ -26,7 +26,7 @@ jobs:
         run: |
           if (${{ steps.extract_branch.outputs.branch }} == master) 
           then 
-            echo ${{ steps.extract_branch.outputs.branch }}
+            echo "Branch : ${{ steps.extract_branch.outputs.branch }}"
           else       
             exit 1
           fi
