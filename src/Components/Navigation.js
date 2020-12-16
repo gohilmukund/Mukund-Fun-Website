@@ -4,9 +4,8 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import page404 from "../Pages/page404";
 import Home from "../Pages/Home";
-import Portfolio from "../Pages/Portfolio";
+import NeumorphicRoute from "./Router";
 
 // This site has 3 pages, all of which are rendered
 // dynamically in the browser (not server rendered).
@@ -17,7 +16,7 @@ import Portfolio from "../Pages/Portfolio";
 // making sure things like the back button and bookmarks
 // work properly.
 
-export default function BasicExample() {
+export default function Navigation() {
   return (
     <Router>
       <div>
@@ -30,24 +29,9 @@ export default function BasicExample() {
         */}
         <Switch>
             <Route exact path="/" component={Home} />
-            <Route path="/portfolio" component={Portfolio} />
-            <Route path="/about" component={About} />      
-            <Route path="*" component={page404} />   
+            <NeumorphicRoute />
         </Switch>
       </div>
     </Router>
-  );
-}
-
-// You can think of these components as "pages"
-// in your app.
-
-
-
-function About() {
-  return (
-    <div>
-      <h2>About</h2>
-    </div>
   );
 }
