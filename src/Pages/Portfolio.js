@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-
-import { Button, Card, Divider, H1, ProgressCircular } from 'ui-neumorphism'
-import 'ui-neumorphism/dist/index.css'
+import { Button, Card, ProgressCircular } from 'ui-neumorphism'
+// import 'ui-neumorphism/dist/index.css'
+import Header from '../Components/Header'
+// import Footer from '../Components/Footer'
 
 class Portfolio extends Component {
 
@@ -19,32 +20,20 @@ class Portfolio extends Component {
         }, 1000 )
     
     return( 
-        <div> 
-            {!this.state.loaded?
-                <div style={styles.center}>                  
-                    <ProgressCircular indeterminate size={64} width={8} color='var(--error)' />
+        <div style={{width:'100%'}}> 
+            {/* {!this.state.loaded? */}
+                {/* <div style={styles.center}>                   */}
+                    {/* <ProgressCircular indeterminate size={64} width={8} color='var(--error)' />
                 </div> 
             :
-                <div style={styles.center}>         
-                    <Card bordered style={styles.mainContainer}>     
-                        <div>
-                            <H1>Mukund's Portfolio</H1>
-                        </div>
-                        <div> 
-                            <Button text>Home</Button> 
-                            <Button text>Portfolio</Button> 
-                            <Button text>Skills</Button> 
-                            <Button text>Achievements</Button> 
-                            <Button text>Certifications</Button> 
-                            <Button text>About Me</Button> 
-                            <Button text>Contact Me</Button> 
-                            {/* <Button text></Button> */}
-                        </div>
-                        <Divider elevated style={{width:'100%'}} />
+                <div style={styles.center}>       
+    <Card bordered style={styles.mainContainer}> */}
+                        <Header title='Portfolio' />
                         <Button > Welcome To Mk's World </Button>
-                    </Card>   
-                </div>
-            }
+                    {/* </Card>
+                    <Footer title="hello"/>
+                </div> */}
+            {/* } */}
         </div>
     )
   }
@@ -56,6 +45,7 @@ const styles = {
         height:'100vh', 
         display: 'flex', 
         justifyContent: 'center', // Horizontal 
+        flexDirection:'column'
     },
     mainContainer: {
         alignItems:'center', // Horizontal
@@ -64,7 +54,7 @@ const styles = {
         height:'90vh', 
         display: 'flex', 
         // justifyContent: 'center', // Vertical 
-    }
+    },
   }
 
 export default Portfolio ;

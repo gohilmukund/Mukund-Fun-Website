@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import * as firebase from 'firebase';
-import BasicExample from './Components/Navigation';
+import Navigation from './Components/Navigation';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDat7NFSCyGQs801U5rIVm66euKgr12AT4",
@@ -20,9 +20,7 @@ firebase.initializeApp(firebaseConfig);
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <Home /> */}
-    {/* <Portfolio /> */}
-    <BasicExample />
+    <Navigation />
   </React.StrictMode>,
   document.getElementById('root')
 );
