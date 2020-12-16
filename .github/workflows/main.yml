@@ -17,12 +17,13 @@ jobs:
     if: github.ref == 'refs/heads/master'
     steps:
       - name: Check Branch 
-      - run: |
+        run: |
           git branch --show-current
           echo "##[set-output name=branch;]"git branch --show-current
           echo branch
           exit 1
-    
+          
+          
   build:
     name: Build
     runs-on: ubuntu-latest
