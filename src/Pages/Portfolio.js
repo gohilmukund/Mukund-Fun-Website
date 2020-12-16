@@ -27,10 +27,10 @@ class Portfolio extends Component {
             :
                 <div style={styles.center}>         
                     <Card bordered style={styles.mainContainer}>     
-                        <div style={{backgroundColor:''}}>
+                        <div>
                             <H1>Mukund's Portfolio</H1>
                         </div>
-                        <div > 
+                        <div> 
                             <Button text>Home</Button> 
                             <Button text>About Me</Button> 
                             <Button text>Contact Me</Button> 
