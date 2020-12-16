@@ -1,3 +1,5 @@
+![Build and Deploy](https://github.com/gohilmukund/Mukund-Fun-Website/workflows/Build%20and%20Deploy/badge.svg?branch=master&event=deployment)
+
 # Mukund's Guide
 
 ## How to use this cloned folder on any system.
