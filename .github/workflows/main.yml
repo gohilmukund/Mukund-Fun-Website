@@ -19,8 +19,7 @@ jobs:
       - name: Check Branch 
         run: |
           git branch --show-current
-          echo "##[set-output name=branch;]"git branch --show-current
-          echo branch
+          
           exit 1
           
           
