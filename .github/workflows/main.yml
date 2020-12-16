@@ -38,7 +38,7 @@ jobs:
       
       - name: Build
         run: |
-          npm run build-prod
+          npm run build
           echo Website build ..... Done
           
       - name: Archive Production Artifact
