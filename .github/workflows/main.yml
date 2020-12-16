@@ -19,7 +19,7 @@ jobs:
       - name: Check Branch
         shell: bash
         if: github.ref != 'refs/heads/master'
-        run: exit 0
+        run: exit 1
           
   build:
     name: Build
