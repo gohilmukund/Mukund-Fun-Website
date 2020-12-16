@@ -16,10 +16,11 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
     steps:
-      - name: Check Branch 
-        run: |
-          echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-          exit 1
+      - name: Get Branch 
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+          
+      - name: Match Branch
+        run: exit 1
           
           
   build:
