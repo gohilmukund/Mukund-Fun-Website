@@ -18,8 +18,7 @@ jobs:
     steps:
       - name: Check Branch 
         run: |
-          git branch --show-current
-          
+          echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
           exit 1
           
           
