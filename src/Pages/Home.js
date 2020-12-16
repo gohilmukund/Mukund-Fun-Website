@@ -1,21 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-// import logo from '../assets/Images/logo.svg';
 import '../Styles/App.css';
 import '../Styles/star.css';
 
 const button = () => {
   return(
-    <Link to="/Portfolio">
+    <a href="/Portfolio">
     <div id="btn" onClick={()=>"#text"} >
       <div id='stars'></div>
       <div id='stars2'></div>
       <div id='stars3'></div>
       
-      <a id='btntext'  > Let's Dive In</a>
+      <div id='btntext' > Let's Dive In</div>
       {/* <Link to="/Portfolio">Let's Dive</Link> */}
     </div>
-    </Link>
+    </a>
   )
 }
 

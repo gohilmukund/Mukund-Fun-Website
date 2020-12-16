@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { Button, Card, ProgressCircular } from 'ui-neumorphism'
+import { Button, Card, Divider, ProgressCircular } from 'ui-neumorphism'
 import 'ui-neumorphism/dist/index.css'
 
 class Portfolio extends Component {
@@ -26,8 +26,10 @@ class Portfolio extends Component {
                 </div> 
             :
                 <div style={styles.center}>         
-                    <Card bordered style={styles.mainContainer}>      
-                        <Button style={{color:'red'}}> Welcome </Button>
+                    <Card bordered style={styles.mainContainer}>     
+                        <div > <Button  /> <Button /> </div>
+                        <Divider elevated style={{width:'100%'}} />
+                        <Button > Welcome </Button>
                     </Card>   
                 </div>
             }

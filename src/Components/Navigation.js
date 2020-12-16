@@ -2,9 +2,9 @@ import React from "react";
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
+import page404 from "../Pages/page404";
 import Home from "../Pages/Home";
 import Portfolio from "../Pages/Portfolio";
 
@@ -29,15 +29,10 @@ export default function BasicExample() {
           of them to render at a time
         */}
         <Switch>
-          <Route exact path="/">
-            <Home  />
-          </Route>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/portfolio">
-            <Portfolio />
-          </Route>
+            <Route exact path="/" component={Home} />
+            <Route path="/portfolio" component={Portfolio} />
+            <Route path="/about" component={About} />      
+            <Route path="*" component={page404} />   
         </Switch>
       </div>
     </Router>
