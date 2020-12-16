@@ -1,6 +1,18 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Build and Deploy](https://github.com/gohilmukund/Mukund-Fun-Website/workflows/Build%20and%20Deploy/badge.svg?branch=master&event=deployment)
 
-## Available Scripts
+# Mukund's Guide
+
+## How to use this cloned folder on any system.
+1. Install Node JS on the system. 
+1. Use `npm install -g firebase-tools` to install firebase CLI
+1. Then login to your account using `firebase login` to gohil.mukund@gmail.com account
+
+## How to build and deploy application
+1. use `npm run build` to build the app
+1. Once build folder is created use `firebase deploy` to deploy it.
+
+
+# Available Scripts
 
 In the project directory, you can run:
 
