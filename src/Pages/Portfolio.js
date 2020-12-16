@@ -32,6 +32,10 @@ class Portfolio extends Component {
                         </div>
                         <div> 
                             <Button text>Home</Button> 
+                            <Button text>Portfolio</Button> 
+                            <Button text>Skills</Button> 
+                            <Button text>Achievements</Button> 
+                            <Button text>Certifications</Button> 
                             <Button text>About Me</Button> 
                             <Button text>Contact Me</Button> 
                             {/* <Button text></Button> */}
