@@ -28,7 +28,6 @@ jobs:
           then 
             echo ${{ steps.extract_branch.outputs.branch }}
           else       
-            echo ${{ steps.extract_branch.outputs.branch }}   
             exit 1
           fi
           
