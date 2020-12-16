@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Card, ProgressCircular } from 'ui-neumorphism'
+import { Button } from 'ui-neumorphism'
 // import 'ui-neumorphism/dist/index.css'
 import Header from '../Components/Header'
 // import Footer from '../Components/Footer'
@@ -39,22 +39,22 @@ class Portfolio extends Component {
   }
 }
 
-const styles = {
-    center: {
-        alignItems:'center', // Vertical
-        height:'100vh', 
-        display: 'flex', 
-        justifyContent: 'center', // Horizontal 
-        flexDirection:'column'
-    },
-    mainContainer: {
-        alignItems:'center', // Horizontal
-        flexDirection:'column',
-        width:'95vw', 
-        height:'90vh', 
-        display: 'flex', 
-        // justifyContent: 'center', // Vertical 
-    },
-  }
+// const styles = {
+//     center: {
+//         alignItems:'center', // Vertical
+//         height:'100vh', 
+//         display: 'flex', 
+//         justifyContent: 'center', // Horizontal 
+//         flexDirection:'column'
+//     },
+//     mainContainer: {
+//         alignItems:'center', // Horizontal
+//         flexDirection:'column',
+//         width:'95vw', 
+//         height:'90vh', 
+//         display: 'flex', 
+//         // justifyContent: 'center', // Vertical 
+//     },
+//   }
 
 export default Portfolio ;
