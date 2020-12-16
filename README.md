@@ -1,4 +1,4 @@
-![Build and Deploy](https://github.com/gohilmukund/Mukund-Fun-Website/workflows/Build%20and%20Deploy/badge.svg?branch=master&event=deployment)
+![Build and Deploy](https://github.com/gohilmukund/Mukund-Fun-Website/workflows/Build%20and%20Deploy/badge.svg?branch=master)
 
 # Mukund's Guide
 
