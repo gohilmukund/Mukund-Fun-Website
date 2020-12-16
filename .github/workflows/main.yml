@@ -23,7 +23,7 @@ jobs:
           
       - name: Match Branch
         shell: bash
-        if: $extract_branch == master
+        if: extract_branch == 'master'
         run: |
           if (${{ steps.extract_branch.outputs.branch }} == master) 
           then 
