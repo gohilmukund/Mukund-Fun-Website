@@ -23,15 +23,8 @@ jobs:
           
       - name: Match Branch
         shell: bash
-        if: github.ref == 'master'
-        run: |
-          if (${{ steps.extract_branch.outputs.branch }} == master) 
-          then 
-            echo "Branch : ${{ steps.extract_branch.outputs.branch }}"
-          else       
-            exit 1
-          fi
-          
+        if: github.ref == 'refs/heads/master'
+        run: exit 1
           
   build:
     name: Build
