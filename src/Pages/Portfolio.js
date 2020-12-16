@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { Button, Card, Divider, ProgressCircular } from 'ui-neumorphism'
+import { Button, Card, Divider, H1, ProgressCircular } from 'ui-neumorphism'
 import 'ui-neumorphism/dist/index.css'
 
 class Portfolio extends Component {
@@ -16,7 +16,7 @@ class Portfolio extends Component {
 
         setTimeout(() => {
             this.setState({loaded:true});
-        }, 3000 )
+        }, 1000 )
     
     return( 
         <div> 
@@ -27,7 +27,15 @@ class Portfolio extends Component {
             :
                 <div style={styles.center}>         
                     <Card bordered style={styles.mainContainer}>     
-                        <div > <Button  /> <Button /> </div>
+                        <div style={{backgroundColor:''}}>
+                            <H1>Mukund's Portfolio</H1>
+                        </div>
+                        <div > 
+                            <Button text>Home</Button> 
+                            <Button text>About Me</Button> 
+                            <Button text>Contact Me</Button> 
+                            {/* <Button text></Button> */}
+                        </div>
                         <Divider elevated style={{width:'100%'}} />
                         <Button > Welcome </Button>
                     </Card>   
@@ -46,11 +54,12 @@ const styles = {
         justifyContent: 'center', // Horizontal 
     },
     mainContainer: {
-        alignItems:'center', // Vertical
+        alignItems:'center', // Horizontal
+        flexDirection:'column',
         width:'95vw', 
         height:'90vh', 
         display: 'flex', 
-        justifyContent: 'center', // Horizontal 
+        // justifyContent: 'center', // Vertical 
     }
   }
 
