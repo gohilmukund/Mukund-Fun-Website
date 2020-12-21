@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { Button } from 'ui-neumorphism'
-// import 'ui-neumorphism/dist/index.css'
 import Header from '../Components/Header'
-// import Footer from '../Components/Footer'
 
 class Portfolio extends Component {
 
