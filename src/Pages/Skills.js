@@ -1,7 +1,7 @@
 import React from 'react'
 import { H3 } from 'ui-neumorphism'
 
-const page404 = () => {
+const Skills = () => {
     return(
         <div style={{width:'100%',height:'100%'}}>
             <div style={{height:'100%', justifyContent:'center' }}> 
@@ -12,4 +12,4 @@ const page404 = () => {
     )
 }
 
-export default page404
+export default Skills
