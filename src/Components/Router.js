@@ -1,54 +1,81 @@
 import React, { useEffect, useState } from "react";
 import { Route, Switch } from "react-router-dom";
-import { Card, ProgressCircular, overrideThemeVariables } from 'ui-neumorphism'
+import { Card, ProgressCircular } from 'ui-neumorphism'
 import 'ui-neumorphism/dist/index.css'
-import page404 from "../Pages/page404";
-import Portfolio from "../Pages/Portfolio";
-import Header from '../Components/Header'
 import Footer from '../Components/Footer'
+import routes from '../routes/index.js'
+import Header from "./Header";
+import { overrideThemeVariables } from 'ui-neumorphism'
+import { theme } from "./Theme";
+import { withRouter } from 'react-router-dom'
 
-export default function NeumorphicRoute() {
+export var DARKMODE = false;
+export let THEMECOLOR ;
+export let isSmall = false ;
+
+function NeumorphicRoute() {
     
     const [loaded, setLoaded] = useState(false)
+    const [darkMode, setDarkMode] = useState(false)
+
     setTimeout(() => {
         setLoaded(true);
-    }, 500 )
+    }, 500 ) 
 
-    // useEffect(()=> {
-    //     overrideThemeVariables({
-    //         '--light-bg': '#E9B7B9',
-    //         '--light-bg-dark-shadow': '#ba9294',
-    //         '--light-bg-light-shadow': '#ffdcde',
-    //         '--dark-bg': '#292E35',
-    //         '--dark-bg-dark-shadow': '#21252a',
-    //         '--dark-bg-light-shadow': '#313740',
-    //         '--primary': '#8672FB',
-    //         '--primary-dark': '#4526f9',
-    //         '--primary-light': '#c7befd'
-    //       })
-    // });
+    useEffect(()=>{
+        THEMECOLOR = 'theme1'
+        overrideThemeVariables(theme(THEMECOLOR))
+    },[])
+
+    const themeModeToggle = () => {
+        DARKMODE = !darkMode;
+        setDarkMode(!darkMode)
+        overrideThemeVariables(theme(THEMECOLOR))
+    }
+
+    const changeTheme = (colorName) => {
+        THEMECOLOR = colorName
+        overrideThemeVariables(theme(THEMECOLOR))
+    }
+    
 
     return (
-        <div>
+        <main className={`theme--${DARKMODE ? 'dark' : 'light'}`}>
+            <Card
+                flat
+                dark={DARKMODE}
+                className={`main-container ${isSmall ? 'main-container-sm' : ''}`} 
+                style={{borderRadius:'0px'}}>
+
             {!loaded?
-                <div style={styles.center}>                  
-                    <ProgressCircular indeterminate size={64} width={8} color='var(--error)' />
+                <div style={styles.center} className={`theme--${DARKMODE ? 'dark' : 'light'}`} >                  
+                    <ProgressCircular dark={DARKMODE} indeterminate size={64} width={8} color='var(--error)' />
                 </div>
             :
+            
                 <div style={styles.center}>       
-                    <Card bordered style={styles.mainContainer}>
+                    <Card bordered dark={DARKMODE} style={styles.mainContainer}>
+                        <Header onClick={themeModeToggle} />
                         <div style={{width:'100%',height:'90vh'}}>
                             <Switch>
-                                <Route path="/portfolio" component={Portfolio} />
-                                <Route path="/about" component={About} />      
-                                <Route path="*" component={page404} /> 
+                                {routes.map((route) => (
+                                    <Route
+                                        exact
+                                        key={route.id}
+                                        path={route.path}
+                                        component={() => <route.component dark={DARKMODE} />}
+                                    />
+                                ))}
                             </Switch>
                         </div>
                     </Card>
-                    <Footer title="hello"/>
+                    
+                    <Footer onClick={changeTheme} />
                 </div>
+                              
             }
-        </div>
+            </Card>
+        </main>
     )
 }
 
@@ -70,12 +97,4 @@ const styles = {
     },
 }
 
-function About() {
-    return (
-      <div style={{width:'100%'}}>
-          <Header title='About'/>
-        <h2>About</h2>
-      </div>
-    );
-  }
-  
+export default withRouter(NeumorphicRoute)
