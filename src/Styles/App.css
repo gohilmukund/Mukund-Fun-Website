@@ -8,8 +8,11 @@ body {
   overflow: hidden;
 }
 
+/* Style for background color */
 #container {
-  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%) !important;
+  /* Blue n black sky */
+  /* background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%) !important; */   
+  background: radial-gradient(ellipse at bottom, #fd163d 0%, #2b0101 100%) !important;
 }
 
 #title span {
@@ -34,7 +37,7 @@ body {
 }
 
 #description span {
-  background: -webkit-linear-gradient(red,white);
+  background: -webkit-linear-gradient(black,white);
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -52,6 +55,7 @@ body {
   letter-spacing: 2px;
   margin-top: -60px;
   padding-left: 10px;
+  
 }
 
 #btn {
@@ -64,27 +68,42 @@ body {
   border-radius: 20px;
   border: double 2px transparent;
   background-image:
-  linear-gradient(to bottom, #1b2735 0%, #121a24 100%),
-  linear-gradient(to bottom right, #b827fc 0%, #2c90fc 25%, #b8fd33 50%, #fec837 75%, #fd1892 100%);
+  /* Blue sky */
+  /* linear-gradient(to bottom, #1b2735 0%, #121a24 100%),
+  linear-gradient(to bottom right, #b827fc 0%, #2c90fc 25%, #b8fd33 50%, #fec837 75%, #fd1892 100%); */
+  
+  /* Christmas sky */
+  /* linear-gradient(to bottom, #cf0d37 0%, #361c1c 100%), */
+  linear-gradient(to bottom right, #F5624D 0%, #CC231E 25%, #34A65F 50%,  #235E6F 100%);
+  box-shadow: 0px 0px 20px 0px whitesmoke;
+
   background-origin: border-box;
-  background-clip: content-box, border-box;
+  background-clip: content-box, border-box;  
 }
 
 #btn:hover {
   background-image:
-  linear-gradient(to bottom, #1b2735 100%, #121a24 0%),
-  linear-gradient(to top left, #b827fc 0%, #2c90fc 25%, #b8fd33 50%, #fec837 75%, #fd1892 100%);
-  /* border-width: 4px; */
+   /* Blue sky */
+  /* linear-gradient(to bottom, #1b2735 100%, #121a24 0%),
+  linear-gradient(to top left, #b827fc 0%, #2c90fc 25%, #b8fd33 50%, #fec837 75%, #fd1892 100%); */
+    
+  /* Christmas sky */
+  /* linear-gradient(to top, #cf0d37 0%, #361c1c 100%), */
+  linear-gradient(to top left, #F5624D 0%, #CC231E 25%, #34A65F 50%, #0F8A5F 75%, #235E6F 100%);
+  
 }
 
 #btntext {
   color: whitesmoke;
+  color: black;
+  text-transform: uppercase;
+  font-weight: 900;
   letter-spacing: 2px;
   font-style: italic;
   text-decoration: none;
   /* vertical-align: center; */
   /* padding-top: 2%; */
-  left: 50%;
+  left: 46%;
   margin-left: -55px;
   margin-top: 3px;
   position: absolute;
