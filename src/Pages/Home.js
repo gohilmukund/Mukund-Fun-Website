@@ -1,6 +1,7 @@
 import React from 'react';
 import '../Styles/App.css';
 import '../Styles/star.css';
+import pine from '../assets/Images/pine.png'
 
 const button = () => {
   return(
@@ -19,6 +20,9 @@ const button = () => {
 
 const Home = () => (
   <div>
+      <div style={{position:"absolute", bottom:0, backgroundImage:`url(${pine})`, backgroundRepeat:'repeat-x', width:'100vw', height:'25vh' }}>
+       
+      </div>
     
       <div id='container' style={{height:"100vh", overflow:"hidden"}} >
           <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css' />

@@ -16,7 +16,9 @@ body {
 }
 
 #title span {
-  background: -webkit-linear-gradient(white, #38495a);
+  background: linear-gradient(to right, rgb(100, 81, 2), gold , rgb(252, 236, 149), gold , rgb(100, 81, 2) );
+  /* text-shadow: 0px 0px 10px black; */
+  font-weight: 400;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -37,7 +39,8 @@ body {
 }
 
 #description span {
-  background: -webkit-linear-gradient(black,white);
+  background: -webkit-linear-gradient(gold,white);
+  text-shadow: 0px 0px 7px black;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -95,7 +98,8 @@ body {
 
 #btntext {
   color: whitesmoke;
-  color: black;
+  color: goldenrod;
+  text-shadow: 0px 0px 7px black;
   text-transform: uppercase;
   font-weight: 900;
   letter-spacing: 2px;
