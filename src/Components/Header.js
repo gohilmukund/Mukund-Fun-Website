@@ -26,13 +26,6 @@ export default function Header(props) {
             </div> */}
             <div> 
                 {routes.map((item)=>buttonRender(item))}
-                {/* <Button dark={DARKMODE} text onClick={()=>window.location.href='/Home'}>Home</Button> 
-                <Button dark={DARKMODE} text onClick={()=>window.location.href='/Portfolio'}>Portfolio</Button> 
-                <Button dark={DARKMODE} text onClick={()=>window.location.href='/Skills'}>Skills</Button> 
-                <Button dark={DARKMODE} text onClick={()=>window.location.href='/Achievements'}>Achievements</Button> 
-                <Button dark={DARKMODE} text onClick={()=>window.location.href='/Certification'}>Certifications</Button> 
-                <Button dark={DARKMODE} text onClick={()=>window.location.href='/About'}>About Me</Button> 
-                <Button dark={DARKMODE} text onClick={()=>window.location.href='/Contact'}>Contact Me</Button>  */}
             </div>
             <Divider elevated dark={DARKMODE} style={{width:'100%'}} />
         </div>
