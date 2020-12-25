@@ -12,13 +12,7 @@ const buttonRender = (item) => {
 }
 
 export default function Header(props) {
-
-    // const darkModeToggle = () => {
-    //     DARKMODE = !DARKMODE;
-    //     overrideThemeVariables(theme('pink'))
-    //     // setDarkMode(!darkMode)        
-    // }   
-
+    
     return (
         <div style={styles.headerStyle}  >
             <Topbar

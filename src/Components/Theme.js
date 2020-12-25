@@ -78,7 +78,19 @@ export function theme(type) {
                 '--primary-light': '#c7befd'
             }
 
-          
+        case 'christmas' :
+            return {
+                '--light-bg': '#e13d37',
+                '--light-bg-dark-shadow': '#cc231e',
+                '--light-bg-light-shadow': '#e4534e',
+                '--dark-bg': '#235E6F',
+                '--dark-bg-dark-shadow': '#18424e',
+                '--dark-bg-light-shadow': '#2b7488',
+                '--primary': '#34A65F',
+                '--primary-dark': '#257443',
+                '--primary-light': '#51c87e'
+            }
+        
         default:
             return {                
                 '--light-bg': '#E9B7B9',
@@ -94,3 +106,38 @@ export function theme(type) {
     }
     
 }
+
+
+export const themeIndex = [
+    {
+        name: 'theme1',
+        light: '#D6DDFB',
+        dark: '#3E3D42'
+    },
+    {
+        name: 'theme2',
+        light: '#E4EBF5',
+        dark: '#444444'
+    },
+    {
+        name: 'theme3',
+        light: '#E9B7B9',
+        dark: '#515568'
+    },
+    {
+        name: 'theme4',
+        light: '#B9D7D2',
+        dark: '#243441'
+    },
+    {
+        name: 'theme5',
+        light: '#cccccc',
+        dark: '#292E35'
+    },
+    {
+        name: 'christmas',
+        light: '#e13d37',
+        dark: '#3E3D42'
+    },
+    
+]

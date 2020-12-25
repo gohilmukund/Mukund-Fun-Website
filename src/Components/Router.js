@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Route, Switch } from "react-router-dom";
-import { Card, ProgressCircular } from 'ui-neumorphism'
+import { Card } from 'ui-neumorphism'
 import 'ui-neumorphism/dist/index.css'
 import Footer from '../Components/Footer'
 import routes from '../routes/index.js'
@@ -15,27 +15,38 @@ export let isSmall = false ;
 
 function NeumorphicRoute() {
     
-    const [loaded, setLoaded] = useState(false)
-    const [darkMode, setDarkMode] = useState(false)
+    const [darkMode, setDarkMode] = useState(false)   
 
-    setTimeout(() => {
-        setLoaded(true);
-    }, 500 ) 
+    window.onload = checkTheme();
+    function checkTheme() {
+        const localStorageTheme = localStorage.getItem("theme");        
+        if(localStorageTheme !== null) {
+            THEMECOLOR = localStorageTheme
+        }
+    }
 
     useEffect(()=>{
-        THEMECOLOR = 'theme1'
+        console.log("Theme: ", localStorage.getItem("darkMode"), localStorage.getItem("theme") )
+    })
+    
+
+    useEffect(()=>{        
+        const localStorageDarkMode = localStorage.getItem("darkMode");
+        DARKMODE=localStorageDarkMode
+        setDarkMode(localStorageDarkMode)
         overrideThemeVariables(theme(THEMECOLOR))
     },[])
 
-    const themeModeToggle = () => {
+    const themeModeToggle = () => {        
         DARKMODE = !darkMode;
         setDarkMode(!darkMode)
-        overrideThemeVariables(theme(THEMECOLOR))
+        localStorage.setItem("darkMode", DARKMODE)
     }
 
     const changeTheme = (colorName) => {
         THEMECOLOR = colorName
-        overrideThemeVariables(theme(THEMECOLOR))
+        localStorage.setItem("theme", colorName)
+        overrideThemeVariables(theme(THEMECOLOR))        
     }
     
 
@@ -46,13 +57,7 @@ function NeumorphicRoute() {
                 dark={DARKMODE}
                 className={`main-container ${isSmall ? 'main-container-sm' : ''}`} 
                 style={{borderRadius:'0px'}}>
-
-            {!loaded?
-                <div style={styles.center} className={`theme--${DARKMODE ? 'dark' : 'light'}`} >                  
-                    <ProgressCircular dark={DARKMODE} indeterminate size={64} width={8} color='var(--error)' />
-                </div>
-            :
-            
+                        
                 <div style={styles.center}>       
                     <Card bordered dark={DARKMODE} style={styles.mainContainer}>
                         <Header onClick={themeModeToggle} />
@@ -72,8 +77,8 @@ function NeumorphicRoute() {
                     
                     <Footer onClick={changeTheme} />
                 </div>
-                              
-            }
+                
+            {/* } */}
             </Card>
         </main>
     )

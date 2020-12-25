@@ -67,7 +67,7 @@ class Topbar extends React.Component {
             <IconButton className='topbar-action' onClick={() => this.open(linkedInUrl)}> <Icon path={mdiLinkedin} size={1} /> </IconButton>
             <IconButton className='topbar-action' onClick={() => this.open(qwiklabUrl)}> <Icon path={mdiGoogleCloud} size={1} /> </IconButton>
             <IconButton className='topbar-action' onClick={() => this.open(githubUrl)}> <Icon path={mdiGithub} size={1} /> </IconButton>
-            <ToggleButton className='topbar-action' onChange={onClick}> <Icon path={dark ? mdiLightbulbOutline : mdiLightbulb} size={1} /> </ToggleButton>
+            <ToggleButton className='topbar-action' onChange={onClick} > <Icon path={dark ? mdiLightbulbOutline : mdiLightbulb} size={1} /> </ToggleButton>
           
         </Card>
       </Card>
