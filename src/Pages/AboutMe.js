@@ -4,13 +4,19 @@ import pro from '../assets/Images/propic.jpg'
 
 const AboutMe = (props) => {
     const {dark} = props
+
+    const borderWidth = 10
+    const imageSize = 150
+
+    const border = borderWidth*2 + imageSize
+    const borderThickness = borderWidth + 'px'
     return(
         <div style={{width:'100%',height:'100%'}}>
-            <div class='justify-content-center align-items-center' style={{height:'100%', paddingTop:'5%' , justifyContent:'center', alignItems:'center' }}> 
+            <div class='justify-content-center align-items-center main-view' style={{height:'100%', paddingTop:'5%' , justifyContent:'center', alignItems:'center' }}> 
 
                 <div style={{width:'100%',  alignContent:'center', justifyContent:'center', display:'flex'}}>
-                    <Avatar size='200' />
-                    <Avatar size='150' src={pro} style={{position:'absolute', margin:'25px'}} />
+                    <Avatar size={border} bgColor={'red'}  />
+                    <Avatar size={imageSize} src={pro} style={{position:'absolute', margin:borderThickness}} />
                 </div>
                 
 

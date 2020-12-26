@@ -7,9 +7,14 @@ import { useLocation, withRouter } from 'react-router';
 
 const buttonRender = (item, location, dark) => {    
     const active = item.path===location.pathname
-    return (
-        <Button key={item.id} bgColor={active ? 'var(--primary-dark)' : null} dark={dark} text onClick={()=>window.location.href=item.path}>{item.name}</Button> 
-    )
+    if (item.id===100)
+        return null;
+    else
+        return (
+            <Button active={active} key={item.id} dark={dark} text onClick={()=>window.location.href=item.path}>
+                {item.name}
+            </Button> 
+        )
 }
 
 function Header(props) {
