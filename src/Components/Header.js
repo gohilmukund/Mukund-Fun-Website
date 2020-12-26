@@ -3,31 +3,33 @@ import { Button, Divider } from 'ui-neumorphism'
 import 'ui-neumorphism/dist/index.css'
 import routes from '../routes/index.js'
 import Topbar from './Topbar';
-import { DARKMODE } from './Router';
+import { useLocation, withRouter } from 'react-router';
 
-const buttonRender = (item) => {
+const buttonRender = (item, location, dark) => {    
+    const active = item.path===location.pathname
     return (
-        <Button key={item.id} dark={DARKMODE} text onClick={()=>window.location.href=item.path}>{item.name}</Button> 
+        <Button key={item.id} bgColor={active ? 'var(--primary-dark)' : null} dark={dark} text onClick={()=>window.location.href=item.path}>{item.name}</Button> 
     )
 }
 
-export default function Header(props) {
+function Header(props) {
+
+    const location = useLocation();
+    const {dark} = props
     
     return (
         <div style={styles.headerStyle}  >
             <Topbar
                 size={"100%"}
-                dark={DARKMODE}
+                dark={dark}
                 onClick={props.onClick}
-                // onMenuClick={this.toggleSidebar}
                 />
-            {/* <div>
-                <H1 dark={DARKMODE} >Mukund's {props.title}</H1>
-            </div> */}
+
             <div> 
-                {routes.map((item)=>buttonRender(item))}
+                {routes.map((item)=>buttonRender(item, location, dark))}
             </div>
-            <Divider elevated dark={DARKMODE} style={{width:'100%'}} />
+
+            <Divider elevated dark={dark} style={{width:'100%'}} />
         </div>
     )
 }
@@ -40,3 +42,6 @@ const styles = {
         alignItems: 'center',
     }
 }
+
+
+export default withRouter(Header)

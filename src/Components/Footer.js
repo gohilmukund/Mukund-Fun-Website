@@ -1,26 +1,29 @@
 import React from 'react'
+import { withRouter } from 'react-router'
 import { Card, Overline, IconButton } from 'ui-neumorphism'
 import 'ui-neumorphism/dist/index.css'
-import { DARKMODE } from './Router'
 import { themeIndex } from './Theme'
 
-
-export default function Footer(props) {
+function Footer(props) {
+    const {dark} = props
     return (
         <div style={{marginTop:'10px'}}>
-            <Overline dark={DARKMODE}> 
+            <Overline dark={dark}> 
                 <span role="img" aria-label="heart"> &#10084;&#65039; </span>
                     Website made by Mukund Gohil 
                 <span role="img" aria-label="heart"> &#10084;&#65039; </span>  
             </Overline>
-            <Card inset dark={DARKMODE} className='d-flex align-center topbar-actions' style={{padding:'5px',alignContent:'center',display: 'flex', justifyContent: 'center',}}> 
+            <Card inset dark={dark} className='d-flex align-center topbar-actions' style={{padding:'5px',alignContent:'center',display: 'flex', justifyContent: 'center',}}> 
 
                 {themeIndex.map((item)=>{
                     return(
-                        <IconButton bordered bgColor={DARKMODE?item.dark:item.light} size="small" onClick={()=>props.onClick(item.name)}> </IconButton>
+                        <IconButton key={item.name} bordered bgColor={dark?item.dark:item.light} size="small" onClick={()=>props.onClick(item.name)}> </IconButton>
                     )
                 })}            
             </Card>
         </div>
     )
 }
+
+
+export default withRouter(Footer)

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import { Card } from 'ui-neumorphism'
 import 'ui-neumorphism/dist/index.css'
@@ -9,58 +9,43 @@ import { overrideThemeVariables } from 'ui-neumorphism'
 import { theme } from "./Theme";
 import { withRouter } from 'react-router-dom'
 
-export var DARKMODE = false;
-export let THEMECOLOR ;
 export let isSmall = false ;
 
 function NeumorphicRoute() {
     
-    const [darkMode, setDarkMode] = useState(false)   
-
-    window.onload = checkTheme();
-    function checkTheme() {
-        const localStorageTheme = localStorage.getItem("theme");        
-        if(localStorageTheme !== null) {
-            THEMECOLOR = localStorageTheme
-        }
-    }
+    const [darkMode, setDarkMode] = useState(localStorage.getItem("darkMode")==="true" ?  true : false)
+    const [themeColor, setThemeColor] = useState(localStorage.getItem("theme")? localStorage.getItem("theme") :'christmas')
 
     useEffect(()=>{
-        console.log("Theme: ", localStorage.getItem("darkMode"), localStorage.getItem("theme") )
-    })
+        overrideThemeVariables(theme(themeColor))
+    },[themeColor])
     
-
-    useEffect(()=>{        
-        const localStorageDarkMode = localStorage.getItem("darkMode");
-        DARKMODE=localStorageDarkMode
-        setDarkMode(localStorageDarkMode)
-        overrideThemeVariables(theme(THEMECOLOR))
-    },[])
-
-    const themeModeToggle = () => {        
-        DARKMODE = !darkMode;
-        setDarkMode(!darkMode)
+    const themeModeToggle = () => {    
+        const DARKMODE=!darkMode   
+        setDarkMode(DARKMODE)  
         localStorage.setItem("darkMode", DARKMODE)
     }
 
-    const changeTheme = (colorName) => {
-        THEMECOLOR = colorName
+    function changeTheme(colorName) {   
         localStorage.setItem("theme", colorName)
-        overrideThemeVariables(theme(THEMECOLOR))        
+        localStorage.setItem("darkMode", darkMode)
+        setDarkMode(darkMode)
+        setThemeColor(colorName)
+        overrideThemeVariables(theme(colorName))
     }
     
 
-    return (
-        <main className={`theme--${DARKMODE ? 'dark' : 'light'}`}>
+    return (        
+        <main className={`theme--${darkMode ? 'dark' : 'light'}`}>
             <Card
                 flat
-                dark={DARKMODE}
+                dark={darkMode}
                 className={`main-container ${isSmall ? 'main-container-sm' : ''}`} 
                 style={{borderRadius:'0px'}}>
                         
                 <div style={styles.center}>       
-                    <Card bordered dark={DARKMODE} style={styles.mainContainer}>
-                        <Header onClick={themeModeToggle} />
+                    <Card bordered dark={darkMode} style={styles.mainContainer}>
+                        <Header dark={darkMode} onClick={themeModeToggle} />
                         <div style={{width:'100%',height:'90vh'}}>
                             <Switch>
                                 {routes.map((route) => (
@@ -68,14 +53,14 @@ function NeumorphicRoute() {
                                         exact
                                         key={route.id}
                                         path={route.path}
-                                        component={() => <route.component dark={DARKMODE} />}
+                                        component={() => <route.component dark={darkMode} />}
                                     />
                                 ))}
                             </Switch>
                         </div>
                     </Card>
                     
-                    <Footer onClick={changeTheme} />
+                    <Footer onClick={changeTheme} dark={darkMode}/>
                 </div>
                 
             {/* } */}

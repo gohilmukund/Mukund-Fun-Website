@@ -14,7 +14,7 @@ import {
 } from '@mdi/js'
 
 import { H2, H6, Card, IconButton, ToggleButton } from 'ui-neumorphism'
-import { DARKMODE } from './Router'
+import { withRouter } from 'react-router'
 
 
 const githubUrl = 'https://github.com/gohilmukund/'
@@ -41,12 +41,12 @@ class Topbar extends React.Component {
 
     const title = createElement(
       isSmall ? H6 : H2,
-      { dark: DARKMODE, style: { color: DARKMODE ? 'var(--secondary-dark)' : 'var(--primary-light)' },  className: 'topbar-title'},
+      { dark: dark, style: { color: dark ? 'var(--primary-dark)' : 'var(--primary)' },  className: 'topbar-title'},
       'Mukund Gohil'
     )
 
     return (
-      <Card flat dark={DARKMODE} className={`main-topbar`} style={{width:'100%', 
+      <Card flat dark={dark} className={`main-topbar`} style={{width:'100%', 
       display: 'flex', 
       flexDirection:'row', 
       alignItems: 'center', 
@@ -67,7 +67,7 @@ class Topbar extends React.Component {
             <IconButton className='topbar-action' onClick={() => this.open(linkedInUrl)}> <Icon path={mdiLinkedin} size={1} /> </IconButton>
             <IconButton className='topbar-action' onClick={() => this.open(qwiklabUrl)}> <Icon path={mdiGoogleCloud} size={1} /> </IconButton>
             <IconButton className='topbar-action' onClick={() => this.open(githubUrl)}> <Icon path={mdiGithub} size={1} /> </IconButton>
-            <ToggleButton className='topbar-action' onChange={onClick} > <Icon path={dark ? mdiLightbulbOutline : mdiLightbulb} size={1} /> </ToggleButton>
+            <ToggleButton className='topbar-action' onChange={onClick} selected={dark} > <Icon path={dark ? mdiLightbulbOutline : mdiLightbulb} size={1} /> </ToggleButton>
           
         </Card>
       </Card>
@@ -75,4 +75,4 @@ class Topbar extends React.Component {
   }
 }
 
-export default Topbar
+export default withRouter(Topbar)

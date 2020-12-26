@@ -1,11 +1,24 @@
 import React from 'react'
-import { H3 } from 'ui-neumorphism'
+import { Avatar, Body1,  } from 'ui-neumorphism'
+import pro from '../assets/Images/propic.jpg'
 
 const AboutMe = () => {
     return(
         <div style={{width:'100%',height:'100%'}}>
-            <div style={{height:'100%', justifyContent:'center' }}> 
-                <H3 style={{height:'100%', textAlign:'center',}}>The page you are trying to access is not found.</H3>
+            <div class='justify-content-center align-items-center' style={{height:'100%', paddingTop:'5%' , justifyContent:'center', alignItems:'center' }}> 
+
+                <div style={{width:'100%',  alignContent:'center', justifyContent:'center', display:'flex'}}>
+                    <Avatar size='150' src={pro} />
+                </div>
+                
+
+                <Body1 style={{height:'100%', paddingLeft:'10%', paddingRight:'10%', textAlign:'center',}}>
+                    Mukund has always been a Windows lover ever since he got his 
+                    hands on her first Windows XP PC. He have used all the versions of Windows, even windows 3.1. 
+                    He have always been enthusiastic about technological stuff, 
+                    especially Internet of Things. Before joining Atos, he worked as a freelancer, technician and 
+                    worked on numerous technical projects.
+                </Body1>
             </div>
                 
         </div>

@@ -87,8 +87,8 @@ export function theme(type) {
                 '--dark-bg-dark-shadow': '#18424e',
                 '--dark-bg-light-shadow': '#2b7488',
                 '--primary': '#34A65F',
-                '--primary-dark': '#257443',
-                '--primary-light': '#51c87e'
+                '--primary-dark': '#51c87e',
+                '--primary-light': '#257443'
             }
         
         default:
@@ -137,7 +137,7 @@ export const themeIndex = [
     {
         name: 'christmas',
         light: '#e13d37',
-        dark: '#3E3D42'
+        dark: '#235E6F'
     },
     
 ]
