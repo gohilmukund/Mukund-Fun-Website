@@ -14,7 +14,7 @@ export let isSmall = false ;
 function NeumorphicRoute() {
     
     const [darkMode, setDarkMode] = useState(localStorage.getItem("darkMode")==="true" ?  true : false)
-    const [themeColor, setThemeColor] = useState(localStorage.getItem("theme")? localStorage.getItem("theme") :'christmas')
+    const [themeColor, setThemeColor] = useState(localStorage.getItem("theme"))
 
     useEffect(()=>{
         overrideThemeVariables(theme(themeColor))
