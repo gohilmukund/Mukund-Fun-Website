@@ -1,7 +1,6 @@
 import React from 'react';
 import '../Styles/App.css';
 import '../Styles/star.css';
-import pine from '../assets/Images/pine.png'
 
 const button = () => {
   return(
@@ -11,7 +10,7 @@ const button = () => {
       <div id='stars2'></div>
       <div id='stars3'></div>
       
-      <div id='btntext' > Let's Dive In</div>
+      <div id='btntext'>Let's Dive In</div>
     </div>
     </a>
   )
@@ -19,7 +18,7 @@ const button = () => {
 
 const Home = () => (
   <div>
-      <div style={{position:"absolute", bottom:0, backgroundImage:`url(${pine})`, backgroundRepeat:'repeat-x', width:'100vw', height:'25vh' }}>
+      <div style={{position:"absolute",  width:'100vw', height:'25vh' }}>
       
       </div>
     

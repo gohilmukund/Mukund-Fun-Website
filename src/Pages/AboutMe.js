@@ -26,6 +26,10 @@ const AboutMe = (props) => {
                     He have always been enthusiastic about technological stuff, 
                     especially Internet of Things. Before joining Atos, he worked as a freelancer, technician and 
                     worked on numerous technical projects.
+
+                    Seeking to grow his career in the field of Cloud, Mobile and Web Application Development 
+                    and to use my acquired knowledge for a better career growth. 
+                    He can adapt to versatile working environment and can handle various challenges.
                 </Body2>
             </div>
                 

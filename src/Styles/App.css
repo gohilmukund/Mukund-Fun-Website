@@ -11,16 +11,17 @@ body {
 /* Style for background color */
 #container {
   /* Blue n black sky */
-  /* background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%) !important; */   
-  background: radial-gradient(ellipse at bottom, #fd163d 0%, #2b0101 100%) !important;
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%) !important;   
+  /* background: radial-gradient(ellipse at bottom, #fd163d 0%, #2b0101 100%) !important; */
 }
 
 #title span {
   background: linear-gradient(to right, rgb(100, 81, 2), gold , rgb(252, 236, 149), gold , rgb(100, 81, 2) );
-  /* text-shadow: 0px 0px 10px black; */
+  text-shadow: 0px 0px 10px black;
   font-weight: 400;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
 }
 
 #title {
@@ -43,11 +44,12 @@ body {
   text-shadow: 0px 0px 7px black;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
 }
 
 #description {
   position: absolute;
-  top: 70%;
+  top: 65%;
   left: 0;
   right: 0;
   color: #FFF;
@@ -70,14 +72,16 @@ body {
   height: 3em;
   border-radius: 20px;
   border: double 2px transparent;
+  align-items: center;
+  justify-content: center;
   background-image:
   /* Blue sky */
-  /* linear-gradient(to bottom, #1b2735 0%, #121a24 100%),
-  linear-gradient(to bottom right, #b827fc 0%, #2c90fc 25%, #b8fd33 50%, #fec837 75%, #fd1892 100%); */
+  linear-gradient(to bottom, #1b2735 0%, #121a24 100%),
+  linear-gradient(to bottom right, #b827fc 0%, #2c90fc 25%, #b8fd33 50%, #fec837 75%, #fd1892 100%);
   
   /* Christmas sky */
   /* linear-gradient(to bottom, #cf0d37 0%, #361c1c 100%), */
-  linear-gradient(to bottom right, #F5624D 0%, #CC231E 25%, #34A65F 50%,  #235E6F 100%);
+  /* linear-gradient(to bottom right, #F5624D 0%, #CC231E 25%, #34A65F 50%,  #235E6F 100%); */
   box-shadow: 0px 0px 20px 0px whitesmoke;
 
   background-origin: border-box;
@@ -87,12 +91,12 @@ body {
 #btn:hover {
   background-image:
    /* Blue sky */
-  /* linear-gradient(to bottom, #1b2735 100%, #121a24 0%),
-  linear-gradient(to top left, #b827fc 0%, #2c90fc 25%, #b8fd33 50%, #fec837 75%, #fd1892 100%); */
+  linear-gradient(to bottom, #1b2735 100%, #121a24 0%),
+  linear-gradient(to top left, #b827fc 0%, #2c90fc 25%, #b8fd33 50%, #fec837 75%, #fd1892 100%);
     
   /* Christmas sky */
-  /* linear-gradient(to top, #cf0d37 0%, #361c1c 100%), */
-  linear-gradient(to top left, #F5624D 0%, #CC231E 25%, #34A65F 50%, #0F8A5F 75%, #235E6F 100%);
+  /* linear-gradient(to top, #cf0d37 0%, #361c1c 100%),
+  linear-gradient(to top left, #F5624D 0%, #CC231E 25%, #34A65F 50%, #0F8A5F 75%, #235E6F 100%); */
   
 }
 
@@ -101,16 +105,18 @@ body {
   color: goldenrod;
   text-shadow: 0px 0px 7px black;
   text-transform: uppercase;
-  font-weight: 900;
+  font-weight: 600;
   letter-spacing: 2px;
   font-style: italic;
   text-decoration: none;
-  /* vertical-align: center; */
+  vertical-align: center;
   /* padding-top: 2%; */
-  left: 46%;
-  margin-left: -55px;
-  margin-top: 3px;
-  position: absolute;
+  /* left: 46%; */
+  flex:auto;
+  text-align: center;
+  /* margin-left: -55px; */
+  /* margin-top: 3px; */
+  /* position: absolute; */
 }
 
 

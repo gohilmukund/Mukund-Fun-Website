@@ -46,7 +46,8 @@ class Topbar extends React.Component {
     )
 
     return (
-      <Card flat dark={dark} className={`main-topbar`} style={{width:'100%', 
+      <Card flat dark={dark} className={`main-topbar`} 
+      style={{width:'100%', 
       display: 'flex', 
       flexDirection:'row', 
       alignItems: 'center', 

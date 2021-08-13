@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { findDOMNode } from "react-dom";
 import { Route, Switch, withRouter} from "react-router-dom";
-import { Card, overrideThemeVariables } from 'ui-neumorphism'
+import { Card, Overline, overrideThemeVariables } from 'ui-neumorphism'
 import 'ui-neumorphism/dist/index.css'
+import '../Styles/Glass.css'
 import Footer from '../Components/Footer'
 import routes from '../routes/index.js'
 import Header from "./Header";
@@ -58,7 +59,7 @@ function NeumorphicRoute() {
                         transitionSpeed={1500}
                         scale={1.1} 
                     >
-                    <Card bordered dark={darkMode} style={styles.mainContainer}>
+                    <Card className={"mainContainer"} bordered dark={darkMode} style={styles.mainContainer}>
                         <Header dark={darkMode} onClick={themeModeToggle} />
                         <Card 
                             flat
@@ -81,11 +82,13 @@ function NeumorphicRoute() {
                         </Card>                   
                     </Card>
                     </Tilt>
+                    {/* <Footer onClick={changeTheme} dark={darkMode}/> */}
+                </div>
+                <div style={styles.footer}>
                     <Footer onClick={changeTheme} dark={darkMode}/>
                 </div>
-                
-            {/* } */}
             </Card>
+            
         </main>
     )
 }
@@ -98,12 +101,23 @@ const styles = {
         justifyContent: 'center', // Horizontal 
         flexDirection:'column'
     },
+    footer: {
+        alignItems:'center', // Vertical
+        // height:'100vh', 
+        display: 'flex', 
+        // backgroundColor:'red',
+        justifyContent: 'center', // Horizontal 
+        // flexDirection:'column',
+        // bottom:0
+    },
     mainContainer: {
         alignItems:'center', // Horizontal
         flexDirection:'column',
         width:'80vw', 
-        height:'90vh', 
+        height:'70vh', 
         display: 'flex', 
+        backgroundColor: 'rgba(255, 255, 255, .15)'
+
         // marginLeft:'10vw', 
         // marginRight:'10vw'
         // justifyContent: 'center', // Vertical 

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import * as firebase from 'firebase';
+import firebase from 'firebase/app';
 import Navigation from './Components/Navigation';
 
 const firebaseConfig = {
