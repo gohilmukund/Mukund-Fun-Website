@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { findDOMNode } from "react-dom";
 import { Route, Switch, withRouter} from "react-router-dom";
-import { Card, Overline, overrideThemeVariables } from 'ui-neumorphism'
+import { Card, overrideThemeVariables } from 'ui-neumorphism'
 import 'ui-neumorphism/dist/index.css'
 import '../Styles/Glass.css'
 import Footer from '../Components/Footer'
