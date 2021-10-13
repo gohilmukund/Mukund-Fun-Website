@@ -5,15 +5,17 @@ import * as serviceWorker from './serviceWorker';
 import firebase from 'firebase/app';
 import Navigation from './Components/Navigation';
 
+const config = require('./config');
+
 const firebaseConfig = {
-  apiKey: "AIzaSyDat7NFSCyGQs801U5rIVm66euKgr12AT4",
-  authDomain: "mukund-fun.firebaseapp.com",
-  databaseURL: "https://mukund-fun.firebaseio.com",
-  projectId: "mukund-fun",
-  storageBucket: "mukund-fun.appspot.com",
-  messagingSenderId: "575650076396",
-  appId: "1:575650076396:web:623b6b2bb7ee5a39b2b7c9",
-  measurementId: "G-RJ6MKGVXX4"
+  apiKey: config.firebase.apiKey,
+  authDomain: config.firebase.authDomain,
+  databaseURL: config.firebase.databaseURL,
+  projectId: config.firebase.projectId,
+  storageBucket: config.firebase.storageBucket,
+  messagingSenderId: config.firebase.messagingSenderId,
+  appId: config.firebase.appId,
+  measurementId: config.firebase.measurementId
 };
 
 firebase.initializeApp(firebaseConfig);
