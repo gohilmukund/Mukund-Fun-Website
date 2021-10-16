@@ -52,11 +52,8 @@ export default ({ data, transitionStatus }) => {
 }
 
 export const query = graphql`
-  query {
-    allMarkdownRemark(
-      filter: { fields: { slug: { regex: "/experience/" } } }
-      sort: { fields: [frontmatter___dateFrom], order: DESC }
-    ) {
+  {
+    allMarkdownRemark(filter: {fields: {slug: {regex: "/experience/"}}}, sort: {fields: [frontmatter___dateFrom], order: DESC}) {
       totalCount
       edges {
         node {
@@ -66,7 +63,7 @@ export const query = graphql`
               title
               image {
                 childImageSharp {
-                  fluid(maxWidth: 200) {
+                  fluid(maxWidth: 800) {
                     ...GatsbyImageSharpFluid
                   }
                 }

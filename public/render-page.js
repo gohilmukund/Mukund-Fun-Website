@@ -50437,7 +50437,7 @@ module.exports = JSON.parse("{\"data\":{\"site\":{\"siteMetadata\":{\"footer\":\
 /*! exports provided: data, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"data\":{\"site\":{\"siteMetadata\":{\"title\":\"Mukund's Portfolio\",\"email\":\"gohil.mukund@gmail.com\",\"siteKeywords\":\"Software developer, Full Stack Developer, Cloud Engineer, Google Cloud Engineer, Google Cloud Architect, Firebase Developer, React-native Developer\",\"siteDescription\":\"This cool App contains information about my work experience and my journey.\",\"social\":{\"gitHub\":\"christiandavid\",\"twitter\":\"ichristiandavid\",\"stackOverflow\":\"967956/christian-david\",\"linkedIn\":\"in/christianibarguen/\",\"resumeInPdf\":\"\"}}}}}");
+module.exports = JSON.parse("{\"data\":{\"site\":{\"siteMetadata\":{\"title\":\"Mukund's Portfolio\",\"email\":\"gohil.mukund@gmail.com\",\"siteKeywords\":\"Software developer, Full Stack Developer, Cloud Engineer, Google Cloud Engineer, Google Cloud Architect, Firebase Developer, React-native Developer\",\"siteDescription\":\"This cool App contains information about my work experience and my journey.\",\"social\":{\"gitHub\":\"gohilmukund\",\"twitter\":\"Mukund_Gohil\",\"stackOverflow\":\"10262852/mukund-gohil\",\"linkedIn\":\"in/mukund-gohil/\",\"resumeInPdf\":\"/CV-Mukund.pdf\"}}}}}");
 
 /***/ }),
 

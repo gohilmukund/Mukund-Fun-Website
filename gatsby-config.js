@@ -31,11 +31,11 @@ module.exports = {
                 email: `gohil.mukund@gmail.com`,
                 social: {
                     // Usernames
-                    twitter: `ichristiandavid`,
-                    gitHub: `christiandavid`,
-                    stackOverflow: `967956/christian-david`,
-                    linkedIn: `in/christianibarguen/`,
-                    // resumeInPdf: `/CV-19.pdf`, // url or local link
+                    twitter: `Mukund_Gohil`,
+                    gitHub: `gohilmukund`,
+                    stackOverflow: `10262852/mukund-gohil`,
+                    linkedIn: `in/mukund-gohil/`,
+                    resumeInPdf: `/CV-Mukund.pdf`, // url or local link
                 },
                 homePage: {
                     availableToHire: true,
