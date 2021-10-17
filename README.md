@@ -1,387 +1,263 @@
-# gatsby-theme-byfolio
+# Gatsby Starter: Mate 🧉
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/christiandavid/gatsby-theme-byfolio/blob/dev/LICENSE)
-[![CircleCI](https://circleci.com/gh/christiandavid/gatsby-theme-byfolio.svg?style=svg)](https://circleci.com/gh/christiandavid/gatsby-theme-byfolio)
-![Twitter Follow](https://img.shields.io/twitter/follow/iChristianDavid?style=social)
+[![Build](https://github.com/EmaSuriano/gatsby-starter-mate/actions/workflows/master.yml/badge.svg)](https://github.com/EmaSuriano/gatsby-starter-mate/actions/workflows/master.yml)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/f532a32d-4fc1-441d-aa28-cdc5e2c2e79c/deploy-status)](https://app.netlify.com/sites/gatsby-starter-mate/deploys)
 
-Initially this was a personal portfolio made in GatsbyJs, now it's a Gatsby theme available to anyone who wants to tell their work history focusing only on the content.
+> Gatsby starter for [`gatsby-theme-mate`](https://github.com/EmaSuriano/gatsby-theme-mate). An accessible and fast portfolio starter for Gatsby integrated with Contentful CMS.
 
-![Gatsby Portfolio](https://raw.githubusercontent.com/christiandavid/gatsby-theme-byfolio/dev/readme-files/Byfolio.jpg)
+The target audience are Developers 💻 and Tech Writers ✍️.
 
-![Portfolio](https://raw.githubusercontent.com/christiandavid/gatsby-theme-byfolio/dev/readme-files/portfolio.gif)
+**[Check the Demo ✨](https://gatsby-starter-mate.netlify.com/)**
 
-- [Installation](#installation)
-- [Configuration](#configuration)
-- [Adding experience and skills](#adding-experience-and-skills)
-- [Skills](#skills)
-- [Component shadowing](#component-shadowing)
-- [Examples](#examples)
-- [Authors](#authors)
-- [Credits](#credits)
+## Why? 🤔
 
-## Installation
+In case you are looking for a quick setup portfolio or upgrade your current, you have to definitely try Mate!
 
-```sh
-mkdir portfolio && cd portfolio
-yarn init -y
-yarn add react react-dom gatsby @christiandavid/gatsby-theme-byfolio
+This starter is totally content based on [Contentful](https://contentful.com), which is a headless CMS where you can write the content for your page. In summary, Contentful is the Model when Gatsby with React is the View.
+
+At the same time, as this portfolio is written with Gatsby is extremely easy to add more than one source of data! For example, the demo comes with an integration of [Medium](https://medium.com) posts based on a user name ✌️
+
+## Features 🛠
+
+- [Gatsby 3](https://www.gatsbyjs.org/)
+- [Rebass](https://rebassjs.org/): styled component system
+- [React Awesome Reveal](https://github.com/dennismorello/react-awesome-reveal)
+- Typescript
+- CMS Integration with [Contentful](https://contentful.com)
+- PWA ready
+- SEO
+- Responsive design
+- Icons from [font-awesome](https://fontawesome.com/)
+- [Netlify](https://www.netlify.com) Deployment Friendly
+- Medium integration
+- Social sharing (Twitter, Facebook, Google, LinkedIn)
+- Google Analytics integration
+
+## How to start
+
+As this process needs more steps compared to other starters, I decided to made a tutorial video of how to set up your own instance of Mate. You can follow the video or jump directly to the written documentation.
+
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=YviWsypJF9c">
+   <img src="https://media.giphy.com/media/LQp2DrNPPUPybUwVx9/giphy.gif" alt="Watch the tutorial"/>
+  </a>
+</p>
+
+If you never used Gatsby before, I highly recommend you to [Set up your development environment](https://www.gatsbyjs.org/tutorial/part-zero/)!
+
+Also, it's recommended that you use `Yarn` as your Package Manager inside `gatsby-cli`:
+
+```bash
+$ gatsby options set pm yarn
+info Preferred package manager set to "yarn"
 ```
 
-Create gatsby-config.js file and load the plugin
+To copy and install this starter run this command:
 
-```js
-// gatsby-config.js
-module.exports = {
-  plugins: [
-    {
-      resolve: `@christiandavid/gatsby-theme-byfolio`,
-    },
-  ],
-}
+```bash
+$ gatsby new mate-portfolio https://github.com/EmaSuriano/gatsby-starter-mate
 ```
 
-```sh
-gatsby develop
+At this point you have the repository download with all the dependencies installed, but if you try to start by running `yarn develop` you are going to received this message in the console:
+
+```bash
+  TypeError: Expected parameter accessToken
 ```
 
-In your browser load [localhost:8000](http://localhost:8000/)
+This is because you didn't specify from which `Contentful` space the portfolio will take the information. So the next step is create an empty space in [Contentful](https://www.contentful.com/)!
 
-## Configuration
+After the space is created, run the following command:
 
-After each modification in gatsby-config.js it is necessary to restart the site from the terminal.
-
-```js
-// gatsby-config.js
-module.exports = {
-  plugins: [
-    {
-      resolve: `@christiandavid/gatsby-theme-byfolio`,
-      options: {
-        basePath: ``,
-        path: `src/`,
-        imagesPath: `src/images/`,
-        iconFile: `src/images/icon.png`,
-        siteTitle: `Portfolio`,
-        siteUrl: `https://www.christianibarguen.com`,
-        siteName: `Christian David Ibarguen`,
-        siteShortName: `CD`,
-        siteDescription: `This cool App contains information about my work experience as a software developer.`,
-        siteKeywords: `Software developer, Full Stack Developer`,
-        useMozJpeg: true,
-        menuLinks: [
-          // title = Link text
-          // color = Animation background color on click
-          { name: `home`, title: `Home`, color: `#000`, link: `` },
-          {
-            name: `experience`,
-            title: `Experience`,
-            color: `#3a3d98`,
-            link: ``,
-          },
-          { name: `skills`, title: `Skills`, color: `#d52d43`, link: `` },
-          { name: `aboutMe`, title: `About Me`, color: `#fff`, link: `` },
-        ],
-        email: `christian@davidibarguen.com`,
-        social: {
-          // Usernames
-          twitter: `ichristiandavid`,
-          gitHub: `christiandavid`,
-          stackOverflow: `967956/christian-david`,
-          linkedIn: `in/christianibarguen/`,
-          resumeInPdf: `/CV-19.pdf`, // url or local link
-        },
-        homePage: {
-          availableToHire: true,
-          dotColors: ["#0e3e1e", "#6CC551"],
-          h1Text: `Hi!, I'm Christian David Ibarguen`,
-          h2Text: `I'm a Full Stack Developer who loves working in Backend, I have
-              worked as a software developer since 2006.`,
-          typewriter: [
-            `Coding is my passion 😎`,
-            `I'm a 🍕 lover`,
-            `I'm a pretty fast learner and always interested in learning new technologies 🤓`,
-            `I think one of my values is the <strong>ability to resolve problems<strong>`,
-            `I like to share what I know 👨‍🏫`,
-            `In my non-coding hours, I'm at the 🏋‍`,
-            `I also do design and UX work <span style='color: #27ae60;'>occasionally</span>`,
-          ],
-        },
-        // Color for menu background
-        shapeColor: {
-          link: { color: "#171616", hover: "#fff" },
-          shape1: {
-            color: `#413f46`,
-            opacity: `0.7`,
-          },
-          shape2: {
-            color: `#e6e5ea`,
-            opacity: `0.7`,
-          },
-          shape3: {
-            color: `#fff`,
-            opacity: `0.7`,
-          },
-        },
-        footer: `heart`,
-      },
-    },
-  ],
-}
+```bash
+yarn setup
 ```
 
-| Option name     | Type    | Description                                                                                                                           |
-| --------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| basePath        | string  | Where should the site be served from? /portfolio will change all paths to start with /portfolio                                         |
-| path            | string  | Place where the files are stored, for example: `src/`                                                                                 |
-| imagesPath      | string  | Place where the images files are stored, for example: `src/images/`                                                                   |
-| iconFile        | string  | Provides the icon path for the gatsby-plugin-manifest plugin                                                                          |
-| typographyPath  | string  | Place where the file that defines your website’s typography configuration is located                                                  |
-| siteTitle       | string  | The main title for the website, used in the `<title>` element                                                                         |
-| siteUrl         | string  | The portfolio url, example: `https://christianibarguen.com`                                                                           |
-| siteName        | string  | Represents the name of the web application as it is usually displayed to the user                                                     |
-| siteShortName   | string  | Represents a short version of the name of the web application                                                                         |
-| siteDescription | string  | Allows you to describe the purpose of the web application                                                                             |
-| siteKeywords    | string  | Keywords for the page                                                                                                                 |
-| useMozJpeg      | boolean | MozJPEG provides better image compression than the default encoder used in gatsby-plugin-sharp.                                       |
-| menuLinks       | array   | An array of objects for the menu, each item represents a link, color represents the color that the animation shows when it is pressed |
-| email           | string  | Email for contact, this is displayed when the Contact Me button is pressed                                                            |
-| social          | object  | An Object with the user accounts of: twitter, gitHub, stackOverflow, linkedIn and `resumeInPdf` resume link                           |
-| homePage        | object  | An object with information of titles, texts with animated description, and animation to show if you are available to be hired         |
-| shapeColor      | object  | Represents the colors used in the menu animation, in total there are 3 in which you can specify the color and the opacity             |
-| footer          | string  | Text to show in the footer only has 2 options: `heart`or `hand`                                                                       |
+This CLI will request 3 values:
 
-## Adding experience and skills
+- `Space ID`
+- `Content Delivery API - access token`
+- `Personal Access Token`
 
-This theme generates pages based on Markdown files in the `path`/experience directory. Your Markdown files should contain some frontmatter defining their company, logo, etc.
-All company logos must be relative to `imagesPath`/companies directory.
-All Skills logos must be relative to `imagesPath`/skills directory.
-All layout images must be relative to company directory, for example: `imagesPath`/companies/vlooping
+These 3 values are inside the Settings section --> API keys.
 
-### Important
+After you provide them the CLI will automatically starts copying all the `Content models` and `Contents` from `mate-demo-contentful` to your space ✨
 
-For each Skill you must add the logo of the Framework, library or program, with a resolution of **width: 500px, height: 500px**, in the src/images/skills/ directory I leave several logos, **only Skills logos that I own are present, if the logo you need does not appear you must create it**.
+If everything went smooth you should see something like this in your terminal:
 
-Layout number is for image animation you can select from 1 to 5, **please do not forget to add the images "images/companies/vlooping.png, images/skills/html5.png, images/skills/react.png, images/companies/vlooping/vlooping.png" to run the following example**
-
-```yaml
----
-title: ""
-company: "Company Name"
-logo: ../images/companies/vlooping.png
-jobTitle: "My job position"
-skills:
-  [
-    { title: "HTML 5", image: ../images/skills/html5.png },
-    { title: "HTML 5", image: ../images/skills/react.png },
-  ]
-images:
-  [
-    {
-      title: "Layout 4",
-      description: "Description text for layout 4.",
-      layout: "4",
-      files:
-        [
-          { image: ../images/companies/vlooping/vlooping.png },
-          { image: ../images/companies/vlooping/vlooping.png },
-          { image: ../images/companies/vlooping/vlooping.png },
-        ],
-    },
-    {
-      title: "Layout 1",
-      description: "Description text for layout 1.",
-      layout: "1",
-      files:
-        [
-          { image: ../images/companies/vlooping/vlooping.png },
-          { image: ../images/companies/vlooping/vlooping.png },
-          { image: ../images/companies/vlooping/vlooping.png },
-        ],
-    },
-    {
-      title: "Layout 2",
-      description: "Description text for layout 2.",
-      layout: "2",
-      files:
-        [
-          { image: ../images/companies/vlooping/vlooping.png },
-          { image: ../images/companies/vlooping/vlooping.png },
-          { image: ../images/companies/vlooping/vlooping.png },
-          { image: ../images/companies/vlooping/vlooping.png },
-          { image: ../images/companies/vlooping/vlooping.png },
-        ],
-      caption: "New Message",
-    },
-    {
-      title: "Layout 3",
-      description: "Description text for layout 1.",
-      layout: "3",
-      files:
-        [
-          { image: ../images/companies/vlooping/vlooping.png },
-          { image: ../images/companies/vlooping/vlooping.png },
-          { image: ../images/companies/vlooping/vlooping.png },
-          { image: ../images/companies/vlooping/vlooping.png },
-        ],
-    },
-    {
-      title: "Layout 5",
-      description: "Description text for layout 5.",
-      layout: "5",
-      files:
-        [
-          { image: ../images/companies/vlooping/vlooping.png },
-          { image: ../images/companies/vlooping/vlooping.png },
-          { image: ../images/companies/vlooping/vlooping.png },
-        ],
-    },
-  ]
-dateFrom: "2015-12-01"
-dateTo: "2019-12-01"
----
-- Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-- Contrary to popular belief, Lorem Ipsum is not simply random text
-- It is a long established fact that a reader will be distracted by the readable content of a page
-- There are many variations of passages of Lorem Ipsum available
-- The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested
+```text
+Writing config file...
+Config file /Users/my-user/Git/test/mate-portfolio/.env written
+┌──────────────────────────────────────────────────┐
+│ The following entities are going to be imported: │
+├─────────────────────────────────┬────────────────┤
+│ Content Types                   │ 3              │
+├─────────────────────────────────┼────────────────┤
+│ Editor Interfaces               │ 3              │
+├─────────────────────────────────┼────────────────┤
+│ Entries                         │ 8              │
+├─────────────────────────────────┼────────────────┤
+│ Assets                          │ 6              │
+├─────────────────────────────────┼────────────────┤
+│ Locales                         │ 1              │
+├─────────────────────────────────┼────────────────┤
+│ Webhooks                        │ 0              │
+└─────────────────────────────────┴────────────────┘
+ ✔ Validating content-file
+ ✔ Initialize client (1s)
+ ✔ Checking if destination space already has any content and retrieving it (2s)
+ ✔ Apply transformations to source data (1s)
+ ✔ Push content to destination space
+   ✔ Connecting to space (1s)
+   ✔ Importing Locales (1s)
+   ✔ Importing Content Types (4s)
+   ✔ Publishing Content Types (3s)
+   ✔ Importing Editor Interfaces (3s)
+   ✔ Importing Assets (7s)
+   ✔ Publishing Assets (3s)
+   ✔ Archiving Assets (1s)
+   ✔ Importing Content Entries (1s)
+   ✔ Publishing Content Entries (5s)
+   ✔ Archiving Entries (1s)
+   ✔ Creating Web Hooks (0s)
+Finished importing all data
 ```
 
-### Skills
+After this step we can finally run the project and see the result in http://localhost:8000/ 😃
 
-The Skills are automatically selected from experience, in case some skill you acquired does not correspond to a company you can add it in `path`/experience/\_additionalSkills.md
-
-```yaml
----
-title: ""
-company: ""
-jobTitle: ""
-logo:
-skills:
-  [
-    { title: "React", image: ../images/skills/react.png },
-    { title: "React Native", image: ../images/skills/react-native.png },
-    { title: "Gatsby", image: ../images/skills/gatsby.png },
-    { title: "GraphQL", image: ../images/skills/graphql.png },
-    { title: "Redux", image: ../images/skills/redux.png },
-    { title: "Apollo GraphQL", image: ../images/skills/apollo.png },
-    { title: "Socket.io", image: ../images/skills/socket-io.png },
-  ]
-images: []
-dateFrom: "2019-09-01"
-dateTo: "2019-09-01"
----
-
+```bash
+$ yarn start
 ```
 
-## Component shadowing
+## Screenshot and Design
 
-You can customize elements like the css style or about-me content by taking advantage of [component shadowing](https://www.gatsbyjs.org/blog/2019-04-29-component-shadowing/).
+As the starter is a SPA it only has two routes:
 
-I recommend using [Coolors.co](https://coolors.co/) to select a color palette and adapt it to your new portfolio.
+- `/`: main page with the sections of `Home`, `About me`, `Projects` and `Writing`.
+- `/404`: error page for unexpected route.
 
-You can change the color of the text and the background of each page, for example:
+| Section  |                 Screenshot                  |
+| -------- | :-----------------------------------------: |
+| Home     |   ![Home](media/screenshots/Landing.png)    |
+| About me |  ![About me](media/screenshots/About.png)   |
+| Projects | ![Projects](media/screenshots/Projects.png) |
+| Writing  |  ![Writing](media/screenshots/Writing.png)  |
+| 404      |      ![404](media/screenshots/404.png)      |
 
-```js
-// src/@christiandavid/gatsby-theme-byfolio/layout/layoutColors.css.js
-import { css } from "@emotion/core"
-import lineSvg from "../../../static/assets/line.svg"
+## Building your site
 
-const styles = css`
-  .e404.layout-wrapper .layout-inner {
-    background: #fff;
-  }
-  .e404 .data-section {
-    color: #000;
-  }
-  .aboutme.layout-wrapper .layout-inner {
-    background: #fff;
-  }
-  .aboutme .data-section {
-    color: #000;
-  }
-  .aboutme .hamburgercolr::before,
-  .aboutme .hamburgercolr::after,
-  .e404 .hamburgercolr::before,
-  .e404 .hamburgercolr::after {
-    background-color: #000;
-  }
-  .home.layout-wrapper .layout-inner {
-    background: #0e0f11;
-    background: #0e0f11 url(${lineSvg}) center center fixed;
-    background-size: contain;
-  }
-  .home.layout-wrapper h1,
-  .home.layout-wrapper h2 {
-    color: #fff;
-  }
-  .skill.layout-wrapper .layout-inner {
-    color: #fff;
-    background: #9d316e;
-    background: url(${lineSvg}) center center fixed, linear-gradient(
-        45deg,
-        #9d316e,
-        #de2d3e
-      );
-    background-size: cover;
-  }
-  .experience.layout-wrapper .layout-inner {
-    background: #3a3d98;
-    background: url(${lineSvg}) center center fixed, linear-gradient(
-        45deg,
-        #6f22b9,
-        #3a3d98
-      );
-    background-size: cover;
-  }
-  .home .hamburgercolr::before,
-  .home .hamburgercolr::after,
-  .skill .hamburgercolr::before,
-  .skill .hamburgercolr::after,
-  .experience .hamburgercolr::before,
-  .experience .hamburgercolr::after {
-    background-color: #fff;
-  }
-  .home .btn-contact-color,
-  .experience .btn-contact-color {
-    color: #fff;
-  }
-  .aboutme .btn-contact-color,
-  .e404 .btn-contact-color {
-    color: #000;
-  }
-`
+As we are dealing with environment variables, the `.env` file is excluded from `.gitignore` file. Therefore, in order to deploy the website you have to send `SPACE_ID` and `ACCESS_TOKEN` with the `build` command.
 
-export default styles
+```bash
+SPACE_ID=xxxxx ACCESS_TOKEN=yyyyy yarn build
 ```
 
-You can change the about-me text in the "src/@christiandavid/gatsby-theme-byfolio/contentJSON/about-me.json" file, for example:
+The result will be stored inside the `public` folder, so you can upload to your web host. I highly suggest using this starter with Netlify when you can define which command will build the project and also send the environment variables inside the website configuration.
 
-```json
-[
-  {
-    "subtitle": "About Me!",
-    "content": "I'm a <strong>Software Developer</strong>"
-  },
-  {
-    "subtitle": "Experience!",
-    "content": "I started developing software from <strong>2004</strong> working in several companies"
-  }
-]
+## Customization
+
+When you first bootstrap the project, you will notice that it doesn't contain many files. This is because of how the project is structured, for example where is the data coming from and how it is displayed to the user. The starter is based on 2 principles:
+
+1. Data coming from an external source: Contentful. Therefore in case you want to change the content of the website, please refer to [Adding your information section](#adding-your-information).
+2. Components and pages decoupled inside a Gatsby Theme: [gatsby-theme-mate](https://github.com/EmaSuriano/gatsby-theme-mate). The reason behind it is to provide an easy way to keep your starter up to date. To know more about Gatsby Theme, please refer to the [official documentation](https://www.gatsbyjs.com/docs/themes/). Most common customizations:
+   1. [Theming](#theming)
+   2. [Changing Icons](#changing-icons)
+   3. [Modifying the Sections](#modifying-the-sections)
+
+### Adding your information
+
+All the information of this starter resides inside [Contentful](https://www.contentful.com/), inside the Content of `About`. To change it, just go to the `Content` section and change the entity with the information you want.
+
+![Contentful About change](./media/contentful-about-change.png)
+
+Regarding the projects and social links, the process is the same! Contentful is easy to learn so don't be afraid of breaking everything, remember that you can restore to the start point by running `yarn setup` 😄
+
+### Theming
+
+Thanks to the [Theme Shadowing](https://www.gatsbyjs.com/docs/how-to/plugins-and-themes/shadowing/), changing the colors of your portfolio is quite easy! You have to create a new file located at `src/gatsby-theme-mate/colors.json`. Some examples I made by using palettes from [Color Hunt](https://colorhunt.co/):
+
+| Name     | Code                                                                                                               | Screenshot                                     |
+| -------- | ------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------- |
+| Original | `{ "text": "#333333", "background": "#FFFFFF", "muted": "#f0e6f6", "primary": "#7c37ad", "secondary": "#ff4081" }` | ![Original Schema](./media/theme-original.png) |
+| Teal     | `{ "text": "#40514e", "background": "#FFFFFF", "muted": "#e4f9f5", "primary": "#11999e", "secondary": "#30e3ca" }` | ![Teal Theme](./media/theme-teal.png)          |
+| Dark     | `{ "text": "#e3e3e3", "background": "#1b262c", "muted": "#0f4c75", "primary": "#bbe1fa", "secondary": "#3282b8" }` | ![Dark Theme](./media/theme-dark-blue.png)     |
+
+### Changing Icons
+
+This project is using the icons from [Font Awesome](https://fontawesome.com/), with the implementation made by [fortawesome](https://fortawesome.com/). A good practice when dealing with icons is to load **only** the ones that the project is going to use. Therefore not all the icons inside FA are loaded by default.
+
+To change the icons used in your portfolio, you have to make use of [Theme Shadowing](https://www.gatsbyjs.com/docs/how-to/plugins-and-themes/shadowing/) and create a file located at `src/gatsby-theme-mate/icons.js` with your icons. By default this is the content of the file:
+
+```javascript
+import {
+  faMedium,
+  faTwitter,
+  faGithub,
+} from '@fortawesome/free-brands-svg-icons';
+import {
+  faGlobe,
+  faEnvelope,
+  faCoffee,
+} from '@fortawesome/free-solid-svg-icons';
+
+export const ICONS = [
+  faMedium,
+  faTwitter,
+  faGithub,
+  faGlobe,
+  faEnvelope,
+  faCoffee,
+];
 ```
 
-## Examples
+Simply import the icons you want to use either `@fortawesome/free-brands-svg-icons` or `@fortawesome/free-solid-svg-icons` and export them inside the `ICONS` array. They get loaded as soon as the app starts.
 
-- [My Portfolio](https://christianibarguen.com)
-- [Mario Gómez Portfolio](http://mariogmz.com)
+### Modifying the Sections
 
-Are you using this theme in your own project? Submit a PR with your website added to this list!
+This starter by default provides 4 different sections:
 
+- Landing: your name, roles, and social links.
+- About: information about yourself plus the image on the side.
+- Projects: summary of the projects you worked on.
+- Writing: articles from Medium you wrote (this will be visible only if you specify a Medium user).
 
-## Credits
+In case you want to change the order, remove or even add new sections. You can do it by using the feature of [Theme Shadowing](https://www.gatsbyjs.com/docs/how-to/plugins-and-themes/shadowing/) and create a file inside `src/gatsby-theme-mate/templates/Home.js` and have total control over what you want to render. This will be an example of swapping between the About and Projects section.
 
-Special thanks to:
+```jsx
+import React from 'react';
 
-- [GatsbyJs](https://www.gatsbyjs.org/)
-- [Codrops](https://tympanus.net/codrops/)
-- [Fontawesome](https://fontawesome.com/license)
-- [Christian David Ibarguen R](https://www.gatsbyjs.com/plugins/@christiandavid/gatsby-theme-byfolio/)
+// Layout components
+import Layout from 'gatsby-theme-mate/src/components/Layout';
+import Header from 'gatsby-theme-mate/src/components/Header';
+import Footer from 'gatsby-theme-mate/src/components/Footer';
+
+// Sections that will fetch data for you
+import Landing from 'gatsby-theme-mate/src/sections/Landing';
+import About from 'gatsby-theme-mate/src/sections/About';
+import Projects from 'gatsby-theme-mate/src/sections/Projects';
+import Writing from 'gatsby-theme-mate/src/sections/Writing';
+
+const Home = () => (
+  <Layout>
+    <Header />
+    <Landing />
+    <Projects />
+    <About />
+    <Writing />
+    <Footer />
+  </Layout>
+);
+
+export default Home;
+```
+
+By following this approach it's possible to modify the code of any component of the project. But please be aware, that by using Theme Shadowing you are going to **always override** the content of this, so in case there will be an update of the same file inside `gatsby-theme-mate` you are not going to use it.
+
+My final recommendation with shadowing is to try to keep as minimum as possible to avoid having breaking changes between new releases of the theme.
+
+## Tracking with Google Analytics (Optional)
+
+This starter has the analytics plugin inside the `gatsby-config`, so the only need to do in order to enable it is to provide the `Tracking Id` for your site (starts with `UA-`). Just set a new variable inside your `.env` file called `ANALYTICS_ID` and analytics will be turn on automatically 😄
+
+## Contributing
+
+In case you want to add your contribution into this project, please refer to the [Gatsby Theme repository](https://github.com/EmaSuriano/gatsby-theme-mate) so then everybody using this starter will be able to get the changes.

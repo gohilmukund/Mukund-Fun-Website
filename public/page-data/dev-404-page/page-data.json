@@ -1,1 +1,5 @@
-{"componentChunkName":"component---cache-dev-404-page-js","path":"/dev-404-page/","result":{"data":{"allSitePage":{"nodes":[{"path":"/experience/_additionalSkills/"},{"path":"/experience/vlooping/"},{"path":"/404.html"},{"path":"/404/"},{"path":"/about-me/"},{"path":"/experience/"},{"path":"/"},{"path":"/skills/"}]}},"pageContext":{}},"staticQueryHashes":["1726861117","1726861117"]}
+{
+    "componentChunkName": "component---cache-dev-404-page-js",
+    "path": "/dev-404-page/",
+    "result": {"data":{"allSiteFunction":{"nodes":[]},"allSitePage":{"nodes":[{"path":"/"},{"path":"/404.html"},{"path":"/404"}]}},"pageContext":{}},
+    "staticQueryHashes": []}

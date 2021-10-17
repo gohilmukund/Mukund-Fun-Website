@@ -17,26 +17,31 @@
         {
           "name": "C:\\Project\\Github\\Mukund-Fun-Website\\node_modules\\@babel\\plugin-proposal-numeric-separator\\lib\\index.js",
           "options": {}
+        },
+        {
+          "name": "babel-plugin-styled-components",
+          "stage": "develop",
+          "options": {
+            "plugins": [],
+            "displayName": true,
+            "fileName": true,
+            "minify": true,
+            "namespace": "",
+            "transpileTemplateLiterals": true,
+            "topLevelImportPaths": [],
+            "pure": false,
+            "ssr": false
+          }
         }
       ],
       "presets": [
         {
-          "name": "C:\\Project\\Github\\Mukund-Fun-Website\\node_modules\\@emotion\\babel-preset-css-prop\\dist\\babel-preset-css-prop.cjs.js",
-          "options": {
-            "sourceMap": true,
-            "autoLabel": true,
-            "plugins": [],
-            "labelFormat": "[local]",
-            "cssPropOptimization": true
-          }
-        },
-        {
           "name": "C:\\Project\\Github\\Mukund-Fun-Website\\node_modules\\@babel\\preset-typescript\\lib\\index.js",
           "options": {
             "plugins": [],
-            "allExtensions": false,
             "isTSX": false,
-            "jsxPragma": "React"
+            "jsxPragma": "React",
+            "allExtensions": false
           }
         }
       ],
@@ -62,26 +67,31 @@
         {
           "name": "C:\\Project\\Github\\Mukund-Fun-Website\\node_modules\\@babel\\plugin-proposal-numeric-separator\\lib\\index.js",
           "options": {}
+        },
+        {
+          "name": "babel-plugin-styled-components",
+          "stage": "develop-html",
+          "options": {
+            "plugins": [],
+            "displayName": true,
+            "fileName": true,
+            "minify": true,
+            "namespace": "",
+            "transpileTemplateLiterals": true,
+            "topLevelImportPaths": [],
+            "pure": false,
+            "ssr": false
+          }
         }
       ],
       "presets": [
         {
-          "name": "C:\\Project\\Github\\Mukund-Fun-Website\\node_modules\\@emotion\\babel-preset-css-prop\\dist\\babel-preset-css-prop.cjs.js",
-          "options": {
-            "sourceMap": true,
-            "autoLabel": true,
-            "plugins": [],
-            "labelFormat": "[local]",
-            "cssPropOptimization": true
-          }
-        },
-        {
           "name": "C:\\Project\\Github\\Mukund-Fun-Website\\node_modules\\@babel\\preset-typescript\\lib\\index.js",
           "options": {
             "plugins": [],
-            "allExtensions": false,
             "isTSX": false,
-            "jsxPragma": "React"
+            "jsxPragma": "React",
+            "allExtensions": false
           }
         }
       ],
@@ -107,26 +117,31 @@
         {
           "name": "C:\\Project\\Github\\Mukund-Fun-Website\\node_modules\\@babel\\plugin-proposal-numeric-separator\\lib\\index.js",
           "options": {}
+        },
+        {
+          "name": "babel-plugin-styled-components",
+          "stage": "build-html",
+          "options": {
+            "plugins": [],
+            "displayName": true,
+            "fileName": true,
+            "minify": true,
+            "namespace": "",
+            "transpileTemplateLiterals": true,
+            "topLevelImportPaths": [],
+            "pure": false,
+            "ssr": true
+          }
         }
       ],
       "presets": [
         {
-          "name": "C:\\Project\\Github\\Mukund-Fun-Website\\node_modules\\@emotion\\babel-preset-css-prop\\dist\\babel-preset-css-prop.cjs.js",
-          "options": {
-            "sourceMap": true,
-            "autoLabel": true,
-            "plugins": [],
-            "labelFormat": "[local]",
-            "cssPropOptimization": true
-          }
-        },
-        {
           "name": "C:\\Project\\Github\\Mukund-Fun-Website\\node_modules\\@babel\\preset-typescript\\lib\\index.js",
           "options": {
             "plugins": [],
-            "allExtensions": false,
             "isTSX": false,
-            "jsxPragma": "React"
+            "jsxPragma": "React",
+            "allExtensions": false
           }
         }
       ],
@@ -152,26 +167,31 @@
         {
           "name": "C:\\Project\\Github\\Mukund-Fun-Website\\node_modules\\@babel\\plugin-proposal-numeric-separator\\lib\\index.js",
           "options": {}
+        },
+        {
+          "name": "babel-plugin-styled-components",
+          "stage": "build-javascript",
+          "options": {
+            "plugins": [],
+            "displayName": true,
+            "fileName": true,
+            "minify": true,
+            "namespace": "",
+            "transpileTemplateLiterals": true,
+            "topLevelImportPaths": [],
+            "pure": false,
+            "ssr": true
+          }
         }
       ],
       "presets": [
         {
-          "name": "C:\\Project\\Github\\Mukund-Fun-Website\\node_modules\\@emotion\\babel-preset-css-prop\\dist\\babel-preset-css-prop.cjs.js",
-          "options": {
-            "sourceMap": true,
-            "autoLabel": true,
-            "plugins": [],
-            "labelFormat": "[local]",
-            "cssPropOptimization": true
-          }
-        },
-        {
           "name": "C:\\Project\\Github\\Mukund-Fun-Website\\node_modules\\@babel\\preset-typescript\\lib\\index.js",
           "options": {
             "plugins": [],
-            "allExtensions": false,
             "isTSX": false,
-            "jsxPragma": "React"
+            "jsxPragma": "React",
+            "allExtensions": false
           }
         }
       ],
@@ -182,6 +202,7 @@
     }
   },
   "browserslist": [
-    "defaults"
+    ">0.25%",
+    "not dead"
   ]
 }
