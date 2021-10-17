@@ -1,7 +1,7 @@
 {
-    "text": "#e3e3e3", 
+    "text": "#0C005A", 
     "background": "#EAEAEA", 
-    "muted": "#FF0000", 
+    "muted": "#0C005A", 
     "primary": "#BC2525",
-    "secondary": "#0C005A" 
+    "secondary": "#FF0000" 
 }
