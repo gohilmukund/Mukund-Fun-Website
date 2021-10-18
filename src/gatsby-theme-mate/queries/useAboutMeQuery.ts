@@ -14,12 +14,18 @@ export type QueryResponse = {
         src: string;
       };
     };
+    profilePicture: {
+      title: string;
+      image: {
+        src: string;
+      };
+    };
   };
 };
 
 export const useAboutMeQueryMK = (): AboutMe => {
   const {
-    contentfulAbout: { aboutMe, profile },
+    contentfulAbout: { aboutMe, profile, profilePicture },
   } = useStaticQuery<QueryResponse>(graphql`
     query AboutMeQueryMK {
       contentfulAbout {
@@ -34,6 +40,12 @@ export const useAboutMeQueryMK = (): AboutMe => {
             src
           }
         }
+        profilePicture {
+					title
+          image: resize(width: 450, quality: 100) {
+            src
+          }
+        }
       }
     }
   `);
@@ -43,6 +55,10 @@ export const useAboutMeQueryMK = (): AboutMe => {
     profile: {
       alt: profile.title,
       src: profile.image.src,
+    },
+    profilePicture: {
+      alt: profilePicture.title,
+      src: profilePicture.image.src,
     },
   };
 };

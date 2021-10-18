@@ -10,7 +10,7 @@ import { useAboutMeQueryMK as useAboutMeQuery } from '../queries/useAboutMeQuery
 import { SECTION } from '../utils/constants';
 
 const About = () => {
-  const { markdown, profile } = useAboutMeQuery();
+  const { markdown, profile, profilePicture } = useAboutMeQuery();
 
   return (
     <Section.Container id={SECTION.about} Background={Background}>
@@ -27,7 +27,7 @@ const About = () => {
           style={{ maxWidth: '300px', margin: 'auto' }}
         >
           <Fade direction="right" triggerOnce>
-            <ProfilePicture mt={[4, 4, 0]} ml={[0, 0, 1]} {...profile} />
+            <ProfilePicture mt={[4, 4, 0]} ml={[0, 0, 1]} {...profilePicture} />
           </Fade>
         </Box>
       </Flex>
