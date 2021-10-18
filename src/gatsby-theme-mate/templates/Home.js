@@ -10,6 +10,7 @@ import Landing from 'gatsby-theme-mate/src/sections/Landing';
 import About from 'gatsby-theme-mate/src/sections/About';
 import Projects from 'gatsby-theme-mate/src/sections/Projects';
 import Writing from 'gatsby-theme-mate/src/sections/Writing';
+import Blog from '../sections/Blog';
 
 const Home = () => (
     <Layout>
@@ -17,7 +18,8 @@ const Home = () => (
         <Landing />        
         <About />
         <Projects />
-        {/* <Writing /> */}
+        <Writing />
+        <Blog />
         <Footer />
     </Layout>
 );
