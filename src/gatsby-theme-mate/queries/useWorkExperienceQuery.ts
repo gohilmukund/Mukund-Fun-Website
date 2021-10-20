@@ -35,8 +35,8 @@ export const useWorkExperienceQuery = (): WorkExperience[] => {
           description {
             raw
           }
-          joiningDate(formatString: "MMM-YYYY")
-          # leavingDate(formatString: "MMM-YYYY")
+          joiningDate(formatString: "MMM YYYY")
+          # leavingDate(formatString: "MMM YYYY")
           logo {
             title
             image: resize(width: 200, quality: 100) {

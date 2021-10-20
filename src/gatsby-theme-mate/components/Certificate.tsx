@@ -13,24 +13,25 @@ const Certificate = ({
   issuingOrganization,
   certificateImage,
   credentialUrl,
-  badge
+  badge,
+  onPress
 }: Props) => (
   <BadgeCard p={0}>
     <Flex style={{ height: CARD_HEIGHT }}>
-      <ImageContainer>
+      <ImageContainer  onClick={()=> onPress({name, issueDate, issuingOrganization, certificateImage, badge, credentialUrl})} >
         <Badge {...badge} />
-          <Flex
-            m={1}
-            style={{
-              top:0,
-              right:0, 
-              position: "absolute"
-            }}
-          >
-            <Box mx={1} fontSize={4}>
-              <SocialLink name="Homepage" icon="globe" url={credentialUrl} />
-            </Box>
-          </Flex>
+        <Flex
+          m={1}
+          style={{
+            top:0,
+            right:0, 
+            position: "absolute",
+          }}
+        >
+          <Box mx={1} fontSize={4}>
+            <SocialLink name="Certificate Link" icon="globe" url={credentialUrl} />
+          </Box>
+        </Flex>
       </ImageContainer>
     </Flex>
   </BadgeCard>
@@ -40,9 +41,11 @@ const CARD_HEIGHT = '200px';
 
 const MEDIA_QUERY_SMALL = '@media (max-width: 400px)';
 
-const ImageContainer = styled.div`
+const ImageContainer = styled.button`
   margin: auto;
   width: ${CARD_HEIGHT};
+  background-color: transparent;
+  border-color: transparent;
 
   ${MEDIA_QUERY_SMALL} {
     width: calc(${CARD_HEIGHT} / 2);
@@ -52,7 +55,7 @@ const ImageContainer = styled.div`
 const Badge = styled(Image)`
   width: ${CARD_HEIGHT};
   height: ${CARD_HEIGHT};
-  padding: 40px;
+  padding: 15px;
   margin-top: 0px;
 
   ${MEDIA_QUERY_SMALL} {

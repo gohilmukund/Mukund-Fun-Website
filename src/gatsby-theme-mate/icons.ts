@@ -3,12 +3,14 @@ import {
     faTwitter,
     faGithub,
     faLinkedin,
+    
 } from '@fortawesome/free-brands-svg-icons';
 import {
     faGlobe,
     faEnvelope,
     faCoffee,
     faDownload,
+    faTimesCircle
 } from '@fortawesome/free-solid-svg-icons';
 
 export const ICONS = [
@@ -19,5 +21,6 @@ export const ICONS = [
     faEnvelope,
     faCoffee,
     faLinkedin,
-    faDownload
+    faDownload,
+    faTimesCircle
 ];

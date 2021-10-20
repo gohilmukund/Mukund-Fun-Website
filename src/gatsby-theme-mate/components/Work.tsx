@@ -57,7 +57,7 @@ const Work = ({
           </ImageLabel>
           <Hide query="md">
             <ImageLabel bg="muted" color="primary">
-              {joiningDate}
+              {joiningDate} - {leavingDate?leavingDate:"PRESENT"}
             </ImageLabel>
           </Hide>
         </ProjectTag>

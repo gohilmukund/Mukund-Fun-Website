@@ -11,8 +11,8 @@ const WorkExperience = () => {
   const job = useWorkExperienceQuery();
 
   return (
-    <Section.Container id={SECTION.WorkExperience} Background={Background}>
-      <Section.Header name={SECTION.WorkExperience} icon="♟" label="chesspawn" />
+    <Section.Container id={SECTION.workExperience} Background={Background}>
+      <Section.Header name={SECTION.workExperience} icon="♟" label="chesspawn" />
 
       <CardContainer minWidth="350px">
         <Fade direction="down" cascade damping={0.5} triggerOnce>

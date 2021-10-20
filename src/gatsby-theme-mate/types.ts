@@ -40,6 +40,7 @@ export type Certification = {
   issueDate: string;
   certificateImage: Image;
   badge: Image;
+  onPress?: Function;
 };
 
 export type AboutMe = {

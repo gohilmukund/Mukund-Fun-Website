@@ -8,6 +8,7 @@ const plugins = [
       spaceId: SPACE_ID,
     },
   },
+  `gatsby-plugin-styled-components`,
 ];
 
 if (ANALYTICS_ID) {
