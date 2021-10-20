@@ -35,13 +35,13 @@ export const useCertificatesQuery = (): Certification[] => {
           credentialUrl
           certificatePicture {
             title
-            image: resize(width: 200, quality: 100) {
+            image: resize(width: 400, quality: 100) {
               src
             }
           }
           certificateBadge {
             title
-            image: resize(width: 200, quality: 200) {
+            image: resize(width: 200, quality: 100) {
               src
             }
           }
