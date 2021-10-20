@@ -23,6 +23,25 @@ export type Project = {
   logo: Image;
 };
 
+export type WorkExperience = {
+  name: string;
+  description: string;
+  homepage: string;
+  position: string;
+  joiningDate: string;
+  leavingDate: string;
+  logo: Image;
+};
+
+export type Certification = {
+  name: string;
+  issuingOrganization: string;
+  credentialUrl: string;
+  issueDate: string;
+  certificateImage: Image;
+  badge: Image;
+};
+
 export type AboutMe = {
   markdown: string;
   profile: Image;

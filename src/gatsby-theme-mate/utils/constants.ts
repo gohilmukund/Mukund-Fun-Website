@@ -11,4 +11,6 @@ export enum SECTION {
   projects = 'Projects',
   writing = 'Writing',
   blog = 'Blog',
+  WorkExperience = 'Work Experience',
+  certifications = 'Certifications',
 }

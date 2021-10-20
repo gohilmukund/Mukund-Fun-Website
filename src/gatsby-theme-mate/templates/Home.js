@@ -11,6 +11,8 @@ import About from 'gatsby-theme-mate/src/sections/About';
 import Projects from 'gatsby-theme-mate/src/sections/Projects';
 import Writing from 'gatsby-theme-mate/src/sections/Writing';
 import Blog from '../sections/Blog';
+import WorkExperience from '../sections/WorkExperience';
+import Certifications from '../sections/Certifications';
 
 const Home = () => (
     <Layout>
@@ -18,8 +20,11 @@ const Home = () => (
         <Landing />        
         <About />
         <Projects />
-        <Writing />
+        {/* <Writing /> */}
+        {/* <Blog /> */}
+        <WorkExperience />
         <Blog />
+        {/* <Certifications /> */}
         <Footer />
     </Layout>
 );
