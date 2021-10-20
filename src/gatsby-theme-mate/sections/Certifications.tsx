@@ -3,21 +3,21 @@ import { Fade } from 'react-awesome-reveal';
 import Section from '../components/Section';
 import { CardContainer } from '../components/Card';
 import Triangle from '../components/Triangle';
-import Project from '../components/Project';
-import { useProjectsQueryMK as useProjectsQuery } from '../queries/useProjectsQuery';
 import { SECTION } from '../utils/constants';
+import Certificate from '../components/Certificate';
+import { useCertificatesQuery } from '../queries/useCertificatesQuery';
 
 const Certifications = () => {
-  const projects = useProjectsQuery();
+  const certificates = useCertificatesQuery();
 
   return (
     <Section.Container id={SECTION.certifications} Background={Background}>
-      <Section.Header name={SECTION.certifications} icon="🗃" label="cards" />
+      <Section.Header name={SECTION.certifications} icon="🌟" label="cards" />
 
       <CardContainer minWidth="350px">
         <Fade direction="down" cascade damping={0.5} triggerOnce>
-          {projects.map((p, i) => (
-            <Project {...p} key={i} />
+          {certificates.map((p, i) => (
+            <Certificate {...p} key={i} />
           ))}
         </Fade>
       </CardContainer>

@@ -48,11 +48,12 @@ export const useWorkExperienceQuery = (): WorkExperience[] => {
     }
   `);
 
-  return contentfulAbout.workExperience.map(({ logo, ...rest }) => ({
+  return contentfulAbout.workExperience.map(({ logo, description, ...rest }) => ({
     ...rest,
     logo: {
       alt: logo.title,
       src: logo.image.src,
     },
+    description: JSON.parse(JSON.stringify(eval("(" + description.raw + ")"))).content[0]?.content[0]?.value
   }));
 };

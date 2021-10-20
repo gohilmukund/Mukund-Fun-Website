@@ -21,10 +21,9 @@ const Home = () => (
         <About />
         <Projects />
         {/* <Writing /> */}
-        {/* <Blog /> */}
         <WorkExperience />
-        <Blog />
-        {/* <Certifications /> */}
+        <Certifications />
+        {/* <Blog />         */}
         <Footer />
     </Layout>
 );

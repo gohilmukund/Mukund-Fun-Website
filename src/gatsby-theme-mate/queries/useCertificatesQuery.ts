@@ -1,17 +1,21 @@
 import { graphql, useStaticQuery } from 'gatsby';
-import { Project } from '../types';
+import { Certification } from '../types';
 
 export type QueryResponse = {
   contentfulAbout: {
-    projects: {
+    certifications: {
       id: string;
       name: string;
-      description: string;
-      homepage: string;
-      repository: string;
-      publishedDate: string;
-      type: string;
-      logo: {
+      credentialUrl: string;
+      issueDate: string;
+      issuingOrganization: string;
+      certificatePicture: {
+        title: string;
+        image: {
+          src: string;
+        };
+      };
+      certificateBadge: {
         title: string;
         image: {
           src: string;
@@ -21,34 +25,42 @@ export type QueryResponse = {
   };
 };
 
-export const useCertificatesQuery = (): Project[] => {
+export const useCertificatesQuery = (): Certification[] => {
   const { contentfulAbout } = useStaticQuery<QueryResponse>(graphql`
-    query CertificateQuery {
+    {
       contentfulAbout {
-        projects {
+        certifications {
           id
           name
-          description
-          homepage: projectUrl
-          repository: repositoryUrl
-          publishedDate(formatString: "YYYY")
-          type
-          logo {
+          credentialUrl
+          certificatePicture {
             title
             image: resize(width: 200, quality: 100) {
               src
             }
           }
+          certificateBadge {
+            title
+            image: resize(width: 200, quality: 200) {
+              src
+            }
+          }
+          issuingOrganization
+          issueDate(formatString: "DD-MMM-YYYY")
         }
       }
     }
   `);
 
-  return contentfulAbout.projects.map(({ logo, ...rest }) => ({
+  return contentfulAbout.certifications.map(({ certificatePicture, certificateBadge, ...rest }) => ({
     ...rest,
-    logo: {
-      alt: logo.title,
-      src: logo.image.src,
+    badge: {
+      alt: certificateBadge?.title,
+      src: certificateBadge?.image.src,
+    },
+    certificateImage: {
+      alt: certificatePicture?.title,
+      src: certificatePicture?.image.src,
     },
   }));
 };

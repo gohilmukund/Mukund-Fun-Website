@@ -18,8 +18,6 @@ const Work = ({
   leavingDate,
   logo,
 }: Props) => { 
-  let desc = JSON.parse(JSON.stringify(eval("(" + description.raw+ ")"))).content[0]?.content[0]?.value
-  console.log(String(desc).replace(/\ng/,'\n'))
   function NewlineText(props) {
     const text = props.text;
     return text.split('\n').map(str => <p>{str}</p>);
@@ -34,7 +32,7 @@ const Work = ({
           </Title>
         </span>
         <Text width={[1]} style={{ overflow: 'auto' }} color="text">
-          <NewlineText text={desc}/>
+          <NewlineText text={description}/>
         </Text>
         
       </TextContainer>
@@ -63,35 +61,6 @@ const Work = ({
             </ImageLabel>
           </Hide>
         </ProjectTag>
-
-      {/* <ImageContainer>
-        <ProjectImage  />
-        <ProjectTag>
-          <Flex
-            m={1}
-            style={{
-              float: 'right',
-            }}
-          >
-            <Box mx={1} fontSize={4}>
-              <SocialLink name="Homepage" icon="globe" url={homepage} />
-            </Box>
-          </Flex>
-          <ImageLabel
-            bg="muted"
-            color="background"
-            position="bottom-right"
-            round
-          >
-            <LogoImage {...logo} />
-          </ImageLabel>
-          <Hide query="md">
-            <ImageLabel bg="muted" color="primary">
-              {joiningDate}
-            </ImageLabel>
-          </Hide>
-        </ProjectTag>
-      </ImageContainer> */}
     </Flex>
   </Card>
 )};
