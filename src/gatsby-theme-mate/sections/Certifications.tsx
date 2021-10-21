@@ -11,6 +11,7 @@ import "@reach/dialog/styles.css"
 import { Box, Flex, Image, Link, Text } from 'rebass/styled-components';
 import styled from 'styled-components';
 import IconButton from '../components/IconButton';
+import { BadgeContainer } from '../components/BadgeCard';
 
 const Certifications = () => {
   const certificates = useCertificatesQuery();
@@ -26,7 +27,7 @@ const Certifications = () => {
     <Section.Container id={SECTION.certifications} Background={Background}>
       <Section.Header name={SECTION.certifications} icon="🌟" label="cards" />
 
-      <CardContainer minWidth="350px">
+      <BadgeContainer minWidth="180px">
         <Fade direction="down" cascade damping={0.5} triggerOnce>
           {certificates.map((p, i) => (
             <Certificate {...p} key={i} onPress={onPressHandle} />
@@ -67,7 +68,7 @@ const Certifications = () => {
             
           </Dialog>
         }
-      </CardContainer>
+      </BadgeContainer>
     </Section.Container>
   );
 };
