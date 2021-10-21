@@ -34,7 +34,7 @@ const Certifications = () => {
           ))}
         </Fade>
         { showLightbox && 
-          <Dialog style={{padding:5, borderRadius:20}}>
+          <Dialog style={{padding:5, borderRadius:20, width:'95%'}}>
             <Flex
               m={1}
               style={{
@@ -84,9 +84,11 @@ const CertificateCard = styled(Image)`
   margin-top: 0px;
 
   ${MEDIA_QUERY_SMALL} {
-    height: calc(${CARD_HEIGHT});
-    width: 320px;
+    height: 50vh;
+    width: '100%';
     margin-top: 0;
+    resize: both;
+    overflow: auto;
     // padding: 10px;
   }
 `;

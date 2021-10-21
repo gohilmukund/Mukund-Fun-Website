@@ -16,7 +16,9 @@ export const BadgeContainer = styled.div<BadgeContainerProps>`
   justify-items: center;
 
   @media only screen and (max-width: 400px) {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(
+      auto-fill, 
+      minmax(280px, 1fr));
   }
 `;
 

@@ -48,7 +48,7 @@ const ImageContainer = styled.button`
   border-color: transparent;
 
   ${MEDIA_QUERY_SMALL} {
-    width: calc(${CARD_HEIGHT} / 2);
+    width: calc(${CARD_HEIGHT});
   }
 `;
 
@@ -59,9 +59,9 @@ const Badge = styled(Image)`
   margin-top: 0px;
 
   ${MEDIA_QUERY_SMALL} {
-    height: calc(${CARD_HEIGHT} / 2);
-    width: calc(${CARD_HEIGHT} / 2);
-    margin-top: calc(${CARD_HEIGHT} / 4);
+    height: calc(${CARD_HEIGHT} / 1.2);
+    width: calc(${CARD_HEIGHT} / 1.2);
+    margin-top: 0px;
     padding: 10px;
   }
 `;
