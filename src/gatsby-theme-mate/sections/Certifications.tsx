@@ -84,8 +84,8 @@ const CertificateCard = styled(Image)`
   margin-top: 0px;
 
   ${MEDIA_QUERY_SMALL} {
-    height: 50vh;
-    width: '100%';
+    height: auto;
+    width: 300px;
     margin-top: 0;
     resize: both;
     overflow: auto;
