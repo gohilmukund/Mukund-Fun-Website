@@ -96,29 +96,22 @@ const CertificateCard = styled(Image)`
 const Background = () => (
   <>
     <Triangle
-      color="secondary"
-      height={['80vh', '80vh']}
+      color="muted"
+      height={['15vh', '10vh']}
       width={['100vw', '100vw']}
-      position="top-right"
+      position="top-left"
     />
 
     <Triangle
-      color="background"
-      height={['50vh', '20vh']}
-      width={['50vw', '50vw']}
-      position="top-right"
+      color="secondary"
+      height={['50vh', '40vh']}
+      width={['70vw', '40vw']}
+      position="bottom-left"
     />
 
     <Triangle
       color="primary"
-      height={['25vh', '40vh']}
-      width={['75vw', '60vw']}
-      position="bottom-right"
-    />
-
-    <Triangle
-      color="muted"
-      height={['25vh', '20vh']}
+      height={['40vh', '15vh']}
       width={['100vw', '100vw']}
       position="bottom-right"
     />
