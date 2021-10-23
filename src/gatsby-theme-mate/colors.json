@@ -3,5 +3,6 @@
     "background": "#EAEAEA", 
     "muted": "#FFCCCC", 
     "primary": "#0C005A",
-    "secondary": "#BC2525" 
+    "secondary": "#BC2525",
+    "whitebg": "#EEEEEE"
 }

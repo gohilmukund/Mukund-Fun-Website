@@ -23,7 +23,7 @@ export const BadgeContainer = styled.div<BadgeContainerProps>`
 `;
 
 export const BadgeCard = styled(CardRebass).attrs({
-  bg: 'background',
+  bg: 'whitebg',
   boxShadow: 0,
 })`
   position: relative;
