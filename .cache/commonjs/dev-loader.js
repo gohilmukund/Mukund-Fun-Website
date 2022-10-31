@@ -21,8 +21,13 @@ const preferDefault = m => m && m.default || m;
 function mergePageEntry(cachedPage, newPageData) {
   return { ...cachedPage,
     payload: { ...cachedPage.payload,
-      json: newPageData.result,
+      json: { // For SSR, cachedPage may contain "data" and "serverData"
+        // But newPageData may contain only "data" or only "serverData" depending on what was updated
+        ...cachedPage.payload.json,
+        ...newPageData.result
+      },
       page: { ...cachedPage.payload.page,
+        getServerDataError: newPageData.getServerDataError,
         staticQueryResults: newPageData.staticQueryResults
       }
     }
@@ -53,6 +58,8 @@ class DevLoader extends _loader.BaseLoader {
           this.handlePageQueryResultHotUpdate(msg);
         } else if (msg.type === `stalePageData`) {
           this.handleStalePageDataMessage(msg);
+        } else if (msg.type === `staleServerData`) {
+          this.handleStaleServerDataMessage(msg);
         }
       });
     } else if (process.env.NODE_ENV !== `test`) {
@@ -108,11 +115,10 @@ class DevLoader extends _loader.BaseLoader {
     }
   }
 
-  handlePageQueryResultHotUpdate(msg) {
+  updatePageData = (pagePath, newPageData) => {
     var _this$pageDataDb$get;
 
-    const newPageData = msg.payload.result;
-    const pageDataDbCacheKey = (0, _normalizePagePath.default)(msg.payload.id);
+    const pageDataDbCacheKey = (0, _normalizePagePath.default)(pagePath);
     const cachedPageData = (_this$pageDataDb$get = this.pageDataDb.get(pageDataDbCacheKey)) === null || _this$pageDataDb$get === void 0 ? void 0 : _this$pageDataDb$get.payload;
 
     if (!(0, _isEqual.default)(newPageData, cachedPageData)) {
@@ -152,41 +158,83 @@ class DevLoader extends _loader.BaseLoader {
         });
       }
 
-      ___emitter.emit(`pageQueryResult`, newPageData);
+      return true;
+    }
+
+    return false;
+  };
+  markAsStale = dirtyQueryId => {
+    if (dirtyQueryId === `/dev-404-page/` || dirtyQueryId === `/404.html`) {
+      // those pages are not on demand so skipping
+      return;
+    }
+
+    const normalizedId = (0, _normalizePagePath.default)(dirtyQueryId); // We can't just delete items in caches, because then
+    // using history.back() would show dev-404 page
+    // due to our special handling of it in root.js (loader.isPageNotFound check)
+    // so instead we mark it as stale and instruct loader's async methods
+    // to refetch resources if they are marked as stale
+
+    const cachedPageData = this.pageDataDb.get(normalizedId);
+
+    if (cachedPageData) {
+      // if we have page data in cache, mark it as stale
+      this.pageDataDb.set(normalizedId, { ...cachedPageData,
+        stale: true
+      });
+    }
+
+    const cachedPage = this.pageDb.get(normalizedId);
+
+    if (cachedPage) {
+      // if we have page data in cache, mark it as stale
+      this.pageDb.set(normalizedId, { ...cachedPage,
+        payload: { ...cachedPage.payload,
+          stale: true
+        }
+      });
+    }
+  };
+
+  handlePageQueryResultHotUpdate(msg) {
+    const updated = this.updatePageData(msg.payload.id, msg.payload.result);
+
+    if (updated) {
+      ___emitter.emit(`pageQueryResult`, msg.payload.result);
     }
   }
 
   handleStalePageDataMessage(msg) {
-    msg.payload.stalePageDataPaths.forEach(dirtyQueryId => {
-      if (dirtyQueryId === `/dev-404-page/` || dirtyQueryId === `/404.html`) {
-        // those pages are not on demand so skipping
-        return;
+    for (const dirtyQueryId of msg.payload.stalePageDataPaths) {
+      this.markAsStale(dirtyQueryId);
+    }
+  }
+
+  handleStaleServerDataMessage() {
+    const activePath = (0, _normalizePagePath.default)(location.pathname); // For now just invalidate every single page with serverData
+
+    for (const [key, value] of this.pageDataDb) {
+      var _value$payload, _value$payload$result;
+
+      if (value !== null && value !== void 0 && (_value$payload = value.payload) !== null && _value$payload !== void 0 && (_value$payload$result = _value$payload.result) !== null && _value$payload$result !== void 0 && _value$payload$result.serverData) {
+        this.markAsStale(key);
       }
 
-      const normalizedId = (0, _normalizePagePath.default)(dirtyQueryId); // We can't just delete items in caches, because then
-      // using history.back() would show dev-404 page
-      // due to our special handling of it in root.js (loader.isPageNotFound check)
-      // so instead we mark it as stale and instruct loader's async methods
-      // to refetch resources if they are marked as stale
-
-      const cachedPageData = this.pageDataDb.get(normalizedId);
-
-      if (cachedPageData) {
-        // if we have page data in cache, mark it as stale
-        this.pageDataDb.set(normalizedId, { ...cachedPageData,
-          stale: true
-        });
+      if (activePath === (0, _normalizePagePath.default)(key)) {
+        this.reFetchServerData(activePath);
       }
+    }
+  }
 
-      const cachedPage = this.pageDb.get(normalizedId);
+  reFetchServerData(pagePath) {
+    this.fetchPageDataJson({
+      pagePath
+    }).then(data => {
+      const updated = this.updatePageData(data.pagePath, data.payload); // SSR could be slow, so we should only emit serverDataResult
+      // when still on the same page
 
-      if (cachedPage) {
-        // if we have page data in cache, mark it as stale
-        this.pageDb.set(normalizedId, { ...cachedPage,
-          payload: { ...cachedPage.payload,
-            stale: true
-          }
-        });
+      if (updated && pagePath === (0, _normalizePagePath.default)(location.pathname)) {
+        ___emitter.emit(`serverDataResult`, data.payload);
       }
     });
   }

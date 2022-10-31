@@ -33,47 +33,47 @@ const Certifications = () => {
             <Certificate {...p} key={i} onPress={onPressHandle} />
           ))}
         </Fade>
-        { showLightbox && 
-          <Dialog style={{padding:5, borderRadius:20, width:'95%'}}>
-            <Flex
-              m={1}
-              style={{
-                top:0,
-                right:0,
-                justifyContent: 'flex-end', 
-                position: "relative",
-              }}
-            >
-              <Box mx={1} fontSize={4}>
-                <IconButton name="Close" icon="times-circle"  onPress={()=>setShowLightbox(false)} url={'#'}/>
-              </Box>
-            </Flex>
-
-            <Flex
-              m={1}
-              style={{
-                top:0,
-                justifyContent:'center',
-                alignItems: 'center',
-                flexDirection: 'column',
-              }}
-            >
-              <CertificateCard {...currentCertificate.certificateImage} /> 
-              <Text style={{textAlign:'center',}}>
-                <h1 style={{padding:0, margin:0 }}> {currentCertificate?.name} </h1>
-                {currentCertificate?.issuingOrganization} <br /> 
-                <Link href={currentCertificate?.credentialUrl}> {currentCertificate?.credentialUrl} </Link>
-              </Text>
-            </Flex>
-            
-          </Dialog>
-        }
+        { showLightbox && <ModalView currentCertificate={currentCertificate} setShowLightbox={setShowLightbox}/> }
       </BadgeContainer>
     </Section.Container>
   );
 };
 
-const CARD_HEIGHT = '600px';
+const ModalView = ({currentCertificate, setShowLightbox}) => {
+  return(
+    <Dialog style={{padding:5, borderRadius:20, width:'65%'}}>
+      <Flex
+        m={1}
+        style={{
+          top:0,
+          right:0,
+          justifyContent: 'flex-end', 
+          position: "relative",
+        }}>
+        <Box mx={1} fontSize={4}>
+          <IconButton name="Close" icon="times-circle"  onPress={()=>setShowLightbox(false)} url={'#'}/>
+        </Box>
+      </Flex>
+      <Flex
+        m={1}
+        style={{
+          top:0,
+          justifyContent:'center',
+          alignItems: 'center',
+          flexDirection: 'column',
+        }}>
+        <CertificateCard {...currentCertificate.certificateImage} /> 
+        <Text style={{textAlign:'center',}}>
+          <h1 style={{padding:0, margin:0 }}> {currentCertificate?.name} </h1>
+          {currentCertificate?.issuingOrganization} <br /> 
+          <Link href={currentCertificate?.credentialUrl}> {currentCertificate?.credentialUrl} </Link>
+        </Text>
+      </Flex>      
+    </Dialog>
+  )
+}
+
+const CARD_HEIGHT = '400px';
 
 const MEDIA_QUERY_SMALL = '@media (max-width: 400px)';
 

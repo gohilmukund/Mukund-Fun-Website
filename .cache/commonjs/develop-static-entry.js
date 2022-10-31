@@ -3,6 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
+exports.getPageChunk = getPageChunk;
 exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
@@ -12,6 +13,8 @@ var _server = require("react-dom/server");
 var _lodash = require("lodash");
 
 var _apiRunnerSsr = require("./api-runner-ssr");
+
+var _asyncRequires = _interopRequireDefault(require("$virtual/async-requires"));
 
 /* global BROWSER_ESM_ONLY */
 // import testRequireError from "./test-require-error"
@@ -147,3 +150,9 @@ var _default = ({
 };
 
 exports.default = _default;
+
+function getPageChunk({
+  componentChunkName
+}) {
+  return _asyncRequires.default.components[componentChunkName]();
+}

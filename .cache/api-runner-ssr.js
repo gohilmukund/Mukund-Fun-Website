@@ -4,12 +4,12 @@ var plugins = [{
       options: {"plugins":[]},
     },{
       name: 'gatsby-plugin-styled-components',
-      plugin: require('C:/Project/Github/Mukund-Fun-Website/node_modules/gatsby-plugin-styled-components/gatsby-ssr'),
+      plugin: require('C:/Project/Github/Mukund-Fun-Website/node_modules/gatsby-theme-mate/node_modules/gatsby-plugin-styled-components/gatsby-ssr'),
       options: {"plugins":[],"displayName":true,"fileName":true,"minify":true,"namespace":"","transpileTemplateLiterals":true,"topLevelImportPaths":[],"pure":false},
     },{
       name: 'gatsby-plugin-manifest',
-      plugin: require('C:/Project/Github/Mukund-Fun-Website/node_modules/gatsby-plugin-manifest/gatsby-ssr'),
-      options: {"plugins":[],"name":"Mate Portfolio","short_name":"Mate","start_url":"/","background_color":"#FFFFFF","theme_color":"#7c37ad","display":"minimal-ui","icon":"icon.png","legacy":true,"theme_color_in_head":true,"cache_busting_mode":"query","crossOrigin":"anonymous","include_favicon":true,"cacheDigest":"bd811806cc1b8afc275a716b064f3106"},
+      plugin: require('C:/Project/Github/Mukund-Fun-Website/node_modules/gatsby-theme-mate/node_modules/gatsby-plugin-manifest/gatsby-ssr'),
+      options: {"plugins":[],"name":"Mate Portfolio","short_name":"Mate","start_url":"/","background_color":"#FFFFFF","theme_color":"#7c37ad","display":"minimal-ui","icon":"icon.png","legacy":true,"theme_color_in_head":true,"cache_busting_mode":"query","crossOrigin":"anonymous","include_favicon":true,"cacheDigest":"c565385b61006d035833f32cb663bb51"},
     }]
 /* global plugins */
 // During bootstrap, we write requires at top of this file which looks like:

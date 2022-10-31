@@ -19,6 +19,8 @@ var _graphqlErrors = require("./components/graphql-errors");
 
 var _devSsrError = require("./components/dev-ssr-error");
 
+var _getserverdataError = require("./components/getserverdata-error");
+
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -68,6 +70,13 @@ const reducer = (state, event) => {
         };
       }
 
+    case `SHOW_GETSERVERDATA_ERROR`:
+      {
+        return { ...state,
+          getServerDataError: event.payload
+        };
+      }
+
     case `SHOW_GRAPHQL_ERRORS`:
       {
         return { ...state,
@@ -87,7 +96,8 @@ const reducer = (state, event) => {
         return { ...state,
           buildError: null,
           errors: [],
-          graphqlErrors: []
+          graphqlErrors: [],
+          getServerDataError: null
         };
       }
 
@@ -102,6 +112,7 @@ const initialState = {
   errors: [],
   buildError: null,
   devSsrError: null,
+  getServerDataError: null,
   graphqlErrors: []
 };
 
@@ -131,20 +142,30 @@ function DevOverlay({
   const dismiss = () => {
     dispatch({
       action: `DISMISS`
-    });
+    }); // Setting gatsbyEvents = [] is necessary for the runtime errors to correctly clear
+    // However, using this for serverData errors doesn't work and results in the overlay not showing up
+    // again since the component isn't remounted and thus the .push method is not reinitalized
+
     window._gatsbyEvents = [];
   };
 
   const hasBuildError = state.buildError !== null;
   const hasRuntimeErrors = Boolean(state.errors.length);
+  const hasGetServerDataError = Boolean(state.getServerDataError);
   const hasGraphqlErrors = Boolean(state.graphqlErrors.length);
   const hasDevSsrError = state.devSsrError !== null;
-  const hasErrors = hasBuildError || hasRuntimeErrors || hasGraphqlErrors || hasDevSsrError; // This component has a deliberate order (priority)
+  const hasErrors = hasBuildError || hasRuntimeErrors || hasGraphqlErrors || hasDevSsrError || hasGetServerDataError; // This component has a deliberate order (priority)
 
   const ErrorComponent = () => {
     if (hasBuildError) {
       return /*#__PURE__*/React.createElement(_buildError.BuildError, {
         error: state.buildError
+      });
+    }
+
+    if (hasGetServerDataError) {
+      return /*#__PURE__*/React.createElement(_getserverdataError.GetServerDataError, {
+        error: state.getServerDataError
       });
     }
 

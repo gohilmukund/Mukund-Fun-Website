@@ -17,6 +17,7 @@ const Work = ({
   joiningDate,
   leavingDate,
   logo,
+  onPress
 }: Props) => { 
   function NewlineText(props) {
     const text = props.text;
@@ -24,7 +25,7 @@ const Work = ({
   }
   return(  
   <Card p={0}>
-    <Flex style={{ height: CARD_HEIGHT }}>
+    <Flex style={{ height: CARD_HEIGHT }} role="button" tabIndex={0} onClick={() => onPress({name, description, position, joiningDate, leavingDate, logo})} >
       <TextContainer>
         <span>
           <Title my={2} pb={1} color="text">
@@ -83,7 +84,10 @@ const TextContainer = styled.div`
   flex-direction: column;
   padding: 10px;
   width: 100%;
-  width: calc(100%);
+  // border-color: transparent;
+  // overflow: hidden;
+  // border-radius: 50px;
+  // text-alignment: left;
 
   ${MEDIA_QUERY_SMALL} {
     width: calc(100%);

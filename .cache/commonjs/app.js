@@ -151,7 +151,7 @@ function notCalledFunction() {
     };
   }
 
-  Promise.all([loader.loadPage(`/dev-404-page/`), loader.loadPage(`/404.html`), loader.loadPage(window.location.pathname)]).then(() => {
+  Promise.all([loader.loadPage(`/dev-404-page/`), loader.loadPage(`/404.html`), loader.loadPage(window.location.pathname + window.location.search)]).then(() => {
     (0, _navigation.init)();
 
     function onHydrated() {

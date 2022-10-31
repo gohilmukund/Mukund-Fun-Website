@@ -31,6 +31,7 @@ export type WorkExperience = {
   joiningDate: string;
   leavingDate: string;
   logo: Image;
+  onPress?: Function;
 };
 
 export type Certification = {

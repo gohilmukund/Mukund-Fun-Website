@@ -20,8 +20,7 @@ const trimPathname = rawPathname => {
   const pathname = decodeURIComponent(rawPathname); // Remove the pathPrefix from the pathname.
 
   const trimmedPathname = (0, _stripPrefix.default)(pathname, decodeURIComponent(__BASE_PATH__)) // Remove any hashfragment
-  .split(`#`)[0] // Remove search query
-  .split(`?`)[0];
+  .split(`#`)[0];
   return trimmedPathname;
 };
 

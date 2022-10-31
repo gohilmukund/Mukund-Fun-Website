@@ -46,7 +46,7 @@ class LocationHandler extends _react.default.Component {
       location
     } = this.props;
 
-    if (!_loader.default.isPageNotFound(location.pathname)) {
+    if (!_loader.default.isPageNotFound(location.pathname + location.search)) {
       return /*#__PURE__*/_react.default.createElement(_ensureResources.default, {
         location: location
       }, locationAndPageResources => /*#__PURE__*/_react.default.createElement(_navigation.RouteUpdates, {
@@ -59,7 +59,7 @@ class LocationHandler extends _react.default.Component {
         location: location,
         id: "gatsby-focus-wrapper"
       }, /*#__PURE__*/_react.default.createElement(RouteHandler, (0, _extends2.default)({
-        path: encodeURI(locationAndPageResources.pageResources.page.matchPath || locationAndPageResources.pageResources.page.path)
+        path: encodeURI((locationAndPageResources.pageResources.page.matchPath || locationAndPageResources.pageResources.page.path).split(`?`)[0])
       }, this.props, locationAndPageResources))))));
     }
 

@@ -207,7 +207,6 @@ async function staticPage(pagePath, isClientOnlyPage, publicDir, error, callback
         href: `${__PATH_PREFIX__}/${style.name}`
       }));
     });
-    const createElement = _react.default.createElement;
 
     class RouteHandler extends _react.default.Component {
       render() {
@@ -222,7 +221,7 @@ async function staticPage(pagePath, isClientOnlyPage, publicDir, error, callback
         let pageElement;
 
         if (_ssrSyncRequires.default.ssrComponents[componentChunkName] && !isClientOnlyPage) {
-          pageElement = createElement(_ssrSyncRequires.default.ssrComponents[componentChunkName], props);
+          pageElement = /*#__PURE__*/_react.default.createElement(_ssrSyncRequires.default.ssrComponents[componentChunkName], props);
         } else {
           // If this is a client-only page or the pageComponent didn't finish
           // compiling yet, just render an empty component.

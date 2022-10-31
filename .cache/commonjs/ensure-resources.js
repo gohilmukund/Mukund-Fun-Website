@@ -25,7 +25,7 @@ class EnsureResources extends _react.default.Component {
     this.state = {
       location: { ...location
       },
-      pageResources: pageResources || _loader.default.loadPageSync(location.pathname, {
+      pageResources: pageResources || _loader.default.loadPageSync(location.pathname + location.search, {
         withErrorDetails: true
       })
     };
@@ -35,7 +35,7 @@ class EnsureResources extends _react.default.Component {
     location
   }, prevState) {
     if (prevState.location.href !== location.href) {
-      const pageResources = _loader.default.loadPageSync(location.pathname, {
+      const pageResources = _loader.default.loadPageSync(location.pathname + location.search, {
         withErrorDetails: true
       });
 
@@ -70,12 +70,12 @@ class EnsureResources extends _react.default.Component {
   shouldComponentUpdate(nextProps, nextState) {
     // Always return false if we're missing resources.
     if (!nextState.pageResources) {
-      this.loadResources(nextProps.location.pathname);
+      this.loadResources(nextProps.location.pathname + nextProps.location.search);
       return false;
     }
 
     if (process.env.BUILD_STAGE === `develop` && nextState.pageResources.stale) {
-      this.loadResources(nextProps.location.pathname);
+      this.loadResources(nextProps.location.pathname + nextProps.location.search);
       return false;
     } // Check if the component or json have changed.
 

@@ -106,7 +106,7 @@ window.___loader = _loader.publicLoader;
         location: location,
         id: "gatsby-focus-wrapper"
       }, /*#__PURE__*/_react.default.createElement(RouteHandler, (0, _extends2.default)({
-        path: pageResources.page.path === `/404.html` ? (0, _stripPrefix.default)(location.pathname, __BASE_PATH__) : encodeURI(pageResources.page.matchPath || pageResources.page.path)
+        path: pageResources.page.path === `/404.html` || pageResources.page.path === `/500.html` ? (0, _stripPrefix.default)(location.pathname, __BASE_PATH__) : encodeURI((pageResources.page.matchPath || pageResources.page.path).split(`?`)[0])
       }, this.props, {
         location: location,
         pageResources: pageResources
@@ -119,20 +119,22 @@ window.___loader = _loader.publicLoader;
     pagePath,
     location: browserLoc
   } = window; // Explicitly call navigate if the canonical path (window.pagePath)
-  // is different to the browser path (window.location.pathname). But
-  // only if NONE of the following conditions hold:
+  // is different to the browser path (window.location.pathname). SSR
+  // page paths might include search params, while SSG and DSG won't.
+  // If page path include search params we also compare query params.
+  // But only if NONE of the following conditions hold:
   //
   // - The url matches a client side route (page.matchPath)
   // - it's a 404 page
   // - it's the offline plugin shell (/offline-plugin-app-shell-fallback/)
 
-  if (pagePath && __BASE_PATH__ + pagePath !== browserLoc.pathname && !(loader.findMatchPath((0, _stripPrefix.default)(browserLoc.pathname, __BASE_PATH__)) || pagePath === `/404.html` || pagePath.match(/^\/404\/?$/) || pagePath.match(/^\/offline-plugin-app-shell-fallback\/?$/))) {
-    (0, _reachRouter.navigate)(__BASE_PATH__ + pagePath + browserLoc.search + browserLoc.hash, {
+  if (pagePath && __BASE_PATH__ + pagePath !== browserLoc.pathname + (pagePath.includes(`?`) ? browserLoc.search : ``) && !(loader.findMatchPath((0, _stripPrefix.default)(browserLoc.pathname, __BASE_PATH__)) || pagePath.match(/^\/(404|500)(\/?|.html)$/) || pagePath.match(/^\/offline-plugin-app-shell-fallback\/?$/))) {
+    (0, _reachRouter.navigate)(__BASE_PATH__ + pagePath + browserLoc.hash, {
       replace: true
     });
   }
 
-  _loader.publicLoader.loadPage(browserLoc.pathname).then(page => {
+  _loader.publicLoader.loadPage(browserLoc.pathname + browserLoc.search).then(page => {
     if (!page || page.status === _loader.PageResourceStatus.Error) {
       const message = `page resources for ${browserLoc.pathname} not found. Not rendering React`; // if the chunk throws an error we want to capture the real error
       // This should help with https://github.com/gatsbyjs/gatsby/issues/19618

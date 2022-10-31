@@ -4,6 +4,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 
 exports.__esModule = true;
 exports.default = staticPage;
+exports.getPageChunk = getPageChunk;
 exports.sanitizeComponents = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
@@ -45,7 +46,7 @@ const {
   apiRunnerAsync
 } = require(`./api-runner-ssr`);
 
-const syncRequires = require(`$virtual/sync-requires`);
+const asyncRequires = require(`$virtual/async-requires`);
 
 const {
   version: gatsbyVersion
@@ -244,6 +245,7 @@ async function staticPage({
       componentChunkName,
       staticQueryHashes = []
     } = pageData;
+    const pageComponent = await asyncRequires.components[componentChunkName]();
     const staticQueryUrls = staticQueryHashes.map(getStaticQueryUrl);
 
     class RouteHandler extends React.Component {
@@ -256,7 +258,7 @@ async function staticPage({
             ...(((_pageData$result = pageData.result) === null || _pageData$result === void 0 ? void 0 : (_pageData$result$page = _pageData$result.pageContext) === null || _pageData$result$page === void 0 ? void 0 : _pageData$result$page.__params) || {})
           }
         };
-        const pageElement = createElement(syncRequires.components[componentChunkName], props);
+        const pageElement = createElement(pageComponent.default, props);
         const wrappedPage = apiRunner(`wrapPageElement`, {
           element: pageElement,
           props
@@ -475,4 +477,10 @@ async function staticPage({
     e.unsafeBuiltinsUsage = global.unsafeBuiltinUsage;
     throw e;
   }
+}
+
+function getPageChunk({
+  componentChunkName
+}) {
+  return asyncRequires.components[componentChunkName]();
 }
