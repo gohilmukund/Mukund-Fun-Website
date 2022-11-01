@@ -16067,10 +16067,10 @@ react-motion@^0.5.2:
     prop-types "^15.5.8"
     raf "^3.1.0"
 
-react-parallax-tilt@^1.4.68:
-  version "1.5.71"
-  resolved "https://registry.yarnpkg.com/react-parallax-tilt/-/react-parallax-tilt-1.5.71.tgz#b536d8efac110b9c217f8405606ae2bbe7dc8663"
-  integrity sha512-aRGYP1BjEmt3TiLpqOsWA2b5e5hQByjWUwrlhjgAzRQMyhrjfad6LDpwMkqC4B1rl6TbMnOBNLVgceMhP8ydbw==
+react-parallax-tilt@^1.7.68:
+  version "1.7.68"
+  resolved "https://registry.yarnpkg.com/react-parallax-tilt/-/react-parallax-tilt-1.7.68.tgz#0aeb733343d942706380c425c30b6f94579896b4"
+  integrity sha512-HDYxYrV8s/mu6Tm1uR+8qGGEvrblCmBEOJGxlUr6O1y0oDjhZ7d6oWr9SsqCvBU6iC/xz5b57kQy2zPeglkQ5Q==
 
 react-refresh@^0.8.3:
   version "0.8.3"
