@@ -31,7 +31,7 @@
   "homepage": "https://github.com/EmaSuriano/gatsby-starter-mate#readme",
   "dependencies": {
     "@reach/dialog": "^0.16.2",
-    "babel-plugin-styled-components": "^1.13.3",
+    "babel-plugin-styled-components": "^2.0.7",
     "gatsby": "next",
     "gatsby-image": "^3.11.0",
     "gatsby-plugin-google-analytics": "^4.0.0",
