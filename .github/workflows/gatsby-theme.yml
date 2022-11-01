@@ -1,9 +1,9 @@
-name: master
+name: gatsby-theme
 
 on:
   push:
     branches:
-      - master
+      - gatsby-theme
 
 jobs:
   build:
