@@ -3,10 +3,10 @@ name: pr-checker
 on:
   pull_request:
     branches:
-      - master
+      - gatsby-theme
   pull_request_target:
     branches:
-      - master
+      - gatsby-theme
 
 jobs:
   build:
