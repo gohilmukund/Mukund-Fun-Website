@@ -14,9 +14,9 @@ type QueryResponse = {
   };
 };
 
-export const useHelmetQueryMK = () => {
+export const useHeadQueryMK = () => {
   const { contentfulAbout } = useStaticQuery<QueryResponse>(graphql`
-    query HelmetQueryMK {
+    query HeadQueryMK {
       contentfulAbout {
         name
         description

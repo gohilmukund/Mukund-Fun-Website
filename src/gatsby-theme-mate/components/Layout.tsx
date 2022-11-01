@@ -3,7 +3,7 @@ import { Theme } from '@rebass/preset';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { loadIcons } from '../utils/icons';
 import { theme } from '../theme';
-import Helmet from './Helmet';
+import Head from './Head';
 import 'tippy.js/dist/tippy.css';
 
 declare module 'styled-components' {
@@ -42,7 +42,7 @@ const Layout = ({ children }: Props) => (
   <main>
     <ThemeProvider theme={theme as Theme}>
       <GlobalStyle />
-      <Helmet />
+      <Head />
       {children}
     </ThemeProvider>
   </main>
