@@ -3,10 +3,10 @@ name: pr-checker
 on:
   pull_request:
     branches:
-      - master
+      - gatsby-theme
   pull_request_target:
     branches:
-      - master
+      - gatsby-theme
 
 jobs:
   build:
@@ -15,14 +15,14 @@ jobs:
       (github.event_name == 'pull_request_target' && github.actor == 'dependabot[bot]') ||
       (github.event_name != 'pull_request_target' && github.actor != 'dependabot[bot]')
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Read .nvmrc
         id: node_version
         run: echo ::set-output name=NODE_VERSION::$(cat .nvmrc)
 
       - name: Setup node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3.5.1
         with:
           node-version: ${{ steps.node_version.outputs.NODE_VERSION }}
 
@@ -32,3 +32,4 @@ jobs:
         env:
           ACCESS_TOKEN: ${{secrets.ACCESS_TOKEN}}
           SPACE_ID: ${{secrets.SPACE_ID}}
+          CONTENTFUL_ACCESS_TOKEN: ${{secrets.CONTENTFUL_ACCESS_TOKEN}}

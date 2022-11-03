@@ -4,12 +4,12 @@ import { Box, Link as RebassLink, Flex, Image } from 'rebass/styled-components';
 import styled from 'styled-components';
 import Link from './Link';
 import { capitalize } from '../utils/string';
-import { useHelmetQueryMK as useHelmetQuery } from '../queries/useHelmetQuery';
+import { useHeadQueryMK as useHeadQuery } from '../queries/useHeadQuery';
 import { SECTION } from '../utils/constants';
 import { getSectionHref } from '../utils/helpers';
 
 const Header = () => {
-  const { profile } = useHelmetQuery();
+  const { profile } = useHeadQuery();
 
   return (
     <StyledHeadroom>

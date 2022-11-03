@@ -1,6 +1,6 @@
 {
   "name": "mukundportfolio",
-  "version": "0.3.0",
+  "version": "2.0.2",
   "description": "An accessible and fast portfolio of Mukund Gohil made using Gatsby and Contentful",
   "license": "MIT",
   "private": true,
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/EmaSuriano/gatsby-starter-mate.git"
+    "url": "git+https://github.com/gohilmukund/Mukund-Fun-Website.git"
   },
   "keywords": [
     "gatsby",
@@ -26,9 +26,9 @@
   ],
   "author": "Mukund Gohil",
   "bugs": {
-    "url": "https://github.com/EmaSuriano/gatsby-starter-mate/issues"
+    "url": "https://github.com/gohilmukund/Mukund-Fun-Website/issues"
   },
-  "homepage": "https://github.com/EmaSuriano/gatsby-starter-mate#readme",
+  "homepage": "https://github.com/gohilmukund/Mukund-Fun-Website#readme",
   "dependencies": {
     "@reach/dialog": "^0.16.2",
     "babel-plugin-styled-components": "^2.0.7",

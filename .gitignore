@@ -93,6 +93,7 @@ netlify.toml
 # mac FS
 .DS_Store
 .vscode/
+.cache/
 .cache/api-runner-browser-plugins.js
 .cache/api-runner-ssr.js
 .cache/app.js
