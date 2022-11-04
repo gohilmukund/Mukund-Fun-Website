@@ -9,6 +9,7 @@ const plugins = [
     },
   },
   `gatsby-plugin-styled-components`,
+  `gatsby-plugin-offline`,
 ];
 
 if (ANALYTICS_ID) {
