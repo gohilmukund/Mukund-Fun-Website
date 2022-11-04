@@ -1,6 +1,6 @@
 # Gatsby Starter: Mate 🧉
 
-[![Build](https://github.com/gohilmukund/Mukund-Fun-Website/actions/workflows/gatsby-theme.yml/badge.svg)](https://github.com/gohilmukund/Mukund-Fun-Website/actions/workflows/master.yml)
+[![Build](https://github.com/gohilmukund/Mukund-Fun-Website/actions/workflows/gatsby-theme.yml/badge.svg)](https://github.com/gohilmukund/Mukund-Fun-Website/actions/workflows/master.yml) ![](https://img.shields.io/badge/-website-blue) ![Contentful Badge](https://img.shields.io/badge/Contentful-2478CC?logo=contentful&logoColor=fff&style=flat) ![Gatsby Badge](https://img.shields.io/badge/Gatsby-639?logo=gatsby&logoColor=fff&style=flat) ![React Badge](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=000&style=flat) 
 
 > Gatsby starter for [`gatsby-theme-mate`](https://github.com/EmaSuriano/gatsby-theme-mate). An accessible and fast portfolio starter for Gatsby integrated with Contentful CMS.
 

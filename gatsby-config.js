@@ -24,7 +24,13 @@ if (GOOGLE_TAGMANAGER_ID) {
   plugins.push({
     resolve: 'gatsby-plugin-google-tagmanager',
     options: {
-      trackingId: GOOGLE_TAGMANAGER_ID,
+      id: GOOGLE_TAGMANAGER_ID,
+      defaultDataLayer: function () {
+        return {
+          pageType: window.pageType,
+          platform: "gatsby"
+        }
+      },
     },
   });
 }
