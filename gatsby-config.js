@@ -10,6 +10,17 @@ const plugins = [
   },
   `gatsby-plugin-styled-components`,
   `gatsby-plugin-offline`,
+  {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Mukund's Portfolio`,
+        short_name: `MK-Portfolio`,
+        start_url: `/`,
+        background_color: `#f7f0eb`,
+        theme_color: `#a2466c`,
+        display: `standalone`,
+     },
+   },
 ];
 
 if (ANALYTICS_ID) {
