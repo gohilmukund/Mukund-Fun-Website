@@ -1,7 +1,6 @@
 # Gatsby Starter: Mate 🧉
 
 [![Build](https://github.com/gohilmukund/Mukund-Fun-Website/actions/workflows/gatsby-theme.yml/badge.svg)](https://github.com/gohilmukund/Mukund-Fun-Website/actions/workflows/master.yml)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/f532a32d-4fc1-441d-aa28-cdc5e2c2e79c/deploy-status)](https://app.netlify.com/sites/gatsby-starter-mate/deploys)
 
 > Gatsby starter for [`gatsby-theme-mate`](https://github.com/EmaSuriano/gatsby-theme-mate). An accessible and fast portfolio starter for Gatsby integrated with Contentful CMS.
 
@@ -19,7 +18,7 @@ At the same time, as this portfolio is written with Gatsby is extremely easy to 
 
 ## Features 🛠
 
-- [Gatsby 3](https://www.gatsbyjs.org/)
+- [Gatsby 4](https://www.gatsbyjs.org/)
 - [Rebass](https://rebassjs.org/): styled component system
 - [React Awesome Reveal](https://github.com/dennismorello/react-awesome-reveal)
 - Typescript
