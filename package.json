@@ -35,6 +35,7 @@
     "gatsby": "next",
     "gatsby-image": "^3.11.0",
     "gatsby-plugin-google-analytics": "^4.0.0",
+    "gatsby-plugin-google-tagmanager": "^4.24.0",
     "gatsby-plugin-image": "^2.0.0",
     "gatsby-plugin-manifest": "^4.0.0",
     "gatsby-plugin-offline": "^5.0.0",
