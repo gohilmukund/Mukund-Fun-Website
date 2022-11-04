@@ -8342,9 +8342,9 @@ gatsby-plugin-manifest@^4.0.0, gatsby-plugin-manifest@^4.10.1:
     semver "^7.3.7"
     sharp "^0.30.7"
 
-gatsby-plugin-offline@^5.0.0:
+gatsby-plugin-offline@^5.24.0:
   version "5.24.0"
-  resolved "https://registry.npmjs.org/gatsby-plugin-offline/-/gatsby-plugin-offline-5.24.0.tgz"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-offline/-/gatsby-plugin-offline-5.24.0.tgz#f866ffa9e138395e3d8dd675801087f3da781561"
   integrity sha512-NiTLxlFOQSpBz7ZXYEtQB1GQOGoO9Xzg/COUkGXoCKlVW84EzXLRiyc01lZcdBk125maE3L8ZAqsql2k8smxLA==
   dependencies:
     "@babel/runtime" "^7.15.4"
