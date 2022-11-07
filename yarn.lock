@@ -5657,28 +5657,28 @@ contentful-batch-libs@^9.4.2:
     lodash.clonedeep "^4.5.0"
     uuid "^8.3.2"
 
-contentful-import@^8.2.24:
-  version "8.5.1"
-  resolved "https://registry.npmjs.org/contentful-import/-/contentful-import-8.5.1.tgz"
-  integrity sha512-kGcllCXIvZHppQhVbjJIDaDysZdm79UeF9a1XSroGlSzRsvG6DK2rX/tz1mYF3SuDNzFODF7tdmaE1P7DLsWbQ==
+contentful-import@^8.5.4:
+  version "8.5.4"
+  resolved "https://registry.yarnpkg.com/contentful-import/-/contentful-import-8.5.4.tgz#a52c2fd1b02eae7096142bd81b05eabeb7282932"
+  integrity sha512-5oJhbggAxcd4KPc9xkrhtgqGTyQAwWZnO/+t2mNvzDAp2GQjQ+2BtRFxf1FlWwbFq6R6xCi9v/T6pNHl33B9tg==
   dependencies:
     bluebird "^3.5.1"
     cli-table3 "^0.6.0"
     contentful-batch-libs "^9.4.2"
-    contentful-management "^10.19.0"
+    contentful-management "^10.19.1"
     date-fns "^2.29.3"
-    joi "^17.6.4"
+    joi "^17.7.0"
     listr "^0.14.1"
     listr-update-renderer "^0.5.0"
     listr-verbose-renderer "^0.6.0"
     lodash "^4.17.10"
     p-queue "^6.6.2"
-    yargs "^17.6.0"
+    yargs "^17.6.2"
 
-contentful-management@^10.19.0:
-  version "10.19.0"
-  resolved "https://registry.npmjs.org/contentful-management/-/contentful-management-10.19.0.tgz"
-  integrity sha512-4cwHoIOw2zVewStaMTQjDesuYPzzC32GlzZlQVfjiY1Z9runiPZo+WlFbGzZdqBpTebrlU/v+KUPvZdxJzQ8hQ==
+contentful-management@^10.19.1:
+  version "10.19.1"
+  resolved "https://registry.yarnpkg.com/contentful-management/-/contentful-management-10.19.1.tgz#efedaf3eabfb077149252f5e92aff4c6c9119db3"
+  integrity sha512-NrHyqhAG9IT2oPH91KhNbMwZSflQWyhF410C7LSMhTT0jx3/1yWI2u0XerN/Or1sDwmTioFJAm8JSecFoslSgw==
   dependencies:
     "@types/json-patch" "0.0.30"
     axios "^0.27.1"
@@ -10915,10 +10915,10 @@ jimp-compact@^0.16.1-2:
   resolved "https://registry.npmjs.org/jimp-compact/-/jimp-compact-0.16.1-2.tgz"
   integrity sha512-b2A3rRT1TITzqmaO70U2/uunCh43BQVq7BfRwGPkD5xj8/WZsR3sPTy9DENt+dNZGsel3zBEm1UtYegUxjZW7A==
 
-joi@^17.4.2, joi@^17.6.4:
-  version "17.6.4"
-  resolved "https://registry.npmjs.org/joi/-/joi-17.6.4.tgz"
-  integrity sha512-tPzkTJHZQjSFCc842QpdVpOZ9LI2txApboNUbW70qgnRB14Lzl+oWQOPdF2N4yqyiY14wBGe8lc7f/2hZxbGmw==
+joi@^17.4.2, joi@^17.7.0:
+  version "17.7.0"
+  resolved "https://registry.yarnpkg.com/joi/-/joi-17.7.0.tgz#591a33b1fe1aca2bc27f290bcad9b9c1c570a6b3"
+  integrity sha512-1/ugc8djfn93rTE3WRKdCzGGt/EtiYKxITMO4Wiv6q5JL1gl9ePt4kBsl1S499nbosspfctIQTpYIhSmHA3WAg==
   dependencies:
     "@hapi/hoek" "^9.0.0"
     "@hapi/topo" "^5.0.0"
@@ -18814,9 +18814,9 @@ yargs-parser@^18.1.2:
     camelcase "^5.0.0"
     decamelize "^1.2.0"
 
-yargs-parser@^21.0.0:
+yargs-parser@^21.1.1:
   version "21.1.1"
-  resolved "https://registry.npmjs.org/yargs-parser/-/yargs-parser-21.1.1.tgz"
+  resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-21.1.1.tgz#9096bceebf990d21bb31fa9516e0ede294a77d35"
   integrity sha512-tVpsJW7DdjecAiFpbIB1e3qxIQsE6NoPc5/eTdrbbIC4h0LVsWhnoa3g+m2HclBIujHzsxZ4VJVA+GUuc2/LBw==
 
 yargs@^13.3.2:
@@ -18852,10 +18852,10 @@ yargs@^15.3.1, yargs@^15.4.1:
     y18n "^4.0.0"
     yargs-parser "^18.1.2"
 
-yargs@^17.6.0:
-  version "17.6.0"
-  resolved "https://registry.npmjs.org/yargs/-/yargs-17.6.0.tgz"
-  integrity sha512-8H/wTDqlSwoSnScvV2N/JHfLWOKuh5MVla9hqLjK3nsfyy6Y4kDSYSvkU5YCUEPOSnRXfIyx3Sq+B/IWudTo4g==
+yargs@^17.6.2:
+  version "17.6.2"
+  resolved "https://registry.yarnpkg.com/yargs/-/yargs-17.6.2.tgz#2e23f2944e976339a1ee00f18c77fedee8332541"
+  integrity sha512-1/9UrdHjDZc0eOU0HxOHoS78C69UD3JRMvzlJ7S79S2nTaWRA/whGCTV8o9e/N/1Va9YIV7Q4sOxD8VV4pCWOw==
   dependencies:
     cliui "^8.0.1"
     escalade "^3.1.1"
@@ -18863,7 +18863,7 @@ yargs@^17.6.0:
     require-directory "^2.1.1"
     string-width "^4.2.3"
     y18n "^5.0.5"
-    yargs-parser "^21.0.0"
+    yargs-parser "^21.1.1"
 
 yeast@0.1.2:
   version "0.1.2"
