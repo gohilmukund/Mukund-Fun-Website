@@ -8,8 +8,19 @@ const plugins = [
       spaceId: SPACE_ID,
     },
   },
+  {
+    resolve: `gatsby-plugin-manifest`,
+    options: {
+      name: `Mukund's Portfolio`,
+      short_name: `MK-Portfolio`,
+      start_url: `/`,
+      background_color: `#f7f0eb`,
+      theme_color: `#a2466c`,
+      display: `standalone`,
+    },
+  },
   `gatsby-plugin-styled-components`,
-  `gatsby-plugin-offline`,
+  `gatsby-plugin-offline`,  
 ];
 
 if (ANALYTICS_ID) {
