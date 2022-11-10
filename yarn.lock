@@ -8323,18 +8323,7 @@ gatsby-plugin-image@^2.0.0, gatsby-plugin-image@^2.10.0:
     objectFitPolyfill "^2.3.5"
     prop-types "^15.8.1"
 
-gatsby-plugin-manifest@^4.10.1:
-  version "4.24.0"
-  resolved "https://registry.npmjs.org/gatsby-plugin-manifest/-/gatsby-plugin-manifest-4.24.0.tgz"
-  integrity sha512-xlpJMNALNozeC0lIspQQZw68qi4pE1nhgPfsLiUtAc5CLihm2LNbGLAKcYHCXwudRHo5Hvp6Xi4VOwtMkRKwmQ==
-  dependencies:
-    "@babel/runtime" "^7.15.4"
-    gatsby-core-utils "^3.24.0"
-    gatsby-plugin-utils "^3.18.0"
-    semver "^7.3.7"
-    sharp "^0.30.7"
-
-gatsby-plugin-manifest@^4.24.0:
+gatsby-plugin-manifest@^4.10.1, gatsby-plugin-manifest@^4.24.0:
   version "4.24.0"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-manifest/-/gatsby-plugin-manifest-4.24.0.tgz#ad537b48f9fb8e7c93234945a4889ecf3c099f66"
   integrity sha512-xlpJMNALNozeC0lIspQQZw68qi4pE1nhgPfsLiUtAc5CLihm2LNbGLAKcYHCXwudRHo5Hvp6Xi4VOwtMkRKwmQ==
@@ -8597,9 +8586,9 @@ gatsby-worker@^1.24.0:
     "@babel/runtime" "^7.15.4"
 
 gatsby@next:
-  version "4.24.7"
-  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-4.24.7.tgz#51036aed3df01ed2c403b6cb88512d8a820ab0e8"
-  integrity sha512-9eA80r0T618fdgdbNa/xuxJpsl0sPD2HBflPC18zNqhwCrboEXe057/VU2DUnQfqrgRislCAf8XDVTjgFXjbbQ==
+  version "4.24.8"
+  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-4.24.8.tgz#2f4c34b3e6727c78a31971e1902d9672e052b5af"
+  integrity sha512-dbpAXMpWPv0P3H+xYhK2+XZ+W0xsgvZUvQTYhYEro7jVh9gBJr68tlT4YYH7J+9FThrIcg6MPLN7KLVJp8yyGw==
   dependencies:
     "@babel/code-frame" "^7.14.0"
     "@babel/core" "^7.15.5"
