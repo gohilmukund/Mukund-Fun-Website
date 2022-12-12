@@ -39,7 +39,7 @@
     "gatsby-plugin-image": "^2.0.0",
     "gatsby-plugin-manifest": "^4.24.0",
     "gatsby-plugin-offline": "^5.24.0",
-    "gatsby-plugin-styled-components": "^5.24.0",
+    "gatsby-plugin-styled-components": "^5.25.0",
     "gatsby-source-filesystem": "^4.0.0",
     "gatsby-theme-mate": "^2.1.1",
     "react": "^17.0.2",
