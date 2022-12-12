@@ -8286,10 +8286,10 @@ gatsby-plugin-fontawesome-css@^1.2.0:
   resolved "https://registry.npmjs.org/gatsby-plugin-fontawesome-css/-/gatsby-plugin-fontawesome-css-1.2.0.tgz"
   integrity sha512-Me7zFKPDmFQAWZmC2MQN7vWSHGFneu6FeIylkVinSMh89C0wPeoF165rpfuEdpgG0HScNg0fSh3xCIxYr5gPOQ==
 
-gatsby-plugin-google-analytics@^4.0.0:
-  version "4.24.0"
-  resolved "https://registry.npmjs.org/gatsby-plugin-google-analytics/-/gatsby-plugin-google-analytics-4.24.0.tgz"
-  integrity sha512-opSdLiJ7xAObfl2j9QsNtXiGEKGVb0MLbEqFUs694vAj8T15/wL1/bFcwzX2nZnZoP2YhvVfblYd+AbJ2AVVCQ==
+gatsby-plugin-google-analytics@^4.25.0:
+  version "4.25.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-google-analytics/-/gatsby-plugin-google-analytics-4.25.0.tgz#9235094d56ddf945eda184c77e1dade08ef2c0da"
+  integrity sha512-fbHrViBAbJ0Ch2gcpuJQlGxWoapaNed42k75eR4gCiZPzaTUvCKagJgLG8ro8ukD1rfD594lgLzdSEaYYcH4WQ==
   dependencies:
     "@babel/runtime" "^7.15.4"
     minimatch "3.0.4"
@@ -8323,18 +8323,7 @@ gatsby-plugin-image@^2.0.0, gatsby-plugin-image@^2.10.0:
     objectFitPolyfill "^2.3.5"
     prop-types "^15.8.1"
 
-gatsby-plugin-manifest@^4.10.1:
-  version "4.24.0"
-  resolved "https://registry.npmjs.org/gatsby-plugin-manifest/-/gatsby-plugin-manifest-4.24.0.tgz"
-  integrity sha512-xlpJMNALNozeC0lIspQQZw68qi4pE1nhgPfsLiUtAc5CLihm2LNbGLAKcYHCXwudRHo5Hvp6Xi4VOwtMkRKwmQ==
-  dependencies:
-    "@babel/runtime" "^7.15.4"
-    gatsby-core-utils "^3.24.0"
-    gatsby-plugin-utils "^3.18.0"
-    semver "^7.3.7"
-    sharp "^0.30.7"
-
-gatsby-plugin-manifest@^4.24.0:
+gatsby-plugin-manifest@^4.10.1, gatsby-plugin-manifest@^4.24.0:
   version "4.24.0"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-manifest/-/gatsby-plugin-manifest-4.24.0.tgz#ad537b48f9fb8e7c93234945a4889ecf3c099f66"
   integrity sha512-xlpJMNALNozeC0lIspQQZw68qi4pE1nhgPfsLiUtAc5CLihm2LNbGLAKcYHCXwudRHo5Hvp6Xi4VOwtMkRKwmQ==
@@ -12258,14 +12247,14 @@ minimalistic-crypto-utils@^1.0.1:
   resolved "https://registry.npmjs.org/minimalistic-crypto-utils/-/minimalistic-crypto-utils-1.0.1.tgz"
   integrity sha512-JIYlbt6g8i5jKfJ3xz7rF0LXmv2TkDxBLUkiBeZ7bAx4GnnNMr8xFpGnOxn6GhTEHx3SjRrZEoU+j04prX1ktg==
 
-minimatch@3.0.4, minimatch@^3.0.4:
+minimatch@3.0.4:
   version "3.0.4"
   resolved "https://registry.npmjs.org/minimatch/-/minimatch-3.0.4.tgz"
   integrity sha512-yJHVQEhyqPLUTgt9B83PXu6W3rx4MvvHvSUvToogpwoGDOUQ+yDrR0HRot+yOCdCO7u4hX3pWft6kWBBcqh0UA==
   dependencies:
     brace-expansion "^1.1.7"
 
-minimatch@^3.0.5, minimatch@^3.1.1, minimatch@^3.1.2:
+minimatch@^3.0.4, minimatch@^3.0.5, minimatch@^3.1.1, minimatch@^3.1.2:
   version "3.1.2"
   resolved "https://registry.npmjs.org/minimatch/-/minimatch-3.1.2.tgz"
   integrity sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==
