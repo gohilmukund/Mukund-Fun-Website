@@ -8323,18 +8323,7 @@ gatsby-plugin-image@^2.0.0, gatsby-plugin-image@^2.10.0:
     objectFitPolyfill "^2.3.5"
     prop-types "^15.8.1"
 
-gatsby-plugin-manifest@^4.10.1:
-  version "4.24.0"
-  resolved "https://registry.npmjs.org/gatsby-plugin-manifest/-/gatsby-plugin-manifest-4.24.0.tgz"
-  integrity sha512-xlpJMNALNozeC0lIspQQZw68qi4pE1nhgPfsLiUtAc5CLihm2LNbGLAKcYHCXwudRHo5Hvp6Xi4VOwtMkRKwmQ==
-  dependencies:
-    "@babel/runtime" "^7.15.4"
-    gatsby-core-utils "^3.24.0"
-    gatsby-plugin-utils "^3.18.0"
-    semver "^7.3.7"
-    sharp "^0.30.7"
-
-gatsby-plugin-manifest@^4.24.0:
+gatsby-plugin-manifest@^4.10.1, gatsby-plugin-manifest@^4.24.0:
   version "4.24.0"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-manifest/-/gatsby-plugin-manifest-4.24.0.tgz#ad537b48f9fb8e7c93234945a4889ecf3c099f66"
   integrity sha512-xlpJMNALNozeC0lIspQQZw68qi4pE1nhgPfsLiUtAc5CLihm2LNbGLAKcYHCXwudRHo5Hvp6Xi4VOwtMkRKwmQ==
@@ -17412,9 +17401,9 @@ typedarray@^0.0.6:
   integrity sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==
 
 ua-parser-js@^0.7.30:
-  version "0.7.32"
-  resolved "https://registry.npmjs.org/ua-parser-js/-/ua-parser-js-0.7.32.tgz"
-  integrity sha512-f9BESNVhzlhEFf2CHMSj40NWOjYPl1YKYbrvIr/hFTDEmLq7SRbWvm7FcdcpCYT95zrOhC7gZSxjdnnTpBcwVw==
+  version "0.7.33"
+  resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.33.tgz#1d04acb4ccef9293df6f70f2c3d22f3030d8b532"
+  integrity sha512-s8ax/CeZdK9R/56Sui0WM6y9OFREJarMRHqLB2EwkovemBxNQ+Bqu8GAsUnVcXKgphb++ghr/B2BZx4mahujPw==
 
 unbox-primitive@^1.0.2:
   version "1.0.2"
