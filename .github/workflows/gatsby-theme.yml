@@ -3,7 +3,7 @@ name: gatsby-theme
 on:
   push:
     branches:
-      - gatsby-theme
+      - prod
 
   workflow_dispatch:
 
