@@ -16,8 +16,6 @@ var _normalizePagePath = _interopRequireDefault(require("./normalize-page-path")
 var _isEqual = _interopRequireDefault(require("lodash/isEqual"));
 
 // TODO move away from lodash
-const preferDefault = m => m && m.default || m;
-
 function mergePageEntry(cachedPage, newPageData) {
   return { ...cachedPage,
     payload: { ...cachedPage.payload,
@@ -36,12 +34,12 @@ function mergePageEntry(cachedPage, newPageData) {
 
 class DevLoader extends _loader.BaseLoader {
   constructor(asyncRequires, matchPaths) {
-    const loadComponent = chunkName => {
-      if (!this.asyncRequires.components[chunkName]) {
+    const loadComponent = (chunkName, exportType = `components`) => {
+      if (!this.asyncRequires[exportType][chunkName]) {
         throw new Error(`We couldn't find the correct component chunk with the name "${chunkName}"`);
       }
 
-      return this.asyncRequires.components[chunkName]().then(preferDefault) // loader will handle the case when component is error
+      return this.asyncRequires[exportType][chunkName]() // loader will handle the case when component is error
       .catch(err => err);
     };
 
@@ -87,7 +85,7 @@ class DevLoader extends _loader.BaseLoader {
       // when we can't find a proper 404.html we fallback to dev-404-page
       // we need to make sure to mark it as not found.
       if (data.status === _loader.PageResourceStatus.Error && rawPath !== `/dev-404-page/`) {
-        console.error(`404 page could not be found. Checkout https://www.gatsbyjs.org/docs/how-to/adding-common-features/add-404-page/`);
+        console.error(`404 page could not be found. Checkout https://www.gatsbyjs.com/docs/how-to/adding-common-features/add-404-page/`);
         return this.loadPageDataJson(`/dev-404-page/`).then(result => Object.assign({}, data, result));
       }
 

@@ -8,9 +8,10 @@
     "extends": "react-app"
   },
   "scripts": {
-    "build": "env-cmd --silent gatsby build",
-    "start": "env-cmd --silent gatsby develop",
-    "serve": "gatsby serve",
+    "build": "gatsby build",
+    "start": "gatsby develop",
+    "clean": "gatsby clean",
+    "serve": "gatsby serve -p 5000",
     "setup": "node ./bin/setup.js"
   },
   "repository": {
@@ -32,7 +33,7 @@
   "dependencies": {
     "@reach/dialog": "^0.18.0",
     "babel-plugin-styled-components": "^2.0.7",
-    "gatsby": "next",
+    "gatsby": "^4.14.0",
     "gatsby-image": "^3.11.0",
     "gatsby-plugin-google-analytics": "^4.0.0",
     "gatsby-plugin-google-tagmanager": "^4.24.0",

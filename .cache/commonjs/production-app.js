@@ -8,8 +8,6 @@ var _apiRunnerBrowser = require("./api-runner-browser");
 
 var _react = _interopRequireDefault(require("react"));
 
-var _reactDom = _interopRequireDefault(require("react-dom"));
-
 var _reachRouter = require("@gatsbyjs/reach-router");
 
 var _gatsbyReactRouterScroll = require("gatsby-react-router-scroll");
@@ -32,14 +30,21 @@ var _stripPrefix = _interopRequireDefault(require("./strip-prefix"));
 
 var _matchPaths = _interopRequireDefault(require("$virtual/match-paths.json"));
 
+var _reactDomUtils = require("./react-dom-utils");
+
 // Generated during bootstrap
 const loader = new _loader.ProdLoader(_asyncRequires.default, _matchPaths.default, window.pageData);
 (0, _loader.setLoader)(loader);
 loader.setApiRunner(_apiRunnerBrowser.apiRunner);
+const {
+  render,
+  hydrate
+} = (0, _reactDomUtils.reactDOMUtils)();
 window.asyncRequires = _asyncRequires.default;
 window.___emitter = _emitter.default;
 window.___loader = _loader.publicLoader;
 (0, _navigation.init)();
+const reloadStorageKey = `gatsby-reload-compilation-hash-match`;
 (0, _apiRunnerBrowser.apiRunnerAsync)(`onClientEntry`).then(() => {
   // Let plugins register a service worker. The plugin just needs
   // to return true.
@@ -77,15 +82,24 @@ window.___loader = _loader.publicLoader;
         pageResources,
         location
       }) => {
-        const staticQueryResults = (0, _loader.getStaticQueryResults)();
-        return /*#__PURE__*/_react.default.createElement(_gatsby.StaticQueryContext.Provider, {
-          value: staticQueryResults
-        }, /*#__PURE__*/_react.default.createElement(DataContext.Provider, {
-          value: {
-            pageResources,
-            location
-          }
-        }, children));
+        if (pageResources.partialHydration) {
+          return /*#__PURE__*/_react.default.createElement(DataContext.Provider, {
+            value: {
+              pageResources,
+              location
+            }
+          }, children);
+        } else {
+          const staticQueryResults = (0, _loader.getStaticQueryResults)();
+          return /*#__PURE__*/_react.default.createElement(_gatsby.StaticQueryContext.Provider, {
+            value: staticQueryResults
+          }, /*#__PURE__*/_react.default.createElement(DataContext.Provider, {
+            value: {
+              pageResources,
+              location
+            }
+          }, children));
+        }
       }));
     }
 
@@ -129,12 +143,54 @@ window.___loader = _loader.publicLoader;
   // - it's the offline plugin shell (/offline-plugin-app-shell-fallback/)
 
   if (pagePath && __BASE_PATH__ + pagePath !== browserLoc.pathname + (pagePath.includes(`?`) ? browserLoc.search : ``) && !(loader.findMatchPath((0, _stripPrefix.default)(browserLoc.pathname, __BASE_PATH__)) || pagePath.match(/^\/(404|500)(\/?|.html)$/) || pagePath.match(/^\/offline-plugin-app-shell-fallback\/?$/))) {
-    (0, _reachRouter.navigate)(__BASE_PATH__ + pagePath + browserLoc.hash, {
+    (0, _reachRouter.navigate)(__BASE_PATH__ + pagePath + (!pagePath.includes(`?`) ? browserLoc.search : ``) + browserLoc.hash, {
       replace: true
     });
-  }
+  } // It's possible that sessionStorage can throw an exception if access is not granted, see https://github.com/gatsbyjs/gatsby/issues/34512
+
+
+  const getSessionStorage = () => {
+    try {
+      return sessionStorage;
+    } catch {
+      return null;
+    }
+  };
 
   _loader.publicLoader.loadPage(browserLoc.pathname + browserLoc.search).then(page => {
+    var _page$page;
+
+    const sessionStorage = getSessionStorage();
+
+    if (page !== null && page !== void 0 && (_page$page = page.page) !== null && _page$page !== void 0 && _page$page.webpackCompilationHash && page.page.webpackCompilationHash !== window.___webpackCompilationHash) {
+      // Purge plugin-offline cache
+      if (`serviceWorker` in navigator && navigator.serviceWorker.controller !== null && navigator.serviceWorker.controller.state === `activated`) {
+        navigator.serviceWorker.controller.postMessage({
+          gatsbyApi: `clearPathResources`
+        });
+      } // We have not matching html + js (inlined `window.___webpackCompilationHash`)
+      // with our data (coming from `app-data.json` file). This can cause issues such as
+      // errors trying to load static queries (as list of static queries is inside `page-data`
+      // which might not match to currently loaded `.js` scripts).
+      // We are making attempt to reload if hashes don't match, but we also have to handle case
+      // when reload doesn't fix it (possibly broken deploy) so we don't end up in infinite reload loop
+
+
+      if (sessionStorage) {
+        const isReloaded = sessionStorage.getItem(reloadStorageKey) === `1`;
+
+        if (!isReloaded) {
+          sessionStorage.setItem(reloadStorageKey, `1`);
+          window.location.reload(true);
+          return;
+        }
+      }
+    }
+
+    if (sessionStorage) {
+      sessionStorage.removeItem(reloadStorageKey);
+    }
+
     if (!page || page.status === _loader.PageResourceStatus.Error) {
       const message = `page resources for ${browserLoc.pathname} not found. Not rendering React`; // if the chunk throws an error we want to capture the real error
       // This should help with https://github.com/gatsbyjs/gatsby/issues/19618
@@ -147,7 +203,6 @@ window.___loader = _loader.publicLoader;
       throw new Error(message);
     }
 
-    window.___webpackCompilationHash = page.page.webpackCompilationHash;
     const SiteRoot = (0, _apiRunnerBrowser.apiRunner)(`wrapRootElement`, {
       element: /*#__PURE__*/_react.default.createElement(LocationHandler, null)
     }, /*#__PURE__*/_react.default.createElement(LocationHandler, null), ({
@@ -176,16 +231,20 @@ window.___loader = _loader.publicLoader;
       return /*#__PURE__*/_react.default.createElement(GatsbyRoot, null, SiteRoot);
     };
 
-    const renderer = (0, _apiRunnerBrowser.apiRunner)(`replaceHydrateFunction`, undefined, _reactDom.default.hydrateRoot ? _reactDom.default.hydrateRoot : _reactDom.default.hydrate)[0];
+    const focusEl = document.getElementById(`gatsby-focus-wrapper`); // Client only pages have any empty body so we just do a normal
+    // render to avoid React complaining about hydration mis-matches.
+
+    let defaultRenderer = render;
+
+    if (focusEl && focusEl.children.length) {
+      defaultRenderer = hydrate;
+    }
+
+    const renderer = (0, _apiRunnerBrowser.apiRunner)(`replaceHydrateFunction`, undefined, defaultRenderer)[0];
 
     function runRender() {
       const rootElement = typeof window !== `undefined` ? document.getElementById(`___gatsby`) : null;
-
-      if (renderer === _reactDom.default.hydrateRoot) {
-        renderer(rootElement, /*#__PURE__*/_react.default.createElement(App, null));
-      } else {
-        renderer( /*#__PURE__*/_react.default.createElement(App, null), rootElement);
-      }
+      renderer( /*#__PURE__*/_react.default.createElement(App, null), rootElement);
     } // https://github.com/madrobby/zepto/blob/b5ed8d607f67724788ec9ff492be297f64d47dfc/src/zepto.js#L439-L450
     // TODO remove IE 10 support
 
@@ -206,5 +265,7 @@ window.___loader = _loader.publicLoader;
       doc.addEventListener(`DOMContentLoaded`, handler, false);
       window.addEventListener(`load`, handler, false);
     }
+
+    return;
   });
 });

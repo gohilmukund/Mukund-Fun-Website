@@ -3,7 +3,7 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
-exports.cleanPath = exports.findPath = exports.grabMatchParams = exports.findMatchPath = exports.setMatchPaths = void 0;
+exports.setMatchPaths = exports.grabMatchParams = exports.findPath = exports.findMatchPath = exports.cleanPath = void 0;
 
 var _utils = require("@gatsbyjs/reach-router/lib/utils");
 
@@ -17,7 +17,15 @@ const pathCache = new Map();
 let matchPaths = [];
 
 const trimPathname = rawPathname => {
-  const pathname = decodeURIComponent(rawPathname); // Remove the pathPrefix from the pathname.
+  let newRawPathname = rawPathname;
+  const queryIndex = rawPathname.indexOf(`?`);
+
+  if (queryIndex !== -1) {
+    const [path, qs] = rawPathname.split(`?`);
+    newRawPathname = `${path}?${encodeURIComponent(qs)}`;
+  }
+
+  const pathname = decodeURIComponent(newRawPathname); // Remove the pathPrefix from the pathname.
 
   const trimmedPathname = (0, _stripPrefix.default)(pathname, decodeURIComponent(__BASE_PATH__)) // Remove any hashfragment
   .split(`#`)[0];

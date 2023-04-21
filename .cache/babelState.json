@@ -7,15 +7,15 @@
           "options": {}
         },
         {
-          "name": "C:\\Project\\Github\\Mukund-Fun-Website\\node_modules\\@babel\\plugin-proposal-optional-chaining\\lib\\index.js",
+          "name": "/home/gohilmukund/webcafe/Mukund-Fun-Website/node_modules/@babel/plugin-proposal-optional-chaining/lib/index.js",
           "options": {}
         },
         {
-          "name": "C:\\Project\\Github\\Mukund-Fun-Website\\node_modules\\@babel\\plugin-proposal-nullish-coalescing-operator\\lib\\index.js",
+          "name": "/home/gohilmukund/webcafe/Mukund-Fun-Website/node_modules/@babel/plugin-proposal-nullish-coalescing-operator/lib/index.js",
           "options": {}
         },
         {
-          "name": "C:\\Project\\Github\\Mukund-Fun-Website\\node_modules\\@babel\\plugin-proposal-numeric-separator\\lib\\index.js",
+          "name": "/home/gohilmukund/webcafe/Mukund-Fun-Website/node_modules/@babel/plugin-proposal-numeric-separator/lib/index.js",
           "options": {}
         },
         {
@@ -32,11 +32,17 @@
             "pure": false,
             "ssr": false
           }
+        },
+        {
+          "name": "/home/gohilmukund/webcafe/Mukund-Fun-Website/node_modules/gatsby-plugin-image/dist/babel-plugin-parse-static-images.js",
+          "options": {
+            "cacheDir": "/home/gohilmukund/webcafe/Mukund-Fun-Website/.cache/caches/gatsby-plugin-image"
+          }
         }
       ],
       "presets": [
         {
-          "name": "C:\\Project\\Github\\Mukund-Fun-Website\\node_modules\\@babel\\preset-typescript\\lib\\index.js",
+          "name": "/home/gohilmukund/webcafe/Mukund-Fun-Website/node_modules/@babel/preset-typescript/lib/index.js",
           "options": {
             "plugins": [],
             "isTSX": false,
@@ -57,16 +63,22 @@
           "options": {}
         },
         {
-          "name": "C:\\Project\\Github\\Mukund-Fun-Website\\node_modules\\@babel\\plugin-proposal-optional-chaining\\lib\\index.js",
+          "name": "/home/gohilmukund/webcafe/Mukund-Fun-Website/node_modules/@babel/plugin-proposal-optional-chaining/lib/index.js",
           "options": {}
         },
         {
-          "name": "C:\\Project\\Github\\Mukund-Fun-Website\\node_modules\\@babel\\plugin-proposal-nullish-coalescing-operator\\lib\\index.js",
+          "name": "/home/gohilmukund/webcafe/Mukund-Fun-Website/node_modules/@babel/plugin-proposal-nullish-coalescing-operator/lib/index.js",
           "options": {}
         },
         {
-          "name": "C:\\Project\\Github\\Mukund-Fun-Website\\node_modules\\@babel\\plugin-proposal-numeric-separator\\lib\\index.js",
+          "name": "/home/gohilmukund/webcafe/Mukund-Fun-Website/node_modules/@babel/plugin-proposal-numeric-separator/lib/index.js",
           "options": {}
+        },
+        {
+          "name": "/home/gohilmukund/webcafe/Mukund-Fun-Website/node_modules/gatsby-plugin-image/dist/babel-plugin-parse-static-images.js",
+          "options": {
+            "cacheDir": "/home/gohilmukund/webcafe/Mukund-Fun-Website/.cache/caches/gatsby-plugin-image"
+          }
         },
         {
           "name": "babel-plugin-styled-components",
@@ -86,7 +98,7 @@
       ],
       "presets": [
         {
-          "name": "C:\\Project\\Github\\Mukund-Fun-Website\\node_modules\\@babel\\preset-typescript\\lib\\index.js",
+          "name": "/home/gohilmukund/webcafe/Mukund-Fun-Website/node_modules/@babel/preset-typescript/lib/index.js",
           "options": {
             "plugins": [],
             "isTSX": false,
@@ -107,16 +119,22 @@
           "options": {}
         },
         {
-          "name": "C:\\Project\\Github\\Mukund-Fun-Website\\node_modules\\@babel\\plugin-proposal-optional-chaining\\lib\\index.js",
+          "name": "/home/gohilmukund/webcafe/Mukund-Fun-Website/node_modules/@babel/plugin-proposal-optional-chaining/lib/index.js",
           "options": {}
         },
         {
-          "name": "C:\\Project\\Github\\Mukund-Fun-Website\\node_modules\\@babel\\plugin-proposal-nullish-coalescing-operator\\lib\\index.js",
+          "name": "/home/gohilmukund/webcafe/Mukund-Fun-Website/node_modules/@babel/plugin-proposal-nullish-coalescing-operator/lib/index.js",
           "options": {}
         },
         {
-          "name": "C:\\Project\\Github\\Mukund-Fun-Website\\node_modules\\@babel\\plugin-proposal-numeric-separator\\lib\\index.js",
+          "name": "/home/gohilmukund/webcafe/Mukund-Fun-Website/node_modules/@babel/plugin-proposal-numeric-separator/lib/index.js",
           "options": {}
+        },
+        {
+          "name": "/home/gohilmukund/webcafe/Mukund-Fun-Website/node_modules/gatsby-plugin-image/dist/babel-plugin-parse-static-images.js",
+          "options": {
+            "cacheDir": "/home/gohilmukund/webcafe/Mukund-Fun-Website/.cache/caches/gatsby-plugin-image"
+          }
         },
         {
           "name": "babel-plugin-styled-components",
@@ -136,7 +154,7 @@
       ],
       "presets": [
         {
-          "name": "C:\\Project\\Github\\Mukund-Fun-Website\\node_modules\\@babel\\preset-typescript\\lib\\index.js",
+          "name": "/home/gohilmukund/webcafe/Mukund-Fun-Website/node_modules/@babel/preset-typescript/lib/index.js",
           "options": {
             "plugins": [],
             "isTSX": false,
@@ -157,16 +175,22 @@
           "options": {}
         },
         {
-          "name": "C:\\Project\\Github\\Mukund-Fun-Website\\node_modules\\@babel\\plugin-proposal-optional-chaining\\lib\\index.js",
+          "name": "/home/gohilmukund/webcafe/Mukund-Fun-Website/node_modules/@babel/plugin-proposal-optional-chaining/lib/index.js",
           "options": {}
         },
         {
-          "name": "C:\\Project\\Github\\Mukund-Fun-Website\\node_modules\\@babel\\plugin-proposal-nullish-coalescing-operator\\lib\\index.js",
+          "name": "/home/gohilmukund/webcafe/Mukund-Fun-Website/node_modules/@babel/plugin-proposal-nullish-coalescing-operator/lib/index.js",
           "options": {}
         },
         {
-          "name": "C:\\Project\\Github\\Mukund-Fun-Website\\node_modules\\@babel\\plugin-proposal-numeric-separator\\lib\\index.js",
+          "name": "/home/gohilmukund/webcafe/Mukund-Fun-Website/node_modules/@babel/plugin-proposal-numeric-separator/lib/index.js",
           "options": {}
+        },
+        {
+          "name": "/home/gohilmukund/webcafe/Mukund-Fun-Website/node_modules/gatsby-plugin-image/dist/babel-plugin-parse-static-images.js",
+          "options": {
+            "cacheDir": "/home/gohilmukund/webcafe/Mukund-Fun-Website/.cache/caches/gatsby-plugin-image"
+          }
         },
         {
           "name": "babel-plugin-styled-components",
@@ -186,7 +210,7 @@
       ],
       "presets": [
         {
-          "name": "C:\\Project\\Github\\Mukund-Fun-Website\\node_modules\\@babel\\preset-typescript\\lib\\index.js",
+          "name": "/home/gohilmukund/webcafe/Mukund-Fun-Website/node_modules/@babel/preset-typescript/lib/index.js",
           "options": {
             "plugins": [],
             "isTSX": false,
