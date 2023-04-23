@@ -1,3 +1,7 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 const { ACCESS_TOKEN, SPACE_ID, ANALYTICS_ID, GOOGLE_TAGMANAGER_ID } = process.env;
 
 const plugins = [
@@ -16,6 +20,23 @@ const plugins = [
       start_url: `/`,
       background_color: `#f7f0eb`,
       theme_color: `#a2466c`,
+      icons: [
+        {
+          src: `src/assets/images/icons/icon-96x96.png`,
+          sizes: `96x96`,
+          type: `image/png`,
+        },
+        {
+          src: `src/assets/images/icons/icon-192x192.png`,
+          sizes: `192x192`,
+          type: `image/png`,
+        },
+        {
+          src: `src/assets/images/icons/icon-512x512.png`,
+          sizes: `512x512`,
+          type: `image/png`,
+        },
+      ],
       display: `standalone`,
     },
   },
