@@ -48,7 +48,7 @@
     "react-icons": "^4.8.0",
     "react-parallax-tilt": "^1.7.130",
     "react-scripts": "^5.0.1",
-    "styled-components": "^5.3.3"
+    "styled-components": "^5.3.10"
   },
   "devDependencies": {
     "chalk": "^5.2.0",
