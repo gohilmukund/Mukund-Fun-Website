@@ -154,3 +154,7 @@ public/icons/icon-512x512.png
 public/page-data/404.html/page-data.json
 public/page-data/dev-404-page/page-data.json
 public/page-data/index/page-data.json
+public/chunk-map.json
+public/webpack.stats.json
+public/page-data/dev-404-page/page-data.json
+public/page-data/index/page-data.json
