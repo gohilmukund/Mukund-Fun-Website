@@ -15,8 +15,8 @@ import { BadgeContainer } from '../components/BadgeCard';
 
 const Certifications = () => {
   const certificates = useCertificatesQuery();
-  const [ showLightbox, setShowLightbox ] = useState(false);
-  const [ currentCertificate, setCurrentCertificate ] = useState({});
+  const [showLightbox, setShowLightbox] = useState(false);
+  const [currentCertificate, setCurrentCertificate] = useState({});
 
   const onPressHandle = (certificate) => {
     setCurrentCertificate(certificate);
@@ -33,42 +33,42 @@ const Certifications = () => {
             <Certificate {...p} key={i} onPress={onPressHandle} />
           ))}
         </Fade>
-        { showLightbox && <ModalView currentCertificate={currentCertificate} setShowLightbox={setShowLightbox}/> }
+        {showLightbox && <ModalView currentCertificate={currentCertificate} setShowLightbox={setShowLightbox} />}
       </BadgeContainer>
     </Section.Container>
   );
 };
 
-const ModalView = ({currentCertificate, setShowLightbox}) => {
-  return(
-    <Dialog style={{padding:5, borderRadius:20, width:'65%'}}>
+const ModalView = ({ currentCertificate, setShowLightbox }) => {
+  return (
+    <Dialog style={{ padding: 5, borderRadius: 20, width: '65%' }}>
       <Flex
         m={1}
         style={{
-          top:0,
-          right:0,
-          justifyContent: 'flex-end', 
+          top: 0,
+          right: 0,
+          justifyContent: 'flex-end',
           position: "relative",
         }}>
         <Box mx={1} fontSize={4}>
-          <IconButton name="Close" icon="times-circle"  onPress={()=>setShowLightbox(false)} url={'#'}/>
+          <IconButton name="Close" icon="times-circle" onPress={() => setShowLightbox(false)} url={'#'} />
         </Box>
       </Flex>
       <Flex
         m={1}
         style={{
-          top:0,
-          justifyContent:'center',
+          top: 0,
+          justifyContent: 'center',
           alignItems: 'center',
           flexDirection: 'column',
         }}>
-        <CertificateCard {...currentCertificate.certificateImage} /> 
-        <Text style={{textAlign:'center',}}>
-          <h1 style={{padding:0, margin:0 }}> {currentCertificate?.name} </h1>
-          {currentCertificate?.issuingOrganization} <br /> 
+        <CertificateCard {...currentCertificate.certificateImage} />
+        <Text style={{ textAlign: 'center', }}>
+          <h1 style={{ padding: 0, margin: 0 }}> {currentCertificate?.name} </h1>
+          {currentCertificate?.issuingOrganization} <br />
           <Link href={currentCertificate?.credentialUrl}> {currentCertificate?.credentialUrl} </Link>
         </Text>
-      </Flex>      
+      </Flex>
     </Dialog>
   )
 }
@@ -95,11 +95,17 @@ const CertificateCard = styled(Image)`
 
 const Background = () => (
   <>
-    <Triangle
-      color="muted"
-      height={['15vh', '10vh']}
+  <Triangle
+      color="secondary"
+      height={['80vh', '80vh']}
       width={['100vw', '100vw']}
-      position="top-left"
+      position="top-right"
+    />
+    <Triangle
+      color="background"
+      height={['50vh', '20vh']}
+      width={['50vw', '50vw']}
+      position="top-right"
     />
 
     <Triangle

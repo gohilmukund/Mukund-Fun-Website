@@ -47,8 +47,8 @@ export const useProjectsQueryMK = (): Project[] => {
   return contentfulAbout.projects.map(({ logo, ...rest }) => ({
     ...rest,
     logo: {
-      alt: logo.title,
-      src: logo.image.src,
+      alt: logo?.title,
+      src: logo?.image.src,
     },
   }));
 };

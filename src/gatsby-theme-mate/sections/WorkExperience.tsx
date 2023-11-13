@@ -6,7 +6,7 @@ import Triangle from '../components/Triangle';
 import { SECTION } from '../utils/constants';
 import { useWorkExperienceQuery } from '../queries/useWorkExperienceQuery';
 import Work from '../components/Work';
-import Dialog from '@reach/dialog';
+import {Dialog} from '@reach/dialog';
 import "@reach/dialog/styles.css"
 import { Box, Flex, Image, Link, Text } from 'rebass/styled-components';
 import styled from 'styled-components';
@@ -93,30 +93,22 @@ const Background = () => (
   <>
     <Triangle
       color="secondary"
-      height={['80vh', '80vh']}
-      width={['100vw', '100vw']}
-      position="top-right"
-    />
-
-    <Triangle
-      color="background"
       height={['50vh', '20vh']}
       width={['50vw', '50vw']}
-      position="top-right"
+      position="bottom-left"
     />
 
     <Triangle
       color="primary"
-      height={['25vh', '40vh']}
-      width={['75vw', '60vw']}
-      position="bottom-right"
+      height={['20vh', '40vh']}
+      width={['75vw', '70vw']}
+      position="top-right"
     />
 
     <Triangle
       color="muted"
       height={['25vh', '20vh']}
       width={['100vw', '100vw']}
-      position="bottom-right"
     />
   </>
 );

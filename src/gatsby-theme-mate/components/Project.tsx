@@ -18,57 +18,42 @@ const Project = ({
   publishedDate,
   logo,
 }: Props) => (
-  <Card p={0}>
-    <Flex style={{ height: CARD_HEIGHT }}>
-      <TextContainer>
-        <span>
-          <Title my={2} pb={1} color="text">
-            {name}
-          </Title>
-        </span>
-        <Text width={[1]} style={{ overflow: 'auto' }} color="text">
-          {description}
-        </Text>
-      </TextContainer>
-
-      <ImageContainer>
-        <ProjectImage {...logo} />
-        <ProjectTag>
-          <Flex
-            m={1}
-            style={{
-              float: 'right',
-            }}
-          >
-            {repository ? <Box mx={1} fontSize={4}>
-              <SocialLink name="Repository" icon="github" url={repository} />
-            </Box> : null}
-            {homepage
-              ?
-              <Box mx={1} fontSize={4}>
-                <SocialLink name="Homepage" icon="globe" url={homepage} />
-              </Box> : null}
-          </Flex>
-          <ImageLabel
-            bg="primary"
-            color="background"
-            position="bottom-right"
-            round
-          >
-            {type}
-          </ImageLabel>
-          <Hide query="md">
-            <ImageLabel bg="muted" color="primary">
-              {publishedDate}
-            </ImageLabel>
-          </Hide>
-        </ProjectTag>
-      </ImageContainer>
-    </Flex>
-  </Card>
+  <div>
+    <Card p={0}>
+      <Flex style={{ height: CARD_HEIGHT }}>
+        <TextContainer style={{ flex: 1 }}>
+          <span>
+            <Title my={2} pb={1} color="text">
+              {name}
+            </Title>
+          </span>
+          <Text width={[1]} style={{ overflow: 'auto' }} color="text">
+            {description}
+          </Text>
+        </TextContainer>
+        {logo.src && 
+        <ImageContainer>
+          <ProjectImage {...logo} />
+        </ImageContainer>
+        }
+      </Flex>
+    </Card>
+    <ProjectTag>
+      <ImageLabel
+        bg="primary"
+        color="background"
+        position="bottom-right"
+        round
+      >
+        {type}
+      </ImageLabel>
+    </ProjectTag>
+  </div>
 );
 
 const CARD_HEIGHT = '200px';
+
+const LOGO_HEIGHT = '150px';
 
 const MEDIA_QUERY_SMALL = '@media (max-width: 400px)';
 
@@ -94,23 +79,23 @@ const TextContainer = styled.div`
 
 const ImageContainer = styled.div`
   margin: auto;
-  width: ${CARD_HEIGHT};
+  width: ${LOGO_HEIGHT};
 
   ${MEDIA_QUERY_SMALL} {
-    width: calc(${CARD_HEIGHT} / 2);
+    width: calc(${LOGO_HEIGHT} / 2);
   }
 `;
 
 const ProjectImage = styled(Image)`
-  width: ${CARD_HEIGHT};
-  height: ${CARD_HEIGHT};
+  width: ${LOGO_HEIGHT};
+  height: ${LOGO_HEIGHT};
   padding: 40px;
   margin-top: 0px;
 
   ${MEDIA_QUERY_SMALL} {
-    height: calc(${CARD_HEIGHT} / 2);
-    width: calc(${CARD_HEIGHT} / 2);
-    margin-top: calc(${CARD_HEIGHT} / 4);
+    height: calc(${LOGO_HEIGHT} / 2);
+    width: calc(${LOGO_HEIGHT} / 2);
+    margin-top: calc(${LOGO_HEIGHT} / 4);
     padding: 10px;
   }
 `;
@@ -118,8 +103,9 @@ const ProjectImage = styled(Image)`
 const ProjectTag = styled.div`
   position: relative;
   height: ${CARD_HEIGHT};
+  pointer-events: none;
   top: calc(
-    -${CARD_HEIGHT} - 3.5px
+    -${CARD_HEIGHT}
   ); /*don't know why I have to add 3.5px here ... */
 
   ${MEDIA_QUERY_SMALL} {
