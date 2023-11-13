@@ -40,12 +40,14 @@ const Project = ({
               float: 'right',
             }}
           >
-            <Box mx={1} fontSize={4}>
+            {repository ? <Box mx={1} fontSize={4}>
               <SocialLink name="Repository" icon="github" url={repository} />
-            </Box>
-            <Box mx={1} fontSize={4}>
-              <SocialLink name="Homepage" icon="globe" url={homepage} />
-            </Box>
+            </Box> : null}
+            {homepage
+              ?
+              <Box mx={1} fontSize={4}>
+                <SocialLink name="Homepage" icon="globe" url={homepage} />
+              </Box> : null}
           </Flex>
           <ImageLabel
             bg="primary"
