@@ -82,8 +82,10 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Create Env file
         run: |
-          echo 'Hello Testing'
-          echo 'ACCESS_TOKEN=${{secrets.ACCESS_TOKEN}}' >> .env.production
+          touch .env.production
+          echo ACCESS_TOKEN=${{secrets.CONTENTFUL_ACCESS_TOKEN}} >> .env.production
+          echo SPACE_ID=${{secrets.CONTENTFUL_SPACE_ID}} >> .env.production
+          echo GOOGLE_TAGMANAGER_ID=${{secrets.GOOGLE_TAGMANAGER_ID}} >> .env.production
           cat .env.production
       - name: Build with Gatsby
         env:
