@@ -1,5 +1,6 @@
 require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
+  // path: `.env`
 })
 
 const { ACCESS_TOKEN, SPACE_ID, ANALYTICS_ID, GOOGLE_TAGMANAGER_ID } = process.env;

@@ -33,6 +33,7 @@ jobs:
   # Build job
   build:
     runs-on: ubuntu-latest
+    environment: Production
     env:
       ACCESS_TOKEN: ${{secrets.CONTENTFUL_ACCESS_TOKEN}}
       SPACE_ID: ${{secrets.CONTENTFUL_SPACE_ID}}
@@ -81,6 +82,7 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Build with Gatsby
         env:
+          NODE_ENV: 'Production'
           PREFIX_PATHS: 'true'
         run: ${{ steps.detect-package-manager.outputs.manager }} run build
       - name: Upload artifact
