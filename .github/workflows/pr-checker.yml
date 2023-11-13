@@ -1,35 +1,35 @@
-name: pr-checker
+# name: pr-checker
 
-on:
-  pull_request:
-    branches:
-      - prod
-  pull_request_target:
-    branches:
-      - prod
+# on:
+#   pull_request:
+#     branches:
+#       - prod
+#   pull_request_target:
+#     branches:
+#       - prod
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    if:
-      (github.event_name == 'pull_request_target' && github.actor == 'dependabot[bot]') ||
-      (github.event_name != 'pull_request_target' && github.actor != 'dependabot[bot]')
-    steps:
-      - uses: actions/checkout@v3
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     if:
+#       (github.event_name == 'pull_request_target' && github.actor == 'dependabot[bot]') ||
+#       (github.event_name != 'pull_request_target' && github.actor != 'dependabot[bot]')
+#     steps:
+#       - uses: actions/checkout@v3
 
-      - name: Read .nvmrc
-        id: node_version
-        run: echo ::set-output name=NODE_VERSION::$(cat .nvmrc)
+#       - name: Read .nvmrc
+#         id: node_version
+#         run: echo ::set-output name=NODE_VERSION::$(cat .nvmrc)
 
-      - name: Setup node
-        uses: actions/setup-node@v3.5.1
-        with:
-          node-version: ${{ steps.node_version.outputs.NODE_VERSION }}
+#       - name: Setup node
+#         uses: actions/setup-node@v3.5.1
+#         with:
+#           node-version: ${{ steps.node_version.outputs.NODE_VERSION }}
 
-      - run: yarn install --frozen-lockfile
+#       - run: yarn install --frozen-lockfile
 
-      - run: yarn build
-        env:
-          ACCESS_TOKEN: ${{secrets.ACCESS_TOKEN}}
-          SPACE_ID: ${{secrets.SPACE_ID}}
-          CONTENTFUL_ACCESS_TOKEN: ${{secrets.CONTENTFUL_ACCESS_TOKEN}}
+#       - run: yarn build
+#         env:
+#           ACCESS_TOKEN: ${{secrets.ACCESS_TOKEN}}
+#           SPACE_ID: ${{secrets.SPACE_ID}}
+#           CONTENTFUL_ACCESS_TOKEN: ${{secrets.CONTENTFUL_ACCESS_TOKEN}}

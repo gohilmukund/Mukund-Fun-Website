@@ -33,6 +33,10 @@ jobs:
   # Build job
   build:
     runs-on: ubuntu-latest
+    env:
+      ACCESS_TOKEN: ${{secrets.CONTENTFUL_ACCESS_TOKEN}}
+      SPACE_ID: ${{secrets.CONTENTFUL_SPACE_ID}}
+      GOOGLE_TAGMANAGER_ID: ${{secrets.GOOGLE_TAGMANAGER_ID}}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
