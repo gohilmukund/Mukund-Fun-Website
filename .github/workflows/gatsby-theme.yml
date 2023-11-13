@@ -1,31 +1,31 @@
-name: gatsby-theme
+# name: gatsby-theme
 
-on:
-  push:
-    branches:
-      - prod
+# on:
+#   push:
+#     branches:
+#       - prod
 
-  workflow_dispatch:
+#   workflow_dispatch:
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v3
 
-      - name: Read .nvmrc
-        id: node_version
-        run: echo ::set-output name=NODE_VERSION::$(cat .nvmrc)
+#       - name: Read .nvmrc
+#         id: node_version
+#         run: echo ::set-output name=NODE_VERSION::$(cat .nvmrc)
 
-      - name: Setup node
-        uses: actions/setup-node@v3.5.1
-        with:
-          node-version: ${{ steps.node_version.outputs.NODE_VERSION }}
+#       - name: Setup node
+#         uses: actions/setup-node@v3.5.1
+#         with:
+#           node-version: ${{ steps.node_version.outputs.NODE_VERSION }}
 
-      - run: yarn install --frozen-lockfile
-        name: Yarn Install
+#       - run: yarn install --frozen-lockfile
+#         name: Yarn Install
 
-      - run: yarn build
-        env:
-          ACCESS_TOKEN: ${{secrets.ACCESS_TOKEN}}
-          SPACE_ID: ${{secrets.SPACE_ID}}
+#       - run: yarn build
+#         env:
+#           ACCESS_TOKEN: ${{secrets.ACCESS_TOKEN}}
+#           SPACE_ID: ${{secrets.SPACE_ID}}
