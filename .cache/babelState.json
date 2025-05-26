@@ -32,6 +32,12 @@
             "pure": false,
             "ssr": false
           }
+        },
+        {
+          "name": "C:\\Project\\Github\\Mukund-Fun-Website\\node_modules\\gatsby-plugin-image\\dist\\babel-plugin-parse-static-images.js",
+          "options": {
+            "cacheDir": "C:\\Project\\Github\\Mukund-Fun-Website\\.cache\\caches\\gatsby-plugin-image"
+          }
         }
       ],
       "presets": [
@@ -67,6 +73,12 @@
         {
           "name": "C:\\Project\\Github\\Mukund-Fun-Website\\node_modules\\@babel\\plugin-proposal-numeric-separator\\lib\\index.js",
           "options": {}
+        },
+        {
+          "name": "C:\\Project\\Github\\Mukund-Fun-Website\\node_modules\\gatsby-plugin-image\\dist\\babel-plugin-parse-static-images.js",
+          "options": {
+            "cacheDir": "C:\\Project\\Github\\Mukund-Fun-Website\\.cache\\caches\\gatsby-plugin-image"
+          }
         },
         {
           "name": "babel-plugin-styled-components",
@@ -119,6 +131,12 @@
           "options": {}
         },
         {
+          "name": "C:\\Project\\Github\\Mukund-Fun-Website\\node_modules\\gatsby-plugin-image\\dist\\babel-plugin-parse-static-images.js",
+          "options": {
+            "cacheDir": "C:\\Project\\Github\\Mukund-Fun-Website\\.cache\\caches\\gatsby-plugin-image"
+          }
+        },
+        {
           "name": "babel-plugin-styled-components",
           "stage": "build-html",
           "options": {
@@ -167,6 +185,12 @@
         {
           "name": "C:\\Project\\Github\\Mukund-Fun-Website\\node_modules\\@babel\\plugin-proposal-numeric-separator\\lib\\index.js",
           "options": {}
+        },
+        {
+          "name": "C:\\Project\\Github\\Mukund-Fun-Website\\node_modules\\gatsby-plugin-image\\dist\\babel-plugin-parse-static-images.js",
+          "options": {
+            "cacheDir": "C:\\Project\\Github\\Mukund-Fun-Website\\.cache\\caches\\gatsby-plugin-image"
+          }
         },
         {
           "name": "babel-plugin-styled-components",

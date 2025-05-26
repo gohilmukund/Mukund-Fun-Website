@@ -32,15 +32,18 @@ const Header = () => {
           </Flex>
         </RebassLink>
         <Flex mr={[0, 3, 5]}>
-          {Object.keys(SECTION)
-            .filter((id) => id !== 'home')
-            .map((id) => (
-              <Box key={id} ml={[2, 3]} color="background" fontSize={[2, 3]}>
-                <Link href={`#${id}`} tabIndex={0}>
-                  {capitalize(id)}
-                </Link>
-              </Box>
-            ))}
+          {
+            // Navigation bar
+            Object.keys(SECTION)
+              .filter((id) => id !== 'home')
+              .map((id) => (
+                <Box key={id} ml={[2, 3]} color="background" fontSize={[2, 3]}>
+                  <Link href={`#${id}`} tabIndex={0}>
+                    {capitalize(id)}
+                  </Link>
+                </Box>
+              ))
+          }
         </Flex>
       </Flex>
     </StyledHeadroom>

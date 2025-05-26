@@ -3,21 +3,31 @@
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 exports.__esModule = true;
+exports.StaticQueryServerContext = exports.StaticQueryContext = exports.React = void 0;
 exports.default = staticPage;
 exports.getPageChunk = getPageChunk;
-exports.sanitizeComponents = void 0;
+exports.sanitizeComponents = exports.reorderHeadComponents = exports.renderToPipeableStream = void 0;
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
+var _writerNode = require("react-server-dom-webpack/writer.node.server");
+
+exports.renderToPipeableStream = _writerNode.renderToPipeableStream;
+
+/* global HAS_REACT_18 */
 const React = require(`react`);
+
+exports.React = React;
 
 const path = require(`path`);
 
 const {
   renderToString,
   renderToStaticMarkup,
-  pipeToNodeWritable
+  renderToPipeableStream
 } = require(`react-dom/server`);
+
+exports.renderToPipeableStream = renderToPipeableStream;
 
 const {
   ServerLocation,
@@ -28,8 +38,12 @@ const {
 const merge = require(`deepmerge`);
 
 const {
-  StaticQueryContext
+  StaticQueryContext,
+  StaticQueryServerContext
 } = require(`gatsby`);
+
+exports.StaticQueryServerContext = StaticQueryServerContext;
+exports.StaticQueryContext = StaticQueryContext;
 
 const fs = require(`fs`);
 
@@ -56,7 +70,11 @@ const {
   grabMatchParams
 } = require(`./find-path`);
 
-const chunkMapping = require(`../public/chunk-map.json`); // we want to force posix-style joins, so Windows doesn't produce backslashes for urls
+const chunkMapping = require(`../public/chunk-map.json`);
+
+const {
+  headHandlerForSSR
+} = require(`./head/head-export-handler-for-ssr`); // we want to force posix-style joins, so Windows doesn't produce backslashes for urls
 
 
 const {
@@ -90,17 +108,6 @@ const getPageDataPath = path => {
   const fixedPagePath = path === `/` ? `index` : path;
   return join(`page-data`, fixedPagePath, `page-data.json`);
 };
-
-const getPageDataUrl = pagePath => {
-  const pageDataPath = getPageDataPath(pagePath);
-  return `${__PATH_PREFIX__}/${pageDataPath}`;
-};
-
-const getStaticQueryPath = hash => join(`page-data`, `sq`, `d`, `${hash}.json`);
-
-const getStaticQueryUrl = hash => `${__PATH_PREFIX__}/${getStaticQueryPath(hash)}`;
-
-const getAppDataUrl = () => `${__PATH_PREFIX__}/${join(`page-data`, `app-data.json`)}`;
 
 const createElement = React.createElement;
 
@@ -140,6 +147,24 @@ function deepMerge(a, b) {
     arrayMerge: combineMerge
   });
 }
+/**
+Reorder headComponents so meta tags are always at the top and aren't missed by crawlers by being pushed down by large inline styles, etc.
+@see https://github.com/gatsbyjs/gatsby/issues/22206
+*/
+
+
+const reorderHeadComponents = headComponents => {
+  const sorted = headComponents.sort((a, b) => {
+    if (a.type && a.type === `meta` && !(b.type && b.type === `meta`)) {
+      return -1;
+    }
+
+    return 0;
+  });
+  return sorted;
+};
+
+exports.reorderHeadComponents = reorderHeadComponents;
 
 async function staticPage({
   pagePath,
@@ -149,7 +174,8 @@ async function staticPage({
   scripts,
   reversedStyles,
   reversedScripts,
-  inlinePageData = false
+  inlinePageData = false,
+  webpackCompilationHash
 }) {
   // for this to work we need this function to be sync or at least ensure there is single execution of it at a time
   global.unsafeBuiltinUsage = [];
@@ -240,13 +266,17 @@ async function staticPage({
       postBodyComponents = sanitizeComponents(components);
     };
 
-    const pageDataUrl = getPageDataUrl(pagePath);
     const {
-      componentChunkName,
-      staticQueryHashes = []
+      componentChunkName
     } = pageData;
     const pageComponent = await asyncRequires.components[componentChunkName]();
-    const staticQueryUrls = staticQueryHashes.map(getStaticQueryUrl);
+    headHandlerForSSR({
+      pageComponent,
+      setHeadComponents,
+      staticQueryContext,
+      pageData,
+      pagePath
+    });
 
     class RouteHandler extends React.Component {
       render() {
@@ -313,16 +343,18 @@ async function staticPage({
     if (!bodyHtml) {
       try {
         // react 18 enabled
-        if (pipeToNodeWritable) {
+        if (HAS_REACT_18) {
           const writableStream = new WritableAsPromise();
           const {
-            startWriting
-          } = pipeToNodeWritable(bodyComponent, writableStream, {
-            onCompleteAll() {
-              startWriting();
+            pipe
+          } = renderToPipeableStream(bodyComponent, {
+            onAllReady() {
+              pipe(writableStream);
             },
 
-            onError() {}
+            onError(error) {
+              writableStream.destroy(error);
+            }
 
           });
           bodyHtml = await writableStream;
@@ -350,44 +382,16 @@ async function staticPage({
       pathPrefix: __PATH_PREFIX__
     });
     reversedScripts.forEach(script => {
-      // Add preload/prefetch <link>s for scripts.
-      headComponents.push( /*#__PURE__*/React.createElement("link", {
-        as: "script",
-        rel: script.rel,
-        key: script.name,
-        href: `${__PATH_PREFIX__}/${script.name}`
-      }));
+      // Add preload/prefetch <link>s magic comments
+      if (script.shouldGenerateLink) {
+        headComponents.push( /*#__PURE__*/React.createElement("link", {
+          as: "script",
+          rel: script.rel,
+          key: script.name,
+          href: `${__PATH_PREFIX__}/${script.name}`
+        }));
+      }
     });
-
-    if (pageData && !inlinePageData) {
-      headComponents.push( /*#__PURE__*/React.createElement("link", {
-        as: "fetch",
-        rel: "preload",
-        key: pageDataUrl,
-        href: pageDataUrl,
-        crossOrigin: "anonymous"
-      }));
-    }
-
-    staticQueryUrls.forEach(staticQueryUrl => headComponents.push( /*#__PURE__*/React.createElement("link", {
-      as: "fetch",
-      rel: "preload",
-      key: staticQueryUrl,
-      href: staticQueryUrl,
-      crossOrigin: "anonymous"
-    })));
-    const appDataUrl = getAppDataUrl();
-
-    if (appDataUrl) {
-      headComponents.push( /*#__PURE__*/React.createElement("link", {
-        as: "fetch",
-        rel: "preload",
-        key: appDataUrl,
-        href: appDataUrl,
-        crossOrigin: "anonymous"
-      }));
-    }
-
     reversedStyles.forEach(style => {
       // Add <link>s for styles that should be prefetched
       // otherwise, inline as a <style> tag
@@ -409,7 +413,7 @@ async function staticPage({
       }
     }); // Add page metadata for the current page
 
-    const windowPageData = `/*<![CDATA[*/window.pagePath="${pagePath}";${inlinePageData ? `window.pageData=${JSON.stringify(pageData)};` : ``}/*]]>*/`;
+    const windowPageData = `/*<![CDATA[*/window.pagePath="${pagePath}";window.___webpackCompilationHash="${webpackCompilationHash}";${inlinePageData ? `window.pageData=${JSON.stringify(pageData)};` : ``}/*]]>*/`;
     postBodyComponents.push( /*#__PURE__*/React.createElement("script", {
       key: `script-loader`,
       id: `gatsby-script-loader`,
@@ -450,6 +454,7 @@ async function staticPage({
       });
     }));
     postBodyComponents.push(...bodyScripts);
+    headComponents = reorderHeadComponents(headComponents);
     apiRunner(`onPreRenderHTML`, {
       getHeadComponents,
       replaceHeadComponents,

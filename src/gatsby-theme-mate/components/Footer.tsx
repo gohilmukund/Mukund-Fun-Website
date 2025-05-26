@@ -20,10 +20,8 @@ const Footer = () => {
           <Text fontSize={[1, 2]} color="background">
             <span>{`Powered by `}</span>
             <Link href={GATSBY_URL}>Gatsby</Link>
-            <span>, </span>
+            <span> & </span>
             <Link href={CONTENTFUL_URL}>Contentful</Link>
-            <span> and </span>
-            <Link href={NETLIFY_URL}>Netlify</Link>{' '}
             <span role="img" aria-label="heart">
               ❤️
             </span>

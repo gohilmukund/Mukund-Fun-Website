@@ -7,8 +7,6 @@ import normalizePagePath from "./normalize-page-path"
 // TODO move away from lodash
 import isEqual from "lodash/isEqual"
 
-const preferDefault = m => (m && m.default) || m
-
 function mergePageEntry(cachedPage, newPageData) {
   return {
     ...cachedPage,
@@ -31,16 +29,15 @@ function mergePageEntry(cachedPage, newPageData) {
 
 class DevLoader extends BaseLoader {
   constructor(asyncRequires, matchPaths) {
-    const loadComponent = chunkName => {
-      if (!this.asyncRequires.components[chunkName]) {
+    const loadComponent = (chunkName, exportType = `components`) => {
+      if (!this.asyncRequires[exportType][chunkName]) {
         throw new Error(
           `We couldn't find the correct component chunk with the name "${chunkName}"`
         )
       }
 
       return (
-        this.asyncRequires.components[chunkName]()
-          .then(preferDefault)
+        this.asyncRequires[exportType][chunkName]()
           // loader will handle the case when component is error
           .catch(err => err)
       )
@@ -93,7 +90,7 @@ class DevLoader extends BaseLoader {
         rawPath !== `/dev-404-page/`
       ) {
         console.error(
-          `404 page could not be found. Checkout https://www.gatsbyjs.org/docs/how-to/adding-common-features/add-404-page/`
+          `404 page could not be found. Checkout https://www.gatsbyjs.com/docs/how-to/adding-common-features/add-404-page/`
         )
         return this.loadPageDataJson(`/dev-404-page/`).then(result =>
           Object.assign({}, data, result)
