@@ -41,7 +41,7 @@ export const useAboutMeQueryMK = (): AboutMe => {
           }
         }
         profilePicture {
-					title
+          title
           image: resize(width: 450, quality: 100) {
             src
           }

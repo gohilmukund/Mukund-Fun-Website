@@ -17,27 +17,40 @@ const Work = ({
   joiningDate,
   leavingDate,
   logo,
-  onPress
-}: Props) => { 
+  onPress,
+}: Props) => {
   function NewlineText(props) {
     const text = props.text;
-    return text.split('\n').map(str => <p>{str}</p>);
+    return text.split('\n').map((str) => <p>{str}</p>);
   }
-  return(  
-  <Card p={0}>
-    <Flex style={{ height: CARD_HEIGHT }} role="button" tabIndex={0} onClick={() => onPress({name, description, position, joiningDate, leavingDate, logo})} >
-      <TextContainer>
-        <span>
-          <Title my={2} pb={1} color="text">
-            {position}
-          </Title>
-        </span>
-        <Text width={[1]} style={{ overflow: 'auto' }} color="text">
-          <NewlineText text={description}/>
-        </Text>
-        
-      </TextContainer>
-      <ProjectTag>
+  return (
+    <Card p={0}>
+      <Flex
+        style={{ height: CARD_HEIGHT }}
+        role="button"
+        tabIndex={0}
+        onClick={() =>
+          onPress({
+            name,
+            description,
+            position,
+            joiningDate,
+            leavingDate,
+            logo,
+          })
+        }
+      >
+        <TextContainer>
+          <span>
+            <Title my={2} pb={1} color="text">
+              {position}
+            </Title>
+          </span>
+          <Text width={[1]} style={{ overflow: 'auto' }} color="text">
+            <NewlineText text={description} />
+          </Text>
+        </TextContainer>
+        <ProjectTag>
           <Flex
             m={1}
             style={{
@@ -58,13 +71,14 @@ const Work = ({
           </ImageLabel>
           <Hide query="md">
             <ImageLabel bg="muted" color="primary">
-              {joiningDate} - {leavingDate?leavingDate:"PRESENT"}
+              {joiningDate} - {leavingDate ? leavingDate : 'PRESENT'}
             </ImageLabel>
           </Hide>
         </ProjectTag>
-    </Flex>
-  </Card>
-)};
+      </Flex>
+    </Card>
+  );
+};
 
 const CARD_HEIGHT = '400px';
 
@@ -108,9 +122,7 @@ const ProjectTag = styled.div`
   position: absolute;
   height: ${CARD_HEIGHT};
   width: 100%;
-  top: 0
-
-  ${MEDIA_QUERY_SMALL} {
+  top: 0 ${MEDIA_QUERY_SMALL} {
     top: calc(-${CARD_HEIGHT} - 3.5px + (${CARD_HEIGHT} / 4));
   }
 `;

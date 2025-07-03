@@ -1,0 +1,8 @@
+.github
+.cache
+node_modules
+public
+firebase.json
+.firebaserrc
+bin
+gatsby-*.js

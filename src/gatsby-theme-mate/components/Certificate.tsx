@@ -14,22 +14,37 @@ const Certificate = ({
   certificateImage,
   credentialUrl,
   badge,
-  onPress
+  onPress,
 }: Props) => (
   <BadgeCard p={0}>
     <Flex style={{ height: CARD_HEIGHT }}>
-      <ImageContainer  onClick={()=> onPress({name, issueDate, issuingOrganization, certificateImage, badge, credentialUrl})} >
+      <ImageContainer
+        onClick={() =>
+          onPress({
+            name,
+            issueDate,
+            issuingOrganization,
+            certificateImage,
+            badge,
+            credentialUrl,
+          })
+        }
+      >
         <Badge {...badge} />
         <Flex
           m={1}
           style={{
-            top:0,
-            right:0, 
-            position: "absolute",
+            top: 0,
+            right: 0,
+            position: 'absolute',
           }}
         >
           <Box mx={1} fontSize={4}>
-            <SocialLink name="Certificate Link" icon="globe" url={credentialUrl} />
+            <SocialLink
+              name="Certificate Link"
+              icon="globe"
+              url={credentialUrl}
+            />
           </Box>
         </Flex>
       </ImageContainer>

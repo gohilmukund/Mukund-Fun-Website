@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react';
 import { withTheme } from 'styled-components';
 import { Theme } from '../types';
 import { useHeadQueryMK as useHeadQuery } from '../queries/useHeadQuery';
@@ -56,7 +56,6 @@ const Head = ({ theme }: Props) => {
         sizes="16x16"
         href={`https:${profile.favicon16.src}`}
       />
-
     </>
   );
 };

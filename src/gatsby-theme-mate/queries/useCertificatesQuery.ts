@@ -52,15 +52,17 @@ export const useCertificatesQuery = (): Certification[] => {
     }
   `);
 
-  return contentfulAbout.certifications.map(({ certificatePicture, certificateBadge, ...rest }) => ({
-    ...rest,
-    badge: {
-      alt: certificateBadge?.title,
-      src: certificateBadge?.image.src,
-    },
-    certificateImage: {
-      alt: certificatePicture?.title,
-      src: certificatePicture?.image.src,
-    },
-  }));
+  return contentfulAbout.certifications.map(
+    ({ certificatePicture, certificateBadge, ...rest }) => ({
+      ...rest,
+      badge: {
+        alt: certificateBadge?.title,
+        src: certificateBadge?.image.src,
+      },
+      certificateImage: {
+        alt: certificatePicture?.title,
+        src: certificatePicture?.image.src,
+      },
+    })
+  );
 };

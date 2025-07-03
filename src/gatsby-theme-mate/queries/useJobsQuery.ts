@@ -8,7 +8,7 @@ export type QueryResponse = {
       name: string;
       description: {
         raw: string;
-      }
+      };
       homepage: string;
       joiningDate: string;
       leavingDate: string;
@@ -48,12 +48,15 @@ export const useWorkExperienceQuery = (): WorkExperience[] => {
     }
   `);
 
-  return contentfulAbout.workExperience.map(({ logo, description, ...rest }) => ({
-    ...rest,
-    logo: {
-      alt: logo.title,
-      src: logo.image.src,
-    },
-    description: JSON.parse(JSON.stringify(eval("(" + description.raw + ")"))).content[0]?.content[0]?.value
-  }));
+  return contentfulAbout.workExperience.map(
+    ({ logo, description, ...rest }) => ({
+      ...rest,
+      logo: {
+        alt: logo.title,
+        src: logo.image.src,
+      },
+      description: JSON.parse(JSON.stringify(eval('(' + description.raw + ')')))
+        .content[0]?.content[0]?.value,
+    })
+  );
 };

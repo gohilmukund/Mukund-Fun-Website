@@ -6,8 +6,8 @@ import Triangle from '../components/Triangle';
 import { SECTION } from '../utils/constants';
 import Certificate from '../components/Certificate';
 import { useCertificatesQuery } from '../queries/useCertificatesQuery';
-import { Dialog } from "@reach/dialog"
-import "@reach/dialog/styles.css"
+import { Dialog } from '@reach/dialog';
+import '@reach/dialog/styles.css';
 import { Box, Flex, Image, Link, Text } from 'rebass/styled-components';
 import styled from 'styled-components';
 import IconButton from '../components/IconButton';
@@ -21,7 +21,7 @@ const Certifications = () => {
   const onPressHandle = (certificate) => {
     setCurrentCertificate(certificate);
     setShowLightbox(true);
-  }
+  };
 
   return (
     <Section.Container id={SECTION.certifications} Background={Background}>
@@ -33,7 +33,12 @@ const Certifications = () => {
             <Certificate {...p} key={i} onPress={onPressHandle} />
           ))}
         </Fade>
-        {showLightbox && <ModalView currentCertificate={currentCertificate} setShowLightbox={setShowLightbox} />}
+        {showLightbox && (
+          <ModalView
+            currentCertificate={currentCertificate}
+            setShowLightbox={setShowLightbox}
+          />
+        )}
       </BadgeContainer>
     </Section.Container>
   );
@@ -48,10 +53,16 @@ const ModalView = ({ currentCertificate, setShowLightbox }) => {
           top: 0,
           right: 0,
           justifyContent: 'flex-end',
-          position: "relative",
-        }}>
+          position: 'relative',
+        }}
+      >
         <Box mx={1} fontSize={4}>
-          <IconButton name="Close" icon="times-circle" onPress={() => setShowLightbox(false)} url={'#'} />
+          <IconButton
+            name="Close"
+            icon="times-circle"
+            onPress={() => setShowLightbox(false)}
+            url={'#'}
+          />
         </Box>
       </Flex>
       <Flex
@@ -61,17 +72,24 @@ const ModalView = ({ currentCertificate, setShowLightbox }) => {
           justifyContent: 'center',
           alignItems: 'center',
           flexDirection: 'column',
-        }}>
+        }}
+      >
         <CertificateCard {...currentCertificate.certificateImage} />
-        <Text style={{ textAlign: 'center', }}>
-          <h1 style={{ padding: 0, margin: 0 }}> {currentCertificate?.name} </h1>
+        <Text style={{ textAlign: 'center' }}>
+          <h1 style={{ padding: 0, margin: 0 }}>
+            {' '}
+            {currentCertificate?.name}{' '}
+          </h1>
           {currentCertificate?.issuingOrganization} <br />
-          <Link href={currentCertificate?.credentialUrl}> {currentCertificate?.credentialUrl} </Link>
+          <Link href={currentCertificate?.credentialUrl}>
+            {' '}
+            {currentCertificate?.credentialUrl}{' '}
+          </Link>
         </Text>
       </Flex>
     </Dialog>
-  )
-}
+  );
+};
 
 const CARD_HEIGHT = '400px';
 
@@ -95,7 +113,7 @@ const CertificateCard = styled(Image)`
 
 const Background = () => (
   <>
-  <Triangle
+    <Triangle
       color="secondary"
       height={['80vh', '80vh']}
       width={['100vw', '100vw']}

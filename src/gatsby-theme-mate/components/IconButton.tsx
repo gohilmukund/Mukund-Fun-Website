@@ -18,12 +18,7 @@ const IconButton = ({ icon, name, onPress, invert }: Props) => {
   }
 
   return (
-    <Tippy
-      content={name}
-      placement="bottom"
-      trigger="mouseenter"
-      arrow={false}
-    >
+    <Tippy content={name} placement="bottom" trigger="mouseenter" arrow={false}>
       <IconLink
         target="_blank"
         invert={invert}

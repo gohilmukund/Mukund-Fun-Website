@@ -6,25 +6,29 @@ import Triangle from '../components/Triangle';
 import { SECTION } from '../utils/constants';
 import { useWorkExperienceQuery } from '../queries/useWorkExperienceQuery';
 import Work from '../components/Work';
-import {Dialog} from '@reach/dialog';
-import "@reach/dialog/styles.css"
+import { Dialog } from '@reach/dialog';
+import '@reach/dialog/styles.css';
 import { Box, Flex, Image, Link, Text } from 'rebass/styled-components';
 import styled from 'styled-components';
 import IconButton from '../components/IconButton';
 
 const WorkExperience = () => {
   const job = useWorkExperienceQuery();
-  const [ showModal, setShowModal ] = useState(false);
-  const [ currentItem, setCurrentItem ] = useState({});
+  const [showModal, setShowModal] = useState(false);
+  const [currentItem, setCurrentItem] = useState({});
 
   const onPressHandle = (item) => {
     setCurrentItem(item);
     setShowModal(true);
-  }
+  };
 
   return (
     <Section.Container id={SECTION.workExperience} Background={Background}>
-      <Section.Header name={SECTION.workExperience} icon="♟" label="chesspawn" />
+      <Section.Header
+        name={SECTION.workExperience}
+        icon="♟"
+        label="chesspawn"
+      />
 
       <CardContainer minWidth="350px">
         <Fade direction="down" cascade damping={0.5} triggerOnce>
@@ -32,49 +36,60 @@ const WorkExperience = () => {
             <Work {...p} key={i} onPress={onPressHandle} />
           ))}
         </Fade>
-        { showModal && <ModalView currentItem={currentItem} setShowModal={setShowModal}/>}
+        {showModal && (
+          <ModalView currentItem={currentItem} setShowModal={setShowModal} />
+        )}
       </CardContainer>
     </Section.Container>
   );
 };
 
-const ModalView = ({currentItem, setShowModal}) => {
+const ModalView = ({ currentItem, setShowModal }) => {
   function NewlineText(props) {
     const text = props.text;
-    return text.split('\n').map(str => <p style={{ textAlign: 'left'}}>{str}</p>);
+    return text
+      .split('\n')
+      .map((str) => <p style={{ textAlign: 'left' }}>{str}</p>);
   }
-  return(
-    <Dialog style={{padding:5, borderRadius:20, width:'55%'}}>
+  return (
+    <Dialog style={{ padding: 5, borderRadius: 20, width: '55%' }}>
       <Flex
         m={1}
         style={{
-          top:0,
-          right:0,
-          justifyContent: 'flex-end', 
-          position: "relative",
-        }}>
+          top: 0,
+          right: 0,
+          justifyContent: 'flex-end',
+          position: 'relative',
+        }}
+      >
         <Box mx={1} fontSize={4}>
-          <IconButton name="Close" icon="times-circle"  onPress={()=>setShowModal(false)} url={'#'}/>
+          <IconButton
+            name="Close"
+            icon="times-circle"
+            onPress={() => setShowModal(false)}
+            url={'#'}
+          />
         </Box>
       </Flex>
       <Flex
         m={1}
         style={{
-          top:0,
-          justifyContent:'center',
+          top: 0,
+          justifyContent: 'center',
           alignItems: 'center',
           flexDirection: 'column',
-        }}> 
-        <Text style={{textAlign:'center'}}>
+        }}
+      >
+        <Text style={{ textAlign: 'center' }}>
           <LogoImage {...currentItem.logo} />
           <br />
           <h3> {currentItem?.position} </h3>
-          <NewlineText text={currentItem?.description}/>
+          <NewlineText text={currentItem?.description} />
         </Text>
-      </Flex>      
+      </Flex>
     </Dialog>
-  )
-}
+  );
+};
 
 const MEDIA_QUERY_SMALL = '@media (max-width: 400px)';
 

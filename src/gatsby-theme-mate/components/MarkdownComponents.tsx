@@ -5,7 +5,9 @@ import styled from 'styled-components';
 
 const StyledLink = styled.a`
   display: inline-block;
-  transition: color 250ms, text-shadow 250ms;
+  transition:
+    color 250ms,
+    text-shadow 250ms;
   color: ${({ theme }) => theme.colors.text};
   cursor: pointer;
   position: relative;

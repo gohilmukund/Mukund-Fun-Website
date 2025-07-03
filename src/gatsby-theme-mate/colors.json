@@ -1,8 +1,8 @@
 {
-    "text": "#0C005A", 
-    "background": "#EAEAEA", 
-    "muted": "#FFCCCC", 
-    "primary": "#0C005A",
-    "secondary": "#BC2525",
-    "whitebg": "#EEEEEE"
+  "text": "#0C005A",
+  "background": "#EAEAEA",
+  "muted": "#FFCCCC",
+  "primary": "#0C005A",
+  "secondary": "#BC2525",
+  "whitebg": "#EEEEEE"
 }

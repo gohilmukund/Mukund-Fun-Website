@@ -11,12 +11,12 @@ import { ICONS } from '../icons';
 export const loadIcons = () => library.add(...ICONS);
 
 export const getIconDefinition = (
-  iconName: IconName,
+  iconName: IconName
 ): IconDefinition | null => {
   return [brandPrefix, basePrefix].reduce(
     (acc: IconDefinition | null, prefix) => {
       return acc || findIconDefinition({ prefix, iconName });
     },
-    null,
+    null
   );
 };

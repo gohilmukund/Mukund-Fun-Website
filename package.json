@@ -12,7 +12,9 @@
     "start": "gatsby develop",
     "clean": "gatsby clean",
     "serve": "gatsby serve -p 5000",
-    "setup": "node ./bin/setup.js"
+    "setup": "node ./bin/setup.js",
+    "prettier:check": "prettier . -c",
+    "prettier:fix": "prettier . -w"
   },
   "repository": {
     "type": "git",
@@ -43,6 +45,7 @@
     "gatsby-plugin-styled-components": "^5.25.0",
     "gatsby-source-filesystem": "^4.25.0",
     "gatsby-theme-mate": "^2.1.1",
+    "prettier": "^3.1.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.10.1",

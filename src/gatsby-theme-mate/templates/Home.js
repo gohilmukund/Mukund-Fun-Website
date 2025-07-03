@@ -15,17 +15,17 @@ import WorkExperience from '../sections/WorkExperience';
 import Certifications from '../sections/Certifications';
 
 const Home = () => (
-    <Layout>
-        <Header />
-        <Landing />        
-        <About />
-        <Projects />
-        {/* <Writing /> */}
-        <WorkExperience />
-        <Certifications />
-        {/* <Blog />         */}
-        <Footer />
-    </Layout>
+  <Layout>
+    <Header />
+    <Landing />
+    <About />
+    <Projects />
+    {/* <Writing /> */}
+    <WorkExperience />
+    <Certifications />
+    {/* <Blog />         */}
+    <Footer />
+  </Layout>
 );
 
 export default Home;
