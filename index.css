@@ -1,0 +1,1094 @@
+/* Base styles */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #008080; /* Teal background */
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevent scrollbars */
+  color: black;
+}
+
+/* Desktop styles */
+.desktop {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative; /* For absolute positioning of icons and windows */
+  cursor: default; /* Default desktop cursor */
+  padding-top: 10px; /* Add some space at the top */
+  padding-left: 10px;
+}
+
+/* Icon styles */
+.icon {
+  display: inline-flex; /* Use inline-flex for better layout control if needed, or keep block */
+  flex-direction: column;
+  align-items: center;
+  margin: 15px; /* Adjust margin */
+  cursor: pointer;
+  user-select: none; /* Prevent text selection */
+  width: 100px; /* Give icons a fixed width for wrapping */
+  vertical-align: top; /* Align icons nicely when wrapping */
+  text-align: center;
+}
+
+.icon img {
+  width: 48px; /* Icon size */
+  height: 48px;
+  margin-bottom: 8px;
+}
+
+.icon span {
+  color: white;
+  font-size: 0.75rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Add text shadow for better visibility */
+  white-space: normal;      /* Allow text wrapping */
+  word-wrap: break-word;    /* Break long words */
+  max-width: 100%;         /* Allow text to use full icon width */
+  text-align: center;
+}
+
+/* Window styles */
+.window {
+  background-color: #C0C0C0; /* Window background color - Changed to match Win95 better */
+  border-top: 2px solid #FFFFFF;
+  border-left: 2px solid #FFFFFF;
+  border-right: 2px solid #000000;
+  border-bottom: 2px solid #000000;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4); /* More subtle shadow */
+  position: absolute; /* Absolute positioning within the desktop */
+  top: 50px;
+  left: 100px;
+  width: 320px; /* Default width */
+  height: 240px; /* Default height */
+  display: none; /* Initially hidden */
+  flex-direction: column; /* Use flexbox for layout */
+  z-index: 10; /* Ensure windows are above desktop icons */
+  box-sizing: border-box; /* Include border in width/height */
+}
+
+.window.active {
+  display: flex; /* Show the window when active */
+  z-index: 20; /* Bring active window to the front */
+}
+
+.window.resizable {
+  resize: both; /* Enable resizing in both directions */
+  overflow: hidden; /* Hide overflow by default, content area will handle scroll */
+  min-width: 200px;  /* Set minimum width */
+  min-height: 150px; /* Set minimum height */
+}
+
+.window-titlebar {
+  background-color: #000080; /* Title bar color */
+  color: white;
+  padding: 3px 4px; /* Adjusted padding */
+  font-size: 0.8rem;
+  font-weight: bold; /* Bold title */
+  display: flex;
+  justify-content: space-between; /* Space between title and buttons */
+  align-items: center; /* Vertically center title and buttons */
+  cursor: grab; /* Show a grab cursor */
+  height: 22px; /* Consistent height */
+  box-sizing: border-box;
+}
+.window-titlebar:active {
+  cursor: grabbing; /* Show a grabbing cursor */
+}
+
+.window-title {
+  margin-right: auto; /* Push title to the left */
+  margin-left: 2px;
+  white-space: nowrap;      /* Prevent text wrapping */
+  overflow: hidden;        /* Hide overflowing text */
+  text-overflow: ellipsis;  /* Add ellipsis (...) if title is too long */
+  max-width: calc(100% - 60px); /* Adjust max-width based on button size */
+}
+
+.window-controls {
+  display: flex;
+  gap: 3px; /* Space between buttons */
+}
+
+.window-control-button {
+  width: 16px; /* Button size */
+  height: 16px;
+  background-color: #C0C0C0; /* Button background */
+  border-top: 1px solid #FFFFFF;
+  border-left: 1px solid #FFFFFF;
+  border-right: 1px solid #000000;
+  border-bottom: 1px solid #000000;
+  box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.5); /* Inner highlight */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-family: "Times New Roman", serif; /* More classic font for symbols */
+  font-size: 0.8rem; /* Adjust font size as needed */
+  font-weight: bold;
+  line-height: 0;      /* Important for vertical centering of symbols */
+  padding: 0;          /* Reset padding */
+  color: black;
+}
+
+.window-control-button:active {
+  border-top: 1px solid #000000;
+  border-left: 1px solid #000000;
+  border-right: 1px solid #FFFFFF;
+  border-bottom: 1px solid #FFFFFF;
+  box-shadow: none; /* Remove shadow on press */
+}
+
+.window-minimize { /* Uses text symbol */ }
+.window-close { /* Uses text symbol */ }
+
+
+.window-content {
+  padding: 2px; /* Minimal padding inside window */
+  font-size: 0.9rem;
+  flex-grow: 1; /* Allow content to fill remaining space */
+  overflow: auto; /* Add scrollbars ONLY if content overflows */
+  background-color: white; /* Standard content background */
+  border: 1px inset #808080; /* Inset border for content area */
+  margin: 2px; /* Margin around the content area */
+  position: relative; /* Needed for absolute positioned elements inside */
+  display: flex; /* Make content a flex container for easier layout */
+  flex-direction: column; /* Stack children vertically */
+}
+
+/* Specific app content styling */
+.window-content textarea {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  resize: none;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9rem;
+  padding: 5px;
+  box-sizing: border-box;
+}
+.window-content iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+#dosbox-container, #doom-container, #wolf3d-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.jsdos {
+  position: relative;
+  width: 100% !important;
+  height: 100% !important;
+  background-color: black;
+}
+
+.jsdos canvas {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain;
+}
+
+#doom .window-content iframe, #wolf3d .window-content iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+  background-color: black;
+}
+
+/* Gemini Chat Styles */
+.gemini-chat-content { /* This is a .window-content */
+  background-color: white;
+  box-sizing: border-box;
+  padding: 2px;
+}
+
+.gemini-chat-history {
+  flex-grow: 1;
+  overflow-y: auto;
+  border: 1px inset #808080;
+  padding: 5px;
+  margin-bottom: 5px;
+  background-color: white;
+  font-size: 0.8rem;
+}
+
+.gemini-chat-history p {
+  margin: 3px 0;
+  word-wrap: break-word;
+}
+.gemini-chat-history .user-message {
+  font-weight: bold;
+  color: blue;
+}
+.gemini-chat-history .gemini-message {
+  color: green;
+}
+.gemini-chat-history .error-message {
+  color: red;
+  font-style: italic;
+}
+
+
+.gemini-chat-input-area {
+  display: flex;
+  flex-shrink: 0;
+  border-top: 1px solid #808080;
+  padding-top: 5px;
+  background-color: #C0C0C0; /* Match window chrome */
+  padding: 5px; /* Add padding to this area */
+  margin: -2px -2px -2px -2px; /* Counteract parent padding to align with window edge */
+}
+
+.gemini-chat-input {
+  flex-grow: 1;
+  border: 1px solid #000000;
+  padding: 3px;
+  font-size: 0.8rem;
+  margin-right: 5px;
+  background-color: white;
+  box-shadow: inset 1px 1px 1px #808080;
+}
+
+.gemini-chat-send {
+  background-color: #C0C0C0;
+  border-top: 1px solid #FFFFFF;
+  border-left: 1px solid #FFFFFF;
+  border-right: 1px solid #000000;
+  border-bottom: 1px solid #000000;
+  box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.5);
+  padding: 2px 8px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.gemini-chat-send:active {
+  border-top: 1px solid #000000;
+  border-left: 1px solid #000000;
+  border-right: 1px solid #FFFFFF;
+  border-bottom: 1px solid #FFFFFF;
+  box-shadow: none;
+  padding: 3px 7px 1px 9px;
+}
+
+/* Start Menu styles */
+.start-menu {
+  background-color: #C0C0C0;
+  border-top: 2px solid #FFFFFF;
+  border-left: 2px solid #FFFFFF;
+  border-right: 2px solid #000000;
+  border-bottom: 2px solid #000000;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
+  position: absolute;
+  bottom: 36px;
+  left: 0;
+  width: 180px;
+  display: none;
+  flex-direction: column;
+  z-index: 50;
+  padding: 2px;
+}
+
+.start-menu.active {
+  display: flex;
+}
+
+.start-menu-item {
+  padding: 5px 10px 5px 25px;
+  font-size: 0.8rem;
+  color: black;
+  cursor: pointer;
+  white-space: nowrap;
+  position: relative;
+}
+
+.start-menu-item:hover {
+  background-color: #000080;
+  color: white;
+}
+
+/* Taskbar styles */
+#taskbar {
+  background-color: #C0C0C0;
+  border-top: 2px solid #FFFFFF;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  padding: 3px;
+  z-index: 40;
+  box-sizing: border-box;
+}
+
+#start-button {
+  background-color: #C0C0C0;
+  border-top: 2px solid #FFFFFF;
+  border-left: 2px solid #FFFFFF;
+  border-right: 2px solid #000000;
+  border-bottom: 2px solid #000000;
+  padding: 2px 8px;
+  margin-right: 5px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 30px;
+  box-sizing: border-box;
+}
+
+#start-button:active {
+ border-top: 2px solid #000000;
+ border-left: 2px solid #000000;
+ border-right: 2px solid #FFFFFF;
+ border-bottom: 2px solid #FFFFFF;
+ padding: 3px 7px 1px 9px;
+}
+
+#start-button img {
+  width: 20px;
+  height: 20px;
+}
+
+#taskbar-apps {
+  display: flex;
+  flex-grow: 1;
+  height: 100%;
+  align-items: center;
+  overflow: hidden;
+}
+
+.taskbar-app {
+  background-color: #C0C0C0;
+  border-top: 1px solid #FFFFFF;
+  border-left: 1px solid #FFFFFF;
+  border-right: 1px solid #000000;
+  border-bottom: 1px solid #000000;
+  padding: 2px 6px;
+  margin: 0 2px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.5);
+}
+
+.taskbar-app img {
+  width: 16px;
+  height: 16px;
+}
+
+.taskbar-app.active, .taskbar-app:active {
+  border-top: 1px solid #000000;
+  border-left: 1px solid #000000;
+  border-right: 1px solid #FFFFFF;
+  border-bottom: 1px solid #FFFFFF;
+  background-color: #e0e0e0;
+  box-shadow: none;
+  padding: 3px 5px 1px 7px;
+}
+
+#taskbar-clock {
+  height: 28px;
+  padding: 0 10px;
+  margin: 0 3px;
+  border-top: 1px solid #808080;
+  border-left: 1px solid #808080;
+  border-right: 1px solid #FFFFFF;
+  border-bottom: 1px solid #FFFFFF;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Notepad button styling */
+.notepad-menu {
+  display: flex;
+  padding: 3px;
+  background-color: #C0C0C0;
+  border-bottom: 1px solid #808080;
+  height: 30px;
+  flex-shrink: 0; /* Prevent shrinking */
+}
+
+.notepad-story-button {
+  background-color: #C0C0C0;
+  border-top: 1px solid #FFFFFF;
+  border-left: 1px solid #FFFFFF;
+  border-right: 1px solid #000000;
+  border-bottom: 1px solid #000000;
+  box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.5);
+  padding: 2px 8px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  height: 24px;
+}
+
+.notepad-story-button:active {
+  border-top: 1px solid #000000;
+  border-left: 1px solid #000000;
+  border-right: 1px solid #FFFFFF;
+  border-bottom: 1px solid #FFFFFF;
+  box-shadow: none;
+  padding: 3px 7px 1px 9px;
+}
+
+.notepad-textarea {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9rem;
+  padding: 5px;
+  box-sizing: border-box;
+  background-color: white;
+  border: 1px solid #808080;
+  flex-grow: 1;
+  width: 100%;
+  resize: none;
+}
+
+/* Browser styles */
+#chrome .window-content {
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+.browser-toolbar {
+  background-color: #C0C0C0;
+  padding: 5px;
+  border-bottom: 1px solid #808080;
+  display: flex;
+  align-items: center;
+  height: 30px;
+  flex-shrink: 0;
+}
+
+.address-bar-container {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+}
+
+.browser-address-bar {
+  flex-grow: 1;
+  height: 22px;
+  border: 1px inset #808080;
+  background-color: white;
+  padding: 2px 5px;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 0.8rem;
+}
+
+.browser-go-button {
+  background-color: #C0C0C0;
+  border-top: 1px solid #FFFFFF;
+  border-left: 1px solid #FFFFFF;
+  border-right: 1px solid #000000;
+  border-bottom: 1px solid #000000;
+  box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.5);
+  padding: 2px 8px;
+  font-size: 0.8rem;
+  margin-left: 5px;
+  height: 22px;
+  cursor: pointer;
+}
+
+.browser-go-button:active {
+  border-top: 1px solid #000000;
+  border-left: 1px solid #000000;
+  border-right: 1px solid #FFFFFF;
+  border-bottom: 1px solid #FFFFFF;
+  box-shadow: none;
+  padding: 3px 7px 1px 9px;
+}
+
+.browser-viewport {
+  position: relative;
+  flex-grow: 1;
+  background-color: white;
+  overflow: hidden;
+}
+
+.browser-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #C0C0C0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  font-family: 'Times New Roman', Times, serif;
+  z-index: 5;
+  display: none;
+}
+
+/* --- Paint Assistant Styles --- */
+#paint-assistant {
+  position: fixed;
+  bottom: 50px;
+  right: 20px;
+  width: 100px;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  z-index: -1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+#paint-assistant.visible {
+  display: flex;
+  z-index: 1;
+}
+
+.assistant-image {
+  width: 80px;
+  height: auto;
+  display: block;
+}
+
+.assistant-bubble {
+  background-color: #FFFFE1;
+  border: 1px solid black;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-size: 0.75rem;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  color: black;
+  margin-bottom: 8px;
+  position: relative;
+  box-shadow: 2px 2px 3px rgba(0,0,0,0.2);
+  max-width: 200px;
+  word-wrap: break-word;
+  text-align: center;
+}
+
+.assistant-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid #FFFFE1;
+}
+
+.assistant-bubble::before {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid black;
+  z-index: -1;
+}
+
+/* --- Simple Paint App Styles --- */
+#paint .window-content {
+    padding: 0;
+    margin: 0;
+    background-color: #c0c0c0;
+    border: none;
+}
+
+.paint-toolbar {
+  background-color: #C0C0C0;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid #808080;
+  height: 30px;
+  flex-shrink: 0;
+}
+
+.paint-colors, .paint-brush-sizes {
+  display: flex;
+  gap: 3px;
+  border: 1px inset #808080;
+  padding: 2px;
+}
+
+.paint-color-swatch {
+  width: 20px;
+  height: 20px;
+  border: 1px solid black;
+  cursor: pointer;
+  font-size: 0.7rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  border-top: 1px solid #FFFFFF;
+  border-left: 1px solid #FFFFFF;
+  border-right: 1px solid #000000;
+  border-bottom: 1px solid #000000;
+  box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.5);
+}
+
+.paint-color-swatch.active {
+  border-top: 1px solid #000000;
+  border-left: 1px solid #000000;
+  border-right: 1px solid #FFFFFF;
+  border-bottom: 1px solid #FFFFFF;
+  box-shadow: none;
+}
+
+.paint-size-button, .paint-clear-button {
+  background-color: #C0C0C0;
+  border-top: 1px solid #FFFFFF;
+  border-left: 1px solid #FFFFFF;
+  border-right: 1px solid #000000;
+  border-bottom: 1px solid #000000;
+  box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.5);
+  padding: 2px 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  min-width: 25px;
+  text-align: center;
+}
+
+.paint-size-button.active,
+.paint-size-button:active,
+.paint-clear-button:active {
+  border-top: 1px solid #000000;
+  border-left: 1px solid #000000;
+  border-right: 1px solid #FFFFFF;
+  border-bottom: 1px solid #FFFFFF;
+  box-shadow: none;
+  padding: 3px 5px 1px 7px;
+}
+
+#paint-canvas {
+  border-top: 1px solid #808080;
+  flex-grow: 1;
+  background-color: white;
+  cursor: crosshair;
+  display: block;
+}
+
+/* --- Minesweeper Styles --- */
+#minesweeper .window-content {
+    padding: 0;
+    margin: 0;
+    background-color: #c0c0c0;
+    border: none;
+}
+
+.minesweeper-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  background-color: #C0C0C0;
+  border-bottom: 2px solid #808080;
+  border-right: 2px solid #808080;
+  border-top: 2px solid #FFFFFF;
+  border-left: 2px solid #FFFFFF;
+  margin: 5px;
+  flex-shrink: 0;
+}
+
+.minesweeper-info {
+  background-color: black;
+  color: red;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  font-size: 1.2rem;
+  padding: 2px 5px;
+  border: 1px inset #808080;
+  min-width: 60px;
+  text-align: center;
+}
+
+.minesweeper-reset-button {
+  width: 30px;
+  height: 30px;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #C0C0C0;
+  border-top: 2px solid #FFFFFF;
+  border-left: 2px solid #FFFFFF;
+  border-right: 2px solid #000000;
+  border-bottom: 2px solid #000000;
+  cursor: pointer;
+}
+
+.minesweeper-reset-button:active {
+  border-top: 2px solid #000000;
+  border-left: 2px solid #000000;
+  border-right: 2px solid #FFFFFF;
+  border-bottom: 2px solid #FFFFFF;
+}
+
+.minesweeper-grid-container {
+  flex-grow: 1;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px inset #808080;
+  margin: 0 5px 5px 5px;
+  overflow: auto;
+  background-color: #C0C0C0;
+}
+
+.minesweeper-grid {
+  display: grid;
+  border: 1px solid #808080;
+}
+
+.minesweeper-cell {
+  width: 20px;
+  height: 20px;
+  background-color: #C0C0C0;
+  border-top: 2px solid #FFFFFF;
+  border-left: 2px solid #FFFFFF;
+  border-right: 2px solid #808080;
+  border-bottom: 2px solid #808080;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+}
+
+.minesweeper-cell.revealed {
+  background-color: #BDBDBD;
+  border: 1px solid #808080;
+  cursor: default;
+}
+
+.minesweeper-cell.mine { }
+.minesweeper-cell.exploded {
+  background-color: red;
+}
+
+.minesweeper-cell[data-number="1"] { color: blue; }
+.minesweeper-cell[data-number="2"] { color: green; }
+.minesweeper-cell[data-number="3"] { color: red; }
+.minesweeper-cell[data-number="4"] { color: #000080; }
+.minesweeper-cell[data-number="5"] { color: #800000; }
+.minesweeper-cell[data-number="6"] { color: #008080; }
+.minesweeper-cell[data-number="7"] { color: black; }
+.minesweeper-cell[data-number="8"] { color: gray; }
+
+.minesweeper-hint-area {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px 5px 8px;
+  background-color: #C0C0C0;
+  flex-shrink: 0;
+}
+
+.minesweeper-hint-button {
+  background-color: #C0C0C0;
+  border-top: 1px solid #FFFFFF;
+  border-left: 1px solid #FFFFFF;
+  border-right: 1px solid #000000;
+  border-bottom: 1px solid #000000;
+  box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.5);
+  padding: 2px 8px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  height: 24px;
+}
+
+.minesweeper-hint-button:active {
+  border-top: 1px solid #000000;
+  border-left: 1px solid #000000;
+  border-right: 1px solid #FFFFFF;
+  border-bottom: 1px solid #FFFFFF;
+  box-shadow: none;
+  padding: 3px 7px 1px 9px;
+}
+
+.minesweeper-commentary {
+  font-size: 0.75rem;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  color: #000080;
+  text-align: right;
+  flex-grow: 1;
+  margin-left: 10px;
+  height: auto;
+  min-height: 24px;
+  line-height: 1.3;
+  word-wrap: break-word;
+}
+
+/* --- Icons Inside Windows --- */
+.window-icon {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80px;
+  padding: 10px;
+  margin: 5px;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  vertical-align: top;
+}
+
+.window-icon:hover {
+  background-color: #000080;
+  color: white;
+}
+
+.window-icon:hover span {
+  background-color: #000080;
+  color: white;
+}
+
+.window-icon img {
+  width: 32px;
+  height: 32px;
+  margin-bottom: 5px;
+}
+
+.window-icon span {
+  font-size: 0.7rem;
+  color: black;
+  max-height: 2.4em;
+  overflow: hidden;
+  line-height: 1.2em;
+}
+
+/* --- Image Viewer Styles --- */
+#imageViewer .window-content {
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #808080;
+    border: none;
+    margin: 0;
+}
+
+#imageViewer img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+
+/* --- Media Player (GemPlayer) Styles --- */
+#mediaPlayer .window-content {
+    padding: 0;
+    margin: 0;
+    background-color: #c0c0c0;
+    border: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.media-player-url-bar {
+  display: flex;
+  padding: 5px;
+  background-color: #C0C0C0;
+  border-bottom: 1px solid #808080;
+  flex-shrink: 0;
+}
+
+.media-player-input {
+  flex-grow: 1;
+  height: 22px;
+  border: 1px inset #808080;
+  background-color: white;
+  padding: 2px 5px;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 0.8rem;
+  margin-right: 5px;
+}
+
+.media-player-load-button {
+  background-color: #C0C0C0;
+  border-top: 1px solid #FFFFFF;
+  border-left: 1px solid #FFFFFF;
+  border-right: 1px solid #000000;
+  border-bottom: 1px solid #000000;
+  box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.5);
+  padding: 2px 8px;
+  font-size: 0.8rem;
+  height: 22px;
+  cursor: pointer;
+}
+
+.media-player-load-button:active {
+  border-top: 1px solid #000000;
+  border-left: 1px solid #000000;
+  border-right: 1px solid #FFFFFF;
+  border-bottom: 1px solid #FFFFFF;
+  box-shadow: none;
+  padding: 3px 7px 1px 9px;
+}
+
+.media-player-video-container {
+  flex-grow: 1;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  margin: 2px;
+  border: 2px inset #808080;
+}
+
+.media-player-status-message {
+  padding:20px;
+  text-align:center;
+  color:#ccc; /* Light gray for dark background */
+  font-size: 0.9rem;
+}
+
+
+#youtube-player-mediaPlayer {
+    width: 100%;
+    height: 100%;
+}
+
+#youtube-player-mediaPlayer iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.media-player-controls-panel {
+  display: flex;
+  justify-content: space-between; /* Space out button group, progress, volume */
+  align-items: center;
+  padding: 4px 8px;
+  background-color: #C0C0C0;
+  border-top: 1px solid #FFFFFF; /* Raised effect for panel */
+  flex-shrink: 0;
+  height: 40px; /* Give controls panel a bit more height */
+}
+
+.media-player-buttons-group {
+    display: flex;
+    align-items: center;
+}
+
+.media-player-control-button {
+  background-color: #C0C0C0;
+  border-top: 2px solid #FFFFFF;
+  border-left: 2px solid #FFFFFF;
+  border-right: 2px solid #000000;
+  border-bottom: 2px solid #000000;
+  font-family: "Segoe UI Symbol", "Symbola", system-ui; /* Better font for symbols if available */
+  font-size: 0.9rem; /* Adjusted size for symbols */
+  color: black;
+  width: 30px;
+  height: 26px;
+  margin: 0 2px; /* Tighter spacing */
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  line-height: 1; /* Ensure symbols are centered */
+}
+
+.media-player-control-button:active {
+  border-top: 2px solid #000000;
+  border-left: 2px solid #000000;
+  border-right: 2px solid #FFFFFF;
+  border-bottom: 2px solid #FFFFFF;
+  padding: 1px 0 0 1px; /* Slight shift for pressed effect */
+}
+
+.media-player-control-button:disabled {
+    color: #808080; /* Gray out disabled button text/symbols */
+    cursor: default;
+    opacity: 0.7;
+}
+
+.media-player-progress-bar-container-placeholder {
+    flex-grow: 1;
+    height: 12px;
+    border: 1px inset #808080;
+    background-color: #A0A0A0; /* Darker gray for track */
+    margin: 0 10px;
+    padding: 1px;
+}
+.media-player-progress-bar-placeholder {
+    width: 30%; /* Just a visual placeholder */
+    height: 100%;
+    background-color: #000080; /* WMP progress color */
+    border-right: 1px solid #0000CL;
+}
+
+.media-player-volume-placeholder {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+}
+.media-player-volume-placeholder span { /* Speaker icon */
+    margin-right: 4px;
+}
+.media-player-volume-slider-placeholder {
+    width: 60px;
+    height: 8px;
+    background-color: #A0A0A0;
+    border: 1px inset #808080;
+}
+
+
+#myComputer .window-content,
+#notepad .window-content,
+#doom .window-content,
+#gemini .window-content,
+#imageViewer .window-content {
+    flex-direction: column;
+}
+
+#doom-content {
+    display: flex;
+    flex-grow: 1;
+    background-color: black;
+}
+
+#paint .window-content,
+#minesweeper .window-content,
+#mediaPlayer .window-content,
+#chrome .window-content,
+#doom-content,
+#imageViewer .window-content {
+    padding: 0;
+    margin: 0;
+    border: none;
+}
