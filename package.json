@@ -1,60 +1,24 @@
 {
-  "name": "mukundportfolio",
-  "version": "2.0.2",
-  "description": "An accessible and fast portfolio of Mukund Gohil made using Gatsby and Contentful",
-  "license": "MIT",
+  "name": "mukund-95",
   "private": true,
-  "eslintConfig": {
-    "extends": "react-app"
-  },
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "build": "gatsby build",
-    "start": "gatsby develop",
-    "clean": "gatsby clean",
-    "serve": "gatsby serve -p 5000",
-    "setup": "node ./bin/setup.js"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gohilmukund/Mukund-Fun-Website.git"
-  },
-  "keywords": [
-    "gatsby",
-    "starter",
-    "contentful",
-    "PWA",
-    "portfolio"
-  ],
-  "author": "Mukund Gohil",
-  "bugs": {
-    "url": "https://github.com/gohilmukund/Mukund-Fun-Website/issues"
-  },
-  "homepage": "https://github.com/gohilmukund/Mukund-Fun-Website#readme",
   "dependencies": {
-    "@reach/dialog": "^0.18.0",
-    "babel-plugin-styled-components": "^2.0.7",
-    "gatsby": "^4.14.0",
-    "gatsby-image": "^3.11.0",
-    "gatsby-plugin-google-analytics": "^4.25.0",
-    "gatsby-plugin-google-tagmanager": "^4.24.0",
-    "gatsby-plugin-image": "^2.0.0",
-    "gatsby-plugin-manifest": "^4.25.0",
-    "gatsby-plugin-offline": "^5.24.0",
-    "gatsby-plugin-styled-components": "^5.25.0",
-    "gatsby-source-filesystem": "^4.25.0",
-    "gatsby-theme-mate": "^2.1.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-icons": "^4.8.0",
-    "react-parallax-tilt": "^1.7.130",
-    "react-scripts": "^5.0.1",
-    "styled-components": "^5.3.3"
+    "@google/genai": "0.7.0",
+    "@tailwindcss/browser": "^4.1.3",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
-    "chalk": "^5.2.0",
-    "contentful-import": "^8.5.45",
-    "env-cmd": "^10.1.0",
-    "inquirer": "^9.1.4",
-    "process": "^0.11.10"
+    "@types/node": "^22.14.0",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "typescript": "~5.7.2",
+    "vite": "^6.2.0"
   }
 }
