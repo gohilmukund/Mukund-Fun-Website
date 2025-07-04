@@ -276,6 +276,7 @@ body {
 }
 
 /* Start Menu styles */
+
 .start-menu {
   background-color: #C0C0C0;
   border-top: 2px solid #FFFFFF;
@@ -286,25 +287,80 @@ body {
   position: absolute;
   bottom: 36px;
   left: 0;
-  width: 180px;
+  width: 260px;
+  min-height: 220px;
   display: none;
-  flex-direction: column;
+  flex-direction: row;
   z-index: 50;
-  padding: 2px;
+  padding: 0;
+  font-family: 'MS Sans Serif', Arial, sans-serif;
 }
 
 .start-menu.active {
   display: flex;
 }
 
+.start-menu-banner {
+  width: 24px;
+  background: linear-gradient(to bottom, #00007b 0%, #00007b 60%, #0000ff 80%, #00007b 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 10px;
+  border-right: 2px solid #000000;
+  box-sizing: border-box;
+}
+.start-menu-banner-logo {
+  width: 32px;
+  height: 32px;
+  margin-bottom: 8px;
+}
+.start-menu-banner-text {
+  color: white;
+  font-size: 1.0rem;
+  font-family: 'Arial Black', 'MS Sans Serif', sans-serif;
+  writing-mode: sideways-lr;
+  text-orientation: mixed;
+  letter-spacing: 0.02px;
+  font-weight: 500;
+  text-shadow: 1px 1px 2px #000;
+}
+.start-menu-items {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 6px 0 6px 0;
+}
+
+
 .start-menu-item {
-  padding: 5px 10px 5px 25px;
-  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  padding: 4px 12px 4px 8px;
+  font-size: 0.92rem;
   color: black;
   cursor: pointer;
   white-space: nowrap;
   position: relative;
+  background: none;
+  margin-bottom: 2px;
+  border-radius: 0;
+  box-sizing: border-box;
+  transition: background 0.1s;
+  min-height: 28px;
 }
+.start-menu-item-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  margin-left: 2px;
+}
+.start-menu-item-label {
+  flex: 1;
+  font-family: 'MS Sans Serif', Arial, sans-serif;
+}
+
 
 .start-menu-item:hover {
   background-color: #000080;
@@ -327,6 +383,7 @@ body {
   box-sizing: border-box;
 }
 
+
 #start-button {
   background-color: #C0C0C0;
   border-top: 2px solid #FFFFFF;
@@ -345,12 +402,22 @@ body {
   box-sizing: border-box;
 }
 
+#start-button.active,
+#start-button[aria-pressed="true"] {
+  border-top: 2px solid #000000;
+  border-left: 2px solid #000000;
+  border-right: 2px solid #FFFFFF;
+  border-bottom: 2px solid #FFFFFF;
+  background-color: #C0C0C0;
+  padding: 3px 7px 1px 9px;
+}
+
 #start-button:active {
- border-top: 2px solid #000000;
- border-left: 2px solid #000000;
- border-right: 2px solid #FFFFFF;
- border-bottom: 2px solid #FFFFFF;
- padding: 3px 7px 1px 9px;
+  border-top: 2px solid #000000;
+  border-left: 2px solid #000000;
+  border-right: 2px solid #FFFFFF;
+  border-bottom: 2px solid #FFFFFF;
+  padding: 3px 7px 1px 9px;
 }
 
 #start-button img {
