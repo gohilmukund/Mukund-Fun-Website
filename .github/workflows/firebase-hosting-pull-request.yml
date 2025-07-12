@@ -20,4 +20,5 @@ jobs:
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_MUKUND_95 }}
+          expires: 30d
           projectId: mukund-95
