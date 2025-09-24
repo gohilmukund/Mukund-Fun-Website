@@ -15,8 +15,8 @@ body {
   overflow: hidden;
   position: relative; /* For absolute positioning of icons and windows */
   cursor: default; /* Default desktop cursor */
-  padding-top: 10px; /* Add some space at the top */
-  padding-left: 10px;
+  padding-bottom: 10px; /* Add some space at the top */
+  /* padding-left: 10px; */
 }
 
 /* Icon styles */
@@ -25,7 +25,7 @@ body {
   flex-direction: column;
   align-items: center;
   margin: 15px; /* Adjust margin */
-  cursor: pointer;
+  cursor: default;
   user-select: none; /* Prevent text selection */
   width: 100px; /* Give icons a fixed width for wrapping */
   vertical-align: top; /* Align icons nicely when wrapping */
@@ -48,6 +48,13 @@ body {
   text-align: center;
 }
 
+.icon:hover {
+  background-color: #0741e131; /* Dark blue highlight */
+  color: white;
+  border-radius: 4px; /* Slightly rounded corners */
+  border: 1px dashed #222230; /* Dark blue border */
+}
+
 /* Window styles */
 .window {
   background-color: #C0C0C0; /* Window background color - Changed to match Win95 better */
@@ -59,8 +66,8 @@ body {
   position: absolute; /* Absolute positioning within the desktop */
   top: 50px;
   left: 100px;
-  width: 320px; /* Default width */
-  height: 240px; /* Default height */
+  width: 640px; /* Default width */
+  height: 400px; /* Default height */
   display: none; /* Initially hidden */
   flex-direction: column; /* Use flexbox for layout */
   z-index: 10; /* Ensure windows are above desktop icons */

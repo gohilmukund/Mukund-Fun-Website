@@ -20,16 +20,16 @@ const desktopStyle: React.CSSProperties = {
     backgroundImage: 'url(assets/Wallpaper.png)',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
-    backgroundSize: 'contain',
+    backgroundSize: 'cover',
     position: 'relative',
     overflow: 'hidden',
 };
 
 const Desktop: React.FC<DesktopProps> = ({ apps, openWindows, onIconDoubleClick, onWindowClose, onWindowMinimize }) => (
     <div style={desktopStyle}>
-        <div className="desktop-icons" style={{ position: 'relative', zIndex: 1 }}>
+        <div className="desktop-icons" style={{ position: 'relative', zIndex: 1, gridGap: 16, padding: 16, display: 'grid', gridTemplateColumns: '80px 80px', justifyContent: 'start', alignContent: 'start' }}>
             {apps.map(app => (
-                <DesktopIcon key={app.id} app={app} onDoubleClick={() => onIconDoubleClick(app.id)} />
+                <DesktopIcon key={app.id} app={app}  onDoubleClick={() => onIconDoubleClick(app.id)} />
             ))}
         </div>
         {openWindows.length > 0 && (

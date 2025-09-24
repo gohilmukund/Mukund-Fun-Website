@@ -29,7 +29,7 @@ const WindowContent: React.FC<WindowContentProps> = ({ app }) => {
       content = <Notepad />;
       break;
     case 'paint':
-      content = <Paint />;
+      content = <Paint  />;
       break;
     case 'doom':
       content = <Doom />;
