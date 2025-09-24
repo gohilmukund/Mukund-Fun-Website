@@ -37,7 +37,7 @@ const Desktop: React.FC<DesktopProps> = ({ apps, openWindows, onIconDoubleClick,
                 {openWindows.map(appId => {
                     const app = apps.find(a => a.id === appId);
                     if (!app) return null;
-                    return <DraggableWindow key={app.id} app={app} onClose={() => onWindowClose(app.id)} onMinimize={() => onWindowMinimize(app.id)} />;
+                    return <DraggableWindow key={app.id}  app={app} onClose={() => onWindowClose(app.id)} onMinimize={() => onWindowMinimize(app.id)} />;
                 })}
             </div>
         )}

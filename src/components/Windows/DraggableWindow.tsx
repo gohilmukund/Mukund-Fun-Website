@@ -62,7 +62,7 @@ const DraggableWindow: React.FC<DraggableWindowProps> = ({ app, onClose, onMinim
       style={{ left: position.x, top: position.y, position: 'absolute' }}
     >
       <div onMouseDown={onMouseDown} style={{ cursor: 'grab' }}>
-        <WindowTitlebar title={app.title} onClose={onClose} onMinimize={onMinimize} />
+        <WindowTitlebar iconUrl={app.icon} title={app.title} onClose={onClose} onMinimize={onMinimize} />
       </div>
       <WindowContent app={app} />
     </div>
