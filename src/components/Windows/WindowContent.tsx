@@ -44,7 +44,7 @@ const WindowContent: React.FC<WindowContentProps> = ({ app }) => {
       content = <MediaPlayer />;
       break;
     case 'pdfViewer':
-      content = <PdfViewer file="public/assets/mukund.pdf" title={app.title} />;
+      content = <PdfViewer file="assets/mukund.pdf" title={app.title} />;
       break;
     default:
       content = <div>App: {app.title}</div>;
