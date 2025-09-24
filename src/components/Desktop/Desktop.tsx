@@ -33,8 +33,6 @@ const Desktop: React.FC<DesktopProps> = ({ apps, openWindows, onIconDoubleClick,
     const [userName, setUserName] = useState<string>('');
     const [chatState, setChatState] = useState<'greeting' | 'asking-name' | 'chatting'>('greeting');
     const [geminiChat, setGeminiChat] = useState<any>(null);
-    const [isDialogOpen, setIsDialogOpen] = useState(false);
-    const [dialogMessage, setDialogMessage] = useState('');
     const [activeClippy, setActiveClippy] = useState<ClippyType | null>(null);
 
     const initGemini = async () => {
@@ -82,30 +80,19 @@ const Desktop: React.FC<DesktopProps> = ({ apps, openWindows, onIconDoubleClick,
         setChatState('asking-name');
     };
 
-    const handleDialogSubmit = (value: string) => {
-        setIsDialogOpen(false);
-        if (activeClippy) {
-            handleUserResponse(activeClippy, value);
-        }
-    };
-
-    const showDialog = () => {
-        if (chatState !== 'greeting') {
-            setDialogMessage(chatState === 'asking-name' ? 'What\'s your name?' : 'How can I help you?');
-            setIsDialogOpen(true);
-        }
-    };
-
     useEffect(() => {
         const handleKeyPress = (event: KeyboardEvent) => {
-            if (event.key === 'Enter') {
-                showDialog();
+            if (event.key === 'Enter' && activeClippy) {
+                activeClippy.ask(
+                    chatState === 'asking-name' ? 'What\'s your name?' : 'How can I help you?',
+                    (response) => handleUserResponse(activeClippy, response)
+                );
             }
         };
 
         window.addEventListener('keypress', handleKeyPress);
         return () => window.removeEventListener('keypress', handleKeyPress);
-    }, [chatState]);
+    }, [chatState, activeClippy]);
 
     const handleClippyInitialLoad = (clippy: ClippyType) => {
         setActiveClippy(clippy);
@@ -114,17 +101,28 @@ const Desktop: React.FC<DesktopProps> = ({ apps, openWindows, onIconDoubleClick,
 
     return (
         <div style={desktopStyle}>
-            <DraggableClippy onLoad={handleClippyInitialLoad} />
-            <CustomDialog 
-                isOpen={isDialogOpen}
-                message={dialogMessage}
-                onSubmit={handleDialogSubmit}
+            <DraggableClippy 
+                onLoad={(clippy) => {
+                    setActiveClippy(clippy);
+                    handleClippyLoad(clippy);
+                }} 
             />
             <div className="desktop-icons" style={{ position: 'relative', zIndex: 1, gridGap: 16, padding: 16, display: 'grid', gridTemplateColumns: '80px 80px', justifyContent: 'start', alignContent: 'start' }}>
                 {apps.map(app => (
-                    <DesktopIcon key={app.id} app={app}  onDoubleClick={() => onIconDoubleClick(app.id)} />
+                    <DesktopIcon key={app.id} app={app} onDoubleClick={() => onIconDoubleClick(app.id)} />
                 ))}
             </div>
+            {openWindows.length > 0 && (
+                <div className="windows">
+                    {openWindows.map(appId => {
+                        const app = apps.find(a => a.id === appId);
+                        if (!app) return null;
+                        return <DraggableWindow key={app.id} app={app} onClose={() => onWindowClose(app.id)} onMinimize={() => onWindowMinimize(app.id)} />;
+                    })}
+                </div>
+            )}
+        </div>
+    );
             {openWindows.length > 0 && (
                 <div className="windows" >
                     {openWindows.map(appId => {
@@ -134,8 +132,6 @@ const Desktop: React.FC<DesktopProps> = ({ apps, openWindows, onIconDoubleClick,
                     })}
                 </div>
             )}
-        </div>
-    );
 };
 
 export default Desktop;

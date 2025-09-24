@@ -65,7 +65,7 @@ interface Props {
   ref: React.MutableRefObject<Clippy | null | undefined>;
 }
 
-interface Clippy {
+export interface Clippy {
   animate: () => void;
   animations: () => string[];
   gestureAt: (x: number, y: number) => void;
@@ -73,9 +73,8 @@ interface Clippy {
   moveTo: (x: number, y: number) => void;
   show: () => void;
   play: (action: Animation) => void;
-  speak: (message: string) => void;
+  speak: (message: string, callback?: () => void) => void;
+  ask: (message: string, callback: (response: string) => void) => void;
   stop: () => void;
   stopCurrent: () => void;
 }
-
-export function Clippy(props: React.PropsWithRef<Props>): React.ReactElement;

@@ -1,26 +1,24 @@
 import React, { useEffect, useRef } from "react";
-import { load } from "./service";
+import { load, unload } from "./service";
 import type { Clippy as ClippyType } from "./clippy.d";
 
-export const Clippy = React.forwardRef<ClippyType, { name?: string; onLoad?: () => void }>(
+export const Clippy = React.forwardRef<ClippyType, { name?: string; onLoad?: (agent: ClippyType) => void }>(
   ({ name = "Clippy", onLoad = () => null }, ref) => {
     const clippyRef = useRef<ClippyType | null>(null);
 
-    if (!ref) {
-      throw Error("Clippy component requires a ref");
-    }
-
     useEffect(() => {
+      let mounted = true;
       const initClippy = async () => {
         try {
           const agent = await load(name);
+          if (!mounted) return;
           clippyRef.current = agent;
           if (typeof ref === 'function') {
-            ref(agent);
+            (ref as any)(agent);
           } else if (ref) {
-            ref.current = agent;
+            (ref as any).current = agent;
           }
-          onLoad();
+          if (onLoad) onLoad(agent);
         } catch (err) {
           console.error(err);
         }
@@ -29,16 +27,24 @@ export const Clippy = React.forwardRef<ClippyType, { name?: string; onLoad?: () 
       initClippy();
 
       return () => {
+        mounted = false;
         if (clippyRef.current) {
-          if (typeof ref === 'function') {
-            ref(null);
-          } else {
-            ref.current = null;
+          try {
+            clippyRef.current.hide();
+          } catch (e) {
+            // ignore
           }
-          clippyRef.current.hide();
+          // tell service we no longer need it
+          try { unload(name); } catch (e) {}
+          clippyRef.current = null;
+        }
+        if (typeof ref === 'function') {
+          (ref as any)(null);
+        } else if (ref) {
+          (ref as any).current = null;
         }
       };
-    }, []);
+    }, [name]);
 
     return <></>;
   }
