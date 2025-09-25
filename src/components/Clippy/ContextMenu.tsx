@@ -78,7 +78,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({ x, y, onClose, menuItems }) =
                 >
                     {item.label}
                     {item.submenu && activeSubmenu === index && (
-                        <div style={{ ...menuStyle, position: 'absolute', left: '100%', top: 0 }}>
+                        <div style={{ ...menuStyle, position: 'absolute', left:  '100%', top: 0 }}>
                             {item.submenu.map((subItem, subIndex) => (
                                 <div
                                     key={subIndex}
