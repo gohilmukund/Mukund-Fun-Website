@@ -125,9 +125,7 @@ const Paint: React.FC = () => {
             style={{ background: c.value, color: c.value === 'white' ? '#333' : '#fff', border: color === c.value ? '2px solid #000' : '1px solid #888', width: 28, height: 28 }}
             onClick={() => setColor(c.value)}
             data-color={c.value}
-          >
-            {c.name}
-          </button>
+          />
         ))}
         {SIZES.map(s => (
           <button
@@ -137,7 +135,7 @@ const Paint: React.FC = () => {
             onClick={() => setSize(s)}
             data-size={s}
           >
-            {s}px
+            <div style={{ width: s, height: s, background: '#333', borderRadius: '50%', margin: 'auto' }} />
           </button>
         ))}
         <button className="paint-clear-button" onClick={clearCanvas} style={{ marginLeft: 8 }}>Clear</button>

@@ -19,18 +19,25 @@ const PdfViewer: React.FC<{ file: string; title?: string }> = ({ file, title }) 
         <span style={{ flex: 1 }}>{title || 'PDF Viewer'}</span>
         <button onClick={handleDownload} style={{ marginRight: 4 }}>⬇ Download</button>
       </div>
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: '#fff', overflow: 'auto' }}>
-        <iframe
-          ref={iframeRef}
-          src={file}
-          title={title || 'PDF'}
-          style={{ flex: 1, width: '100%', height: '100%', border: 'none', minHeight: 400 }}
-        />
-        <div style={{ padding: 16 }}>
-          <p>PDF preview is not supported in this browser. <a href={file} target="_blank" rel="noopener noreferrer">Download PDF</a></p>
-        </div>
-      </div>
+      {
+        /* PDF.js does not work in iframes in some browsers, so we provide a fallback link below the iframe */
+        typeof navigator !== 'undefined' && /MSIE |Trident\/|Edge\//.test(navigator.userAgent) ? (
+          <div style={{ padding: 16, textAlign: 'center', background: '#fff', flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+            <p>Your browser does not support PDF preview. Please <a href={file} target="_blank" rel="noopener noreferrer">download the PDF</a> to view it.</p>
+            <button onClick={handleDownload} style={{ marginTop: 8 }}>⬇ Download PDF</button>
+          </div>
+        ) : 
+          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: '#fff', overflow: 'auto' }}>
+            <iframe
+              ref={iframeRef}
+              src={file}
+              title={title || 'PDF'}
+              style={{ flex: 1, width: '100%', height: '100%', border: 'none', minHeight: 400 }}
+            />
+          </div>
+      }
     </div>
+
   );
 };
 

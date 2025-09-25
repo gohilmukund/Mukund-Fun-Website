@@ -42,7 +42,7 @@ const Chrome: React.FC = () => {
         }
       }
       if (!htmlContent.includes('<html')) {
-        htmlContent = `<!DOCTYPE html><html><head><title>${domain}</title><style>body{font-family:\"Comic Sans MS\";background:lime;color:blue;}marquee{background:yellow;color:red;}img{max-width:80%; display:block; margin:10px auto; border: 3px ridge gray;}</style></head><body><marquee>Welcome to ${domain}!</marquee><h1>${domain}</h1><div>${htmlContent}</div></body></html>`;
+        htmlContent = `<!DOCTYPE html><html><head><title>${domain}</title><style>body{font-family:"Comic Sans MS";background:lime;color:blue;}marquee{background:yellow;color:red;}img{max-width:80%; display:block; margin:10px auto; border: 3px ridge gray;}</style></head><body><marquee>Welcome to ${domain}!</marquee><h1>${domain}</h1><div>${htmlContent}</div></body></html>`;
       }
       if (images.length > 0) {
         if (!htmlContent.includes('<img src="data:')) {
