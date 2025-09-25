@@ -1,10 +1,23 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { initGemini, getGeminiResponse } from '../../services/gemini';
 
-const Gemini: React.FC = () => {
-  const [messages, setMessages] = useState<{ sender: 'user' | 'gemini' | 'system'; text: string }[]>([
-    { sender: 'system', text: 'Initializing AI...' },
-  ]);
+interface GeminiProps {
+  initialQuestion?: string;
+  initialResponse?: string;
+}
+
+const Gemini: React.FC<GeminiProps> = ({ initialQuestion, initialResponse }) => {
+  type Message = { sender: 'user' | 'gemini' | 'system'; text: string };
+  const [messages, setMessages] = useState<Message[]>(() => {
+    const initialMessages: Message[] = [{ sender: 'system', text: 'Initializing AI...' }];
+    if (initialQuestion && initialResponse) {
+      initialMessages.push(
+        { sender: 'user', text: initialQuestion },
+        { sender: 'gemini', text: initialResponse }
+      );
+    }
+    return initialMessages;
+  });
 
   useEffect(() => {
     initGemini().then(success => {

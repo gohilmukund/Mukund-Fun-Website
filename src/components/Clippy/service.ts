@@ -46,8 +46,31 @@ const extendAgent = (agent: any): Clippy => {
                 fullResponse += chunk || '';
               }
               
+              // Add a button to open Gemini window
+              const geminiButton = document.createElement('button');
+              geminiButton.textContent = 'Open in Gemini';
+              geminiButton.className = 'clippy-gemini-button';
+              geminiButton.style.cssText = `
+                margin-top: 8px;
+                padding: 4px 8px;
+                background: #4285f4;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+              `;
+              geminiButton.onclick = () => {
+                if (agent.openGeminiWindow) {
+                  agent.openGeminiWindow(question, fullResponse);
+                }
+              };
+              
               // Speak the response
               agent.speak(fullResponse, () => {
+                const content = document.querySelector('.clippy-balloon .clippy-content');
+                if (content) {
+                  content.appendChild(geminiButton);
+                }
                 callback(fullResponse);
               });
             } catch (error) {
