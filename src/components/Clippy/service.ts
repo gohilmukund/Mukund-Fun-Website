@@ -8,9 +8,14 @@ const agentCache: Record<string, Clippy | undefined> = {};
 const inflight: Record<string, Promise<Clippy> | undefined> = {};
 const refCount: Record<string, number | undefined> = {};
 
+import { initGemini, getGeminiResponse } from '../../services/gemini';
+
+// Initialize Gemini when the service loads
+initGemini().catch(console.error);
+
 const extendAgent = (agent: any): Clippy => {
   // add convenience ask method that renders an input in the balloon
-  (agent as any).ask = (message: string, callback: (response: string) => void) => {
+  (agent as any).ask = async (message: string, callback: (response: string) => void) => {
     const balloon = document.querySelector('.clippy-balloon');
     if (balloon) {
       const content = balloon.querySelector('.clippy-content');
@@ -27,13 +32,29 @@ const extendAgent = (agent: any): Clippy => {
         input.style.padding = '4px';
         input.style.border = '1px solid #000';
 
-        const handleSubmit = () => {
-          const value = input.value;
-          input.remove();
-          callback(value);
-        };
-
-        input.addEventListener('keydown', (e) => {
+          const handleSubmit = async () => {
+            const question = input.value;
+            input.remove();
+            
+            // Show typing indicator
+            agent.speak("Let me think about that...");
+            
+            try {
+              // Use Gemini to get a smart response
+              let fullResponse = "";
+              for await (const chunk of getGeminiResponse(question)) {
+                fullResponse += chunk || '';
+              }
+              
+              // Speak the response
+              agent.speak(fullResponse, () => {
+                callback(fullResponse);
+              });
+            } catch (error) {
+              console.error('Gemini error:', error);
+              agent.speak("Sorry, I couldn't process that request. Please try again.");
+            }
+          };        input.addEventListener('keydown', (e) => {
           if ((e as KeyboardEvent).key === 'Enter') {
             handleSubmit();
           }
