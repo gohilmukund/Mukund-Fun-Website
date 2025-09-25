@@ -1,11 +1,10 @@
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AppMeta } from '../../data/apps';
 import DesktopIcon from './DesktopIcon';
 import DraggableWindow from '../Windows/DraggableWindow';
 import DraggableClippy from '../Clippy/DraggableClippy';
 import type { Clippy as ClippyType } from '../Clippy/clippy.d';
-import CustomDialog from '../Apps/CustomDialog';
 import '@google/genai';
 import '../Clippy/clippy.css';
 
@@ -30,7 +29,7 @@ const desktopStyle: React.CSSProperties = {
 };
 
 const Desktop: React.FC<DesktopProps> = ({ apps, openWindows, onIconDoubleClick, onWindowClose, onWindowMinimize }) => {
-    const [userName, setUserName] = useState<string>('');
+    const [_, setUserName] = useState<string>('');
     const [chatState, setChatState] = useState<'greeting' | 'asking-name' | 'chatting'>('greeting');
     const [geminiChat, setGeminiChat] = useState<any>(null);
     const [activeClippy, setActiveClippy] = useState<ClippyType | null>(null);
@@ -94,10 +93,6 @@ const Desktop: React.FC<DesktopProps> = ({ apps, openWindows, onIconDoubleClick,
         return () => window.removeEventListener('keypress', handleKeyPress);
     }, [chatState, activeClippy]);
 
-    const handleClippyInitialLoad = (clippy: ClippyType) => {
-        setActiveClippy(clippy);
-        handleClippyLoad(clippy);
-    };
 
     return (
         <div style={desktopStyle}>
@@ -123,15 +118,6 @@ const Desktop: React.FC<DesktopProps> = ({ apps, openWindows, onIconDoubleClick,
             )}
         </div>
     );
-            {openWindows.length > 0 && (
-                <div className="windows" >
-                    {openWindows.map(appId => {
-                        const app = apps.find(a => a.id === appId);
-                        if (!app) return null;
-                        return <DraggableWindow key={app.id}  app={app} onClose={() => onWindowClose(app.id)} onMinimize={() => onWindowMinimize(app.id)} />;
-                    })}
-                </div>
-            )}
 };
 
 export default Desktop;

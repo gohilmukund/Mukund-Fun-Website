@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import WindowTitlebar from '../Windows/WindowTitlebar';
-import DraggableWindow from '../Windows/DraggableWindow';
 
 interface DialogProps {
     isOpen: boolean;
