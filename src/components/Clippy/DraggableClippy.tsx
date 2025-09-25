@@ -24,26 +24,12 @@ interface DraggableClippyProps {
 const DraggableClippy: React.FC<DraggableClippyProps> = ({ onLoad }) => {
     const clippyRef = useRef<ClippyType | null>(null);
     const [position, setPosition] = useState({ x: window.innerWidth - 150, y: window.innerHeight - 150 });
-    const [isDragging, setIsDragging] = useState(false);
-    const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+    // dragging is handled by document pointer handlers for better responsiveness
     const [contextMenu, setContextMenu] = useState<{ x: number; y: number } | null>(null);
 
-    const handleMouseDown = (e: React.MouseEvent) => {
-        if (e.button === 2) { // Right click
-            e.preventDefault();
-            setContextMenu({ x: e.clientX, y: e.clientY });
-            return;
-        }
-        
-        e.preventDefault();
-        if (clippyRef.current) {
-            setIsDragging(true);
-            setDragOffset({
-                x: e.clientX - position.x,
-                y: e.clientY - position.y
-            });
-        }
-    };
+    // We handle dragging via global pointer events attached to document so they work
+    // when clippyjs injects DOM outside React tree. This also uses requestAnimationFrame
+    // to avoid frequent React state updates for smooth dragging.
 
     
 
@@ -90,57 +76,113 @@ const DraggableClippy: React.FC<DraggableClippyProps> = ({ onLoad }) => {
         }
     };
 
-    // Add mousemove event to window for smoother dragging
+    // Use pointer events on document to start dragging when pointerdown happens on clippy DOM
     useEffect(() => {
-        const handleGlobalMouseMove = (e: MouseEvent) => {
-            if (isDragging && clippyRef.current) {
-                const newX = Math.max(0, Math.min(window.innerWidth - 100, e.clientX - dragOffset.x));
-                const newY = Math.max(0, Math.min(window.innerHeight - 100, e.clientY - dragOffset.y));
-                
-                setPosition({ x: newX, y: newY });
-                if (clippyRef.current.moveTo) {
-                    clippyRef.current.moveTo(newX, newY);
+        let raf: number | null = null;
+        let dragging = false;
+        let offsetX = 0;
+        let offsetY = 0;
+        const lastPos = { x: position.x, y: position.y };
+
+        const onPointerDown = (e: PointerEvent) => {
+            const path = (e.composedPath && e.composedPath()) || (e as any).path || [];
+            const clickedOnClippy = path.some((node: any) => {
+                try {
+                    if (!node || !node.classList) return false;
+                    return node.classList.contains('clippy') || node.classList.contains('clippy-balloon') || node.classList.contains('clippy-container');
+                } catch (err) {
+                    return false;
                 }
-            }
+            });
+            if (!clickedOnClippy) return;
+            // right click should open context menu; let contextmenu handler manage it
+            if ((e as any).button === 2) return;
+
+            e.preventDefault();
+            dragging = true;
+            const startX = e.clientX;
+            const startY = e.clientY;
+            offsetX = startX - lastPos.x;
+            offsetY = startY - lastPos.y;
+
+            const onPointerMove = (ev: PointerEvent) => {
+                if (!dragging) return;
+                const nx = Math.max(0, Math.min(window.innerWidth - 100, ev.clientX - offsetX));
+                const ny = Math.max(0, Math.min(window.innerHeight - 100, ev.clientY - offsetY));
+                lastPos.x = nx;
+                lastPos.y = ny;
+
+                if (raf == null) {
+                    raf = requestAnimationFrame(() => {
+                        raf = null;
+                        if (clippyRef.current && clippyRef.current.moveTo) {
+                            clippyRef.current.moveTo(lastPos.x, lastPos.y);
+                        }
+                    });
+                }
+            };
+
+            const onPointerUp = () => {
+                dragging = false;
+                if (raf) { cancelAnimationFrame(raf); raf = null; }
+                setPosition({ x: lastPos.x, y: lastPos.y });
+                window.removeEventListener('pointermove', onPointerMove, true);
+                window.removeEventListener('pointerup', onPointerUp, true);
+            };
+
+            window.addEventListener('pointermove', onPointerMove, true);
+            window.addEventListener('pointerup', onPointerUp, true);
         };
 
-        const handleGlobalMouseUp = () => {
-            setIsDragging(false);
-        };
-
-        if (isDragging) {
-            window.addEventListener('mousemove', handleGlobalMouseMove);
-            window.addEventListener('mouseup', handleGlobalMouseUp);
-        }
-
+        document.addEventListener('pointerdown', onPointerDown, true);
         return () => {
-            window.removeEventListener('mousemove', handleGlobalMouseMove);
-            window.removeEventListener('mouseup', handleGlobalMouseUp);
+            document.removeEventListener('pointerdown', onPointerDown, true);
+            if (raf) { cancelAnimationFrame(raf); }
         };
-    }, [isDragging, dragOffset]);
+    }, [position.x, position.y]);
 
     // Intercept native contextmenu events on the document but only when target is clippy elements
     useEffect(() => {
-        const onDocumentContext = (e: MouseEvent) => {
-            const target = e.target as HTMLElement | null;
-            if (!target) return;
-            if (target.closest && (
-                target.closest('.clippy') || target.closest('.clippy-container') || target.closest('.clippy-balloon')
-            )) {
-                e.preventDefault();
-                e.stopPropagation();
-                const me = e as MouseEvent;
-                setContextMenu({ x: me.clientX, y: me.clientY });
-            }
-        };
+            const onDocumentContext = (e: MouseEvent) => {
+                // use composedPath to handle shadow DOM and nested nodes from clippyjs
+                const path = (e.composedPath && e.composedPath()) || (e as any).path || [];
+                const matched = path.some((node: any) => {
+                    try {
+                        if (!node || !node.classList) return false;
+                        return node.classList.contains('clippy') || node.classList.contains('clippy-balloon') || node.classList.contains('clippy-container');
+                    } catch (err) {
+                        return false;
+                    }
+                });
+                if (matched) {
+                    e.preventDefault();
+                    // stop other listeners (including browser default) as early as possible
+                    e.stopImmediatePropagation && (e.stopImmediatePropagation as any)();
+                    e.stopPropagation && e.stopPropagation();
+                    const me = e as MouseEvent;
+                    setContextMenu({ x: me.clientX, y: me.clientY });
+                }
+            };
 
         const onDocumentMouseDown = (e: MouseEvent) => {
-            const target = e.target as HTMLElement | null;
-            if (!target) return;
-            // if user clicks outside clippy, close menu
-            if (!target.closest || !target.closest('.clippy-container')) {
-                setContextMenu(null);
-            }
+            const path = (e.composedPath && e.composedPath()) || (e as any).path || [];
+            const clickedOnClippy = path.some((node: any) => {
+                try {
+                    if (!node || !node.classList) return false;
+                    return node.classList.contains('clippy') || node.classList.contains('clippy-container') || node.classList.contains('clippy-balloon');
+                } catch (err) {
+                    return false;
+                }
+            });
+            const clickedOnMenu = path.some((node: any) => {
+                try {
+                    if (!node || !node.classList) return false;
+                    return node.classList.contains('clippy-context-menu');
+                } catch (err) {
+                    return false;
+                }
+            });
+            if (!clickedOnClippy && !clickedOnMenu) setContextMenu(null);
         };
 
         // use capture so we can intercept before browser shows menu
@@ -175,11 +217,10 @@ const DraggableClippy: React.FC<DraggableClippyProps> = ({ onLoad }) => {
                     left: `${position.x}px`,
                     top: `${position.y}px`,
                     zIndex: 999999,
-                    cursor: isDragging ? 'grabbing' : 'grab',
+                    cursor: 'grab',
                     userSelect: 'none',
                     pointerEvents: 'all'
                 }}
-                onMouseDown={handleMouseDown}
                 onContextMenu={(e) => {
                     e.preventDefault();
                     e.stopPropagation();

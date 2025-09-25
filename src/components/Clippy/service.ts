@@ -63,15 +63,20 @@ export const load = (name = ""): Promise<Clippy> => {
     return Promise.resolve(agentCache[key]);
   }
   if (inflight[key]) {
-    // ensure refcount increments once the inflight promise resolves
-    inflight[key] = inflight[key].then((agent) => {
-      refCount[key] = (refCount[key] || 0) + 1;
-      return agent;
-    });
-    return inflight[key];
+    // another caller is already loading this agent — increment refcount and return the inflight promise
+    refCount[key] = (refCount[key] || 0) + 1;
+    return inflight[key] as Promise<Clippy>;
   }
 
   const p = new Promise<Clippy>((resolve, reject) => {
+    // remove any leftover clippy DOM nodes before creating a new agent to avoid duplicates
+    try {
+      const existing = document.querySelectorAll('.clippy, .clippy-balloon');
+      existing.forEach(n => n.remove());
+    } catch (e) {
+      // ignore DOM errors
+    }
+
     clippy.load(
       name,
       (agent: any) => {

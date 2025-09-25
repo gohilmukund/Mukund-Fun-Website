@@ -1,5 +1,4 @@
-import React from 'react';
-import { Agents } from './clippy.d';
+import React, { useState, useRef, useLayoutEffect } from 'react';
 
 interface MenuItem {
     label: string;
@@ -31,7 +30,9 @@ const itemStyle: React.CSSProperties = {
 };
 
 const ContextMenu: React.FC<ContextMenuProps> = ({ x, y, onClose, menuItems }) => {
-    const [activeSubmenu, setActiveSubmenu] = React.useState<number | null>(null);
+    const [activeSubmenu, setActiveSubmenu] = useState<number | null>(null);
+    const menuRef = useRef<HTMLDivElement | null>(null);
+    const [pos, setPos] = useState<{ left: number; top: number } | null>(null);
 
     const handleItemClick = (item: MenuItem) => {
         if (item.action) {
@@ -40,8 +41,34 @@ const ContextMenu: React.FC<ContextMenuProps> = ({ x, y, onClose, menuItems }) =
         onClose();
     };
 
+    // Measure and clamp/flip so the menu stays inside the viewport
+    useLayoutEffect(() => {
+        const el = menuRef.current;
+        // start with requested coordinates
+        let left = x;
+        let top = y;
+        if (el) {
+            const rect = el.getBoundingClientRect();
+            const margin = 8; // small gap from edges
+            // horizontal
+            if (left + rect.width + margin > window.innerWidth) {
+                left = Math.max(margin, window.innerWidth - rect.width - margin);
+            }
+            // vertical
+            if (top + rect.height + margin > window.innerHeight) {
+                top = Math.max(margin, window.innerHeight - rect.height - margin);
+            }
+        }
+        setPos({ left, top });
+    }, [x, y, menuItems]);
+
     return (
-        <div style={{ ...menuStyle, left: x, top: y }} onMouseLeave={onClose}>
+        <div
+            ref={menuRef}
+            className="clippy-context-menu"
+            style={{ ...menuStyle, left: pos ? pos.left : -9999, top: pos ? pos.top : -9999, visibility: pos ? 'visible' : 'hidden' }}
+            onMouseLeave={onClose}
+        >
             {menuItems.map((item, index) => (
                 <div
                     key={index}
