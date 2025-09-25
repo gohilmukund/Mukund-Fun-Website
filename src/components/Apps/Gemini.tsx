@@ -1,10 +1,33 @@
-import React, { useRef, useState } from 'react';
-import '@google/genai';
+import React, { useRef, useState, useEffect } from 'react';
+import { initGemini, getGeminiResponse } from '../../services/gemini';
 
-const Gemini: React.FC = () => {
-  const [messages, setMessages] = useState<{ sender: 'user' | 'gemini' | 'system'; text: string }[]>([
-    { sender: 'system', text: 'Initializing AI...' },
-  ]);
+interface GeminiProps {
+  initialQuestion?: string;
+  initialResponse?: string;
+}
+
+const Gemini: React.FC<GeminiProps> = ({ initialQuestion, initialResponse }) => {
+  type Message = { sender: 'user' | 'gemini' | 'system'; text: string };
+  const [messages, setMessages] = useState<Message[]>(() => {
+    const initialMessages: Message[] = [{ sender: 'system', text: 'Initializing AI...' }];
+    if (initialQuestion && initialResponse) {
+      initialMessages.push(
+        { sender: 'user', text: initialQuestion },
+        { sender: 'gemini', text: initialResponse }
+      );
+    }
+    return initialMessages;
+  });
+
+  useEffect(() => {
+    initGemini().then(success => {
+      if (success) {
+        setMessages(msgs => [...msgs, { sender: 'system', text: 'AI ready! Ask me anything about Mukund\'s experience or background.' }]);
+      } else {
+        setMessages(msgs => [...msgs, { sender: 'system', text: 'Failed to initialize AI. Please try refreshing the page.' }]);
+      }
+    });
+  }, []);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -15,22 +38,9 @@ const Gemini: React.FC = () => {
     setMessages(msgs => [...msgs, { sender: 'user', text: input }]);
     setInput('');
     try {
-      // @ts-ignore
-      const module = await import('@google/genai');
-      // @ts-ignore
-      const GoogleGenAI = module.GoogleGenAI;
-      // @ts-ignore
-      const apiKey = process.env.GEMINI_API_KEY || '';
-      if (!apiKey) throw new Error('Gemini API key missing.');
-      // @ts-ignore
-      const gemini = new GoogleGenAI({ apiKey });
-      // @ts-ignore
-      const chat = gemini.chats.create({ model: 'gemini-2.5-flash', history: [] });
-      // @ts-ignore
-      const result = await chat.sendMessageStream({ message: input });
       let fullResponse = '';
-      for await (const chunk of result) {
-        fullResponse += chunk.text || '';
+      for await (const chunk of getGeminiResponse(input)) {
+        fullResponse += chunk || '';
         setMessages(msgs => {
           const last = msgs[msgs.length - 1];
           if (last && last.sender === 'gemini') {

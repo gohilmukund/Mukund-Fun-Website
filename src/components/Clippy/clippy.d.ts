@@ -77,4 +77,5 @@ export interface Clippy {
   ask: (message: string, callback: (response: string) => void) => void;
   stop: () => void;
   stopCurrent: () => void;
+  openGeminiWindow?: (question: string, response: string) => void;
 }

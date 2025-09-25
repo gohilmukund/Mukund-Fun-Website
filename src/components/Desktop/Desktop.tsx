@@ -75,15 +75,15 @@ const Desktop: React.FC<DesktopProps> = ({ apps, openWindows, onIconDoubleClick,
     const handleClippyLoad = (clippy: ClippyType) => {
         initGemini();
         clippy.play('Greeting');
-        clippy.speak('Hi there! I\'m Clippy. What\'s your name?');
-        setChatState('asking-name');
+        clippy.speak('Hi there! I\'m Clippy.');
+        // setChatState('asking-name');
     };
 
     useEffect(() => {
         const handleKeyPress = (event: KeyboardEvent) => {
             if (event.key === 'Enter' && activeClippy) {
                 activeClippy.ask(
-                    chatState === 'asking-name' ? 'What\'s your name?' : 'How can I help you?',
+                    'How can I help you?',
                     (response) => handleUserResponse(activeClippy, response)
                 );
             }

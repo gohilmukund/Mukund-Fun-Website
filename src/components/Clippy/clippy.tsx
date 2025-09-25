@@ -2,8 +2,12 @@ import React, { useEffect, useRef } from "react";
 import { load, unload } from "./service";
 import type { Clippy as ClippyType } from "./clippy.d";
 
-export const Clippy = React.forwardRef<ClippyType, { name?: string; onLoad?: (agent: ClippyType) => void }>(
-  ({ name = "Clippy", onLoad = () => null }, ref) => {
+export const Clippy = React.forwardRef<ClippyType, { 
+  name?: string; 
+  onLoad?: (agent: ClippyType) => void;
+  openGeminiWindow?: (question: string, response: string) => void;
+}>(
+  ({ name = "Clippy", onLoad = () => null, openGeminiWindow }, ref) => {
     const clippyRef = useRef<ClippyType | null>(null);
 
     useEffect(() => {
@@ -12,6 +16,10 @@ export const Clippy = React.forwardRef<ClippyType, { name?: string; onLoad?: (ag
         try {
           const agent = await load(name);
           if (!mounted) return;
+          // Add the openGeminiWindow function to the agent
+          if (openGeminiWindow) {
+            agent.openGeminiWindow = openGeminiWindow;
+          }
           clippyRef.current = agent;
           if (typeof ref === 'function') {
             (ref as any)(agent);

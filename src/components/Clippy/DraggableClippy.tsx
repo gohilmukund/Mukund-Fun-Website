@@ -19,13 +19,20 @@ const AVAILABLE_AGENTS = [
 
 interface DraggableClippyProps {
     onLoad?: (clippy: ClippyType) => void;
+    openWindow?: (appId: string, props?: any) => void;
 }
 
-const DraggableClippy: React.FC<DraggableClippyProps> = ({ onLoad }) => {
+const DraggableClippy: React.FC<DraggableClippyProps> = ({ onLoad, openWindow }) => {
     const clippyRef = useRef<ClippyType | null>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
     const [position, setPosition] = useState({ x: window.innerWidth - 150, y: window.innerHeight - 150 });
-    // dragging is handled by document pointer handlers for better responsiveness
     const [contextMenu, setContextMenu] = useState<{ x: number; y: number } | null>(null);
+    const positionRef = useRef(position); // For sync access in RAF
+    
+    // Update ref when state changes
+    useEffect(() => {
+        positionRef.current = position;
+    }, [position]);
 
     // We handle dragging via global pointer events attached to document so they work
     // when clippyjs injects DOM outside React tree. This also uses requestAnimationFrame
@@ -76,70 +83,94 @@ const DraggableClippy: React.FC<DraggableClippyProps> = ({ onLoad }) => {
         }
     };
 
-    // Use pointer events on document to start dragging when pointerdown happens on clippy DOM
+    // Direct DOM manipulation for ultra-responsive dragging
     useEffect(() => {
-        let raf: number | null = null;
-        let dragging = false;
-        let offsetX = 0;
-        let offsetY = 0;
-        const lastPos = { x: position.x, y: position.y };
+        const container = containerRef.current;
+        if (!container) return;
 
-        const onPointerDown = (e: PointerEvent) => {
-            const path = (e.composedPath && e.composedPath()) || (e as any).path || [];
-            const clickedOnClippy = path.some((node: any) => {
-                try {
-                    if (!node || !node.classList) return false;
-                    return node.classList.contains('clippy') || node.classList.contains('clippy-balloon') || node.classList.contains('clippy-container');
-                } catch (err) {
-                    return false;
-                }
-            });
-            if (!clickedOnClippy) return;
-            // right click should open context menu; let contextmenu handler manage it
-            if ((e as any).button === 2) return;
+        let isDragging = false;
+        let initialX = 0;
+        let initialY = 0;
+        let currentX = position.x;
+        let currentY = position.y;
+        let rafId: number | null = null;
+
+        function directMove(x: number, y: number) {
+            container.style.transform = `translate3d(${x}px,${y}px,0)`;
+        }
+
+        function onPointerDown(e: PointerEvent) {
+            console.log('Clippy pointer down', e);
+            if (e.button !== 0 || !e.isPrimary) return; // left click only
+            if (!(e.target as HTMLElement).closest('.clippy-container')) return;
 
             e.preventDefault();
-            dragging = true;
-            const startX = e.clientX;
-            const startY = e.clientY;
-            offsetX = startX - lastPos.x;
-            offsetY = startY - lastPos.y;
+            e.stopPropagation();
 
-            const onPointerMove = (ev: PointerEvent) => {
-                if (!dragging) return;
-                const nx = Math.max(0, Math.min(window.innerWidth - 100, ev.clientX - offsetX));
-                const ny = Math.max(0, Math.min(window.innerHeight - 100, ev.clientY - offsetY));
-                lastPos.x = nx;
-                lastPos.y = ny;
+            isDragging = true;
+            initialX = e.clientX - position.x;
+            initialY = e.clientY - position.y;
+            currentX = position.x;
+            currentY = position.y;
 
-                if (raf == null) {
-                    raf = requestAnimationFrame(() => {
-                        raf = null;
-                        if (clippyRef.current && clippyRef.current.moveTo) {
-                            clippyRef.current.moveTo(lastPos.x, lastPos.y);
-                        }
-                    });
-                }
-            };
+            container.style.cursor = 'grabbing';
+            container.style.transition = 'none';
+            container.setPointerCapture(e.pointerId);
+        }
 
-            const onPointerUp = () => {
-                dragging = false;
-                if (raf) { cancelAnimationFrame(raf); raf = null; }
-                setPosition({ x: lastPos.x, y: lastPos.y });
-                window.removeEventListener('pointermove', onPointerMove, true);
-                window.removeEventListener('pointerup', onPointerUp, true);
-            };
+        function onPointerMove(e: PointerEvent) {
+            if (!isDragging || !e.isPrimary) return;
 
-            window.addEventListener('pointermove', onPointerMove, true);
-            window.addEventListener('pointerup', onPointerUp, true);
-        };
+            const x = Math.max(0, Math.min(window.innerWidth - 100, e.clientX - initialX));
+            const y = Math.max(0, Math.min(window.innerHeight - 100, e.clientY - initialY));
 
-        document.addEventListener('pointerdown', onPointerDown, true);
+            // Immediate visual feedback
+            directMove(x, y);
+
+            // Throttle React state & clippy updates
+            if (!rafId) {
+                rafId = requestAnimationFrame(() => {
+                    rafId = null;
+                    currentX = x;
+                    currentY = y;
+                    if (clippyRef.current?.moveTo) {
+                        clippyRef.current.moveTo(x, y);
+                    }
+                    setPosition({ x, y });
+                });
+            }
+        }
+
+        function onPointerUp(e: PointerEvent) {
+            if (!isDragging || !e.isPrimary) return;
+
+            isDragging = false;
+            container.style.cursor = 'grab';
+            container.releasePointerCapture(e.pointerId);
+
+            if (rafId) {
+                cancelAnimationFrame(rafId);
+                rafId = null;
+            }
+
+            // Final position update
+            setPosition({ x: currentX, y: currentY });
+        }
+
+        // Attach events directly to container for better performance
+        container.addEventListener('pointerdown', onPointerDown);
+        container.addEventListener('pointermove', onPointerMove);
+        container.addEventListener('pointerup', onPointerUp);
+        container.addEventListener('pointercancel', onPointerUp);
+
         return () => {
-            document.removeEventListener('pointerdown', onPointerDown, true);
-            if (raf) { cancelAnimationFrame(raf); }
+            container.removeEventListener('pointerdown', onPointerDown);
+            container.removeEventListener('pointermove', onPointerMove);
+            container.removeEventListener('pointerup', onPointerUp);
+            container.removeEventListener('pointercancel', onPointerUp);
+            if (rafId) cancelAnimationFrame(rafId);
         };
-    }, [position.x, position.y]);
+    }, [position]);
 
     // Intercept native contextmenu events on the document but only when target is clippy elements
     useEffect(() => {
@@ -212,14 +243,16 @@ const DraggableClippy: React.FC<DraggableClippyProps> = ({ onLoad }) => {
     return (
         <>
             <div
+                ref={containerRef}
                 style={{
                     position: 'fixed',
-                    left: `${position.x}px`,
-                    top: `${position.y}px`,
+                    top: 0,
+                    left: 0,
+                    width: '100vw',
+                    height: '100vh',
                     zIndex: 999999,
-                    cursor: 'grab',
-                    userSelect: 'none',
-                    pointerEvents: 'all'
+                    pointerEvents: 'none', // let clippyjs handle pointer events
+                    // border: '2px solid red', // DEBUG: can remove if not needed
                 }}
                 onContextMenu={(e) => {
                     e.preventDefault();
@@ -228,8 +261,15 @@ const DraggableClippy: React.FC<DraggableClippyProps> = ({ onLoad }) => {
                 }}
             >
                 <div className="clippy-container">
-                    {/* Render a single Clippy instance managed by the Clippy component; do not change its "name" prop dynamically to avoid double-loading DOM nodes. */}
-                    <Clippy ref={clippyRef} onLoad={handleLoad} />
+                    <Clippy 
+                        ref={clippyRef} 
+                        onLoad={handleLoad} 
+                        openGeminiWindow={(question, response) => {
+                            if (openWindow) {
+                                openWindow('Gemini', { initialQuestion: question, initialResponse: response });
+                            }
+                        }}
+                    />
                 </div>
             </div>
             {contextMenu && (
