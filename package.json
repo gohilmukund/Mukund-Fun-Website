@@ -11,7 +11,7 @@
   "dependencies": {
     "@google/genai": "1.20.0",
     "@google/generative-ai": "^0.24.1",
-    "@tailwindcss/browser": "^4.1.13",
+    "@tailwindcss/browser": "^4.1.14",
     "clippyjs": "^0.0.3",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
