@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@google/genai": "1.20.0",
+    "@google/genai": "1.24.0",
     "@google/generative-ai": "^0.24.1",
     "@tailwindcss/browser": "^4.1.13",
     "clippyjs": "^0.0.3",
