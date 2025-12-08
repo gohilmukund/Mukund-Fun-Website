@@ -14,12 +14,12 @@
     "@tailwindcss/browser": "^4.1.13",
     "clippyjs": "^0.0.3",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react-dom": "^19.2.1"
   },
   "devDependencies": {
     "@types/node": "^24.5.2",
     "@types/react": "^19.1.9",
-    "@types/react-dom": "^19.1.7",
+    "@types/react-dom": "^19.2.3",
     "typescript": "~5.9.2",
     "vite": "^7.1.7"
   }
