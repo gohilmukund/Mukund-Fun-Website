@@ -14,8 +14,14 @@ interface DraggableWindowProps {
 
 const DraggableWindow: React.FC<DraggableWindowProps> = ({ app, onClose, onMinimize, isActive, onFocus }) => {
   const windowRef = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState({ x: 100 + (Math.random() * 50), y: 50 + (Math.random() * 50) });
-  const [size, setSize] = useState({ width: 640, height: 400 });
+  const [position, setPosition] = useState({ 
+    x: 100 + (Math.random() * 50), 
+    y: 50 + (Math.random() * 50) 
+  });
+  const [size, setSize] = useState({ 
+    width: app.width || 640, 
+    height: app.height || 400 
+  });
   const [dragging, setDragging] = useState(false);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [isMaximized, setIsMaximized] = useState(false);

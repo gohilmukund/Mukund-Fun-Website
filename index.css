@@ -505,36 +505,59 @@ body {
   flex-shrink: 0;
 }
 
-/* Notepad button styling */
-.notepad-menu {
+/* Window Menu styles */
+.window-menu {
   display: flex;
-  padding: 3px;
   background-color: #C0C0C0;
   border-bottom: 1px solid #808080;
-  height: 30px;
-  flex-shrink: 0; /* Prevent shrinking */
+  padding: 1px 2px;
+  height: 20px;
+  flex-shrink: 0;
 }
 
-.notepad-story-button {
+.window-menu-item {
+  padding: 0 6px;
+  font-size: 11px;
+  cursor: default;
+  display: flex;
+  align-items: center;
+}
+
+.window-menu-item:hover {
+  background-color: #000080;
+  color: white;
+}
+
+.dropdown-item:hover {
+  background-color: #000080;
+  color: white;
+}
+
+/* Status Bar styles */
+.status-bar {
+  display: flex;
   background-color: #C0C0C0;
-  border-top: 1px solid #FFFFFF;
-  border-left: 1px solid #FFFFFF;
-  border-right: 1px solid #000000;
-  border-bottom: 1px solid #000000;
-  box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.5);
-  padding: 2px 8px;
-  font-size: 0.8rem;
-  cursor: pointer;
-  height: 24px;
+  border-top: 1px solid #808080;
+  height: 20px;
+  padding: 0 2px;
+  flex-shrink: 0;
+  align-items: center;
+  font-size: 11px;
 }
 
-.notepad-story-button:active {
-  border-top: 1px solid #000000;
-  border-left: 1px solid #000000;
-  border-right: 1px solid #FFFFFF;
-  border-bottom: 1px solid #FFFFFF;
-  box-shadow: none;
-  padding: 3px 7px 1px 9px;
+.status-bar-field {
+  padding: 0 4px;
+  border-left: 1px solid #808080;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-grow: 0;
+  min-width: 50px;
+}
+
+.status-bar-field:first-child {
+  border-left: none;
+  flex-grow: 1;
 }
 
 .notepad-textarea {
@@ -703,79 +726,61 @@ body {
     border: none;
 }
 
-.paint-toolbar {
+.paint-sidebar {
+  width: 54px;
+  background-color: #C0C0C0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-content: start; /* Keep tools at the top */
+  padding: 2px;
+  gap: 1px;
+  flex-shrink: 0;
+  border-right: 1px solid #808080;
+}
+
+.paint-tool-button {
+  width: 24px;
+  height: 24px;
+  background-color: #C0C0C0;
+  border-top: 1px solid #fff;
+  border-left: 1px solid #fff;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+  box-shadow: inset 1px 1px 0 #dfdfdf, inset -1px -1px 0 #808080;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: default;
+}
+
+.paint-tool-button.active {
+  background-color: #fff;
+  border-top: 1px solid #000;
+  border-left: 1px solid #000;
+  border-right: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  box-shadow: none;
+}
+
+.paint-palette {
   background-color: #C0C0C0;
   padding: 4px;
   display: flex;
   align-items: center;
   gap: 10px;
-  border-bottom: 1px solid #808080;
-  height: 30px;
+  border-top: 1px solid #808080;
   flex-shrink: 0;
 }
 
-.paint-colors, .paint-brush-sizes {
-  display: flex;
-  gap: 3px;
-  border: 1px inset #808080;
-  padding: 2px;
-}
-
 .paint-color-swatch {
-  width: 20px;
-  height: 20px;
-  border: 1px solid black;
-  cursor: pointer;
-  font-size: 0.7rem;
-  font-weight: bold;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: black;
-  border-top: 1px solid #FFFFFF;
-  border-left: 1px solid #FFFFFF;
-  border-right: 1px solid #000000;
-  border-bottom: 1px solid #000000;
-  box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.5);
-}
-
-.paint-color-swatch.active {
-  border-top: 1px solid #000000;
-  border-left: 1px solid #000000;
-  border-right: 1px solid #FFFFFF;
-  border-bottom: 1px solid #FFFFFF;
-  box-shadow: none;
-}
-
-.paint-size-button, .paint-clear-button {
-  background-color: #C0C0C0;
-  border-top: 1px solid #FFFFFF;
-  border-left: 1px solid #FFFFFF;
-  border-right: 1px solid #000000;
-  border-bottom: 1px solid #000000;
-  box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.5);
-  padding: 2px 6px;
-  font-size: 0.8rem;
-  cursor: pointer;
-  min-width: 25px;
-  text-align: center;
-}
-
-.paint-size-button.active,
-.paint-size-button:active,
-.paint-clear-button:active {
-  border-top: 1px solid #000000;
-  border-left: 1px solid #000000;
-  border-right: 1px solid #FFFFFF;
-  border-bottom: 1px solid #FFFFFF;
-  box-shadow: none;
-  padding: 3px 5px 1px 7px;
+  width: 14px;
+  height: 14px;
+  border: 1px solid #808080;
+  box-shadow: inset 1px 1px 0 #000;
 }
 
 #paint-canvas {
-  border-top: 1px solid #808080;
-  flex-grow: 1;
-  background-color: white;
+  background-color: #fff;
   cursor: crosshair;
   display: block;
 }
@@ -1033,115 +1038,143 @@ body {
   cursor: pointer;
 }
 
-.media-player-load-button:active {
-  border-top: 1px solid #000000;
-  border-left: 1px solid #000000;
-  border-right: 1px solid #FFFFFF;
-  border-bottom: 1px solid #FFFFFF;
-  box-shadow: none;
-  padding: 3px 7px 1px 9px;
+/* --- High Fidelity Windows Media Player Styles --- */
+.wmp-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: #D4D0C8;
+  border-top: 1px solid #fff;
+  border-left: 1px solid #fff;
+  border-right: 1px solid #404040;
+  border-bottom: 1px solid #404040;
+  padding: 2px;
 }
 
-.media-player-video-container {
+.wmp-menu {
+  display: flex;
+  background-color: #D4D0C8;
+  padding: 1px 2px;
+  border-bottom: 1px solid #808080;
+  margin-bottom: 2px;
+}
+
+.wmp-menu-item {
+  padding: 1px 6px;
+  font-size: 11px;
+  cursor: default;
+}
+
+.wmp-menu-item:hover {
+  background-color: #000080;
+  color: #fff;
+}
+
+.wmp-video-area {
   flex-grow: 1;
-  background-color: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  margin: 2px;
+  background-color: #000;
   border: 2px inset #808080;
+  margin: 1px;
+  position: relative;
 }
 
-.media-player-status-message {
-  padding:20px;
-  text-align:center;
-  color:#ccc; /* Light gray for dark background */
-  font-size: 0.9rem;
-}
-
-
-#youtube-player-mediaPlayer {
-    width: 100%;
-    height: 100%;
-}
-
-#youtube-player-mediaPlayer iframe {
-    display: block;
-    width: 100%;
-    height: 100%;
-    border: none;
-}
-
-.media-player-controls-panel {
+.wmp-controls {
+  background-color: #D4D0C8;
+  padding: 4px;
   display: flex;
-  justify-content: space-between; /* Space out button group, progress, volume */
-  align-items: center;
-  padding: 4px 8px;
-  background-color: #C0C0C0;
-  border-top: 1px solid #FFFFFF; /* Raised effect for panel */
-  flex-shrink: 0;
-  height: 40px; /* Give controls panel a bit more height */
+  flex-direction: column;
+  gap: 4px;
 }
 
-.media-player-buttons-group {
-    display: flex;
-    align-items: center;
+.wmp-seek-container {
+  padding: 0 4px;
 }
 
-.media-player-control-button {
+.wmp-seek-track {
+  height: 12px;
   background-color: #C0C0C0;
-  border-top: 2px solid #FFFFFF;
-  border-left: 2px solid #FFFFFF;
-  border-right: 2px solid #000000;
-  border-bottom: 2px solid #000000;
-  font-family: "Segoe UI Symbol", "Symbola", system-ui; /* Better font for symbols if available */
-  font-size: 0.9rem; /* Adjusted size for symbols */
-  color: black;
-  width: 30px;
-  height: 26px;
-  margin: 0 2px; /* Tighter spacing */
+  border: 1px inset #808080;
+  position: relative;
+}
+
+.wmp-seek-thumb {
+  width: 10px;
+  height: 14px;
+  background-color: #D4D0C8;
+  border: 1px outset #fff;
+  position: absolute;
+  top: -2px;
   cursor: pointer;
+}
+
+.wmp-buttons-row {
+  display: flex;
+  align-items: center;
+  padding: 2px 0;
+}
+
+.wmp-btn-group {
+  display: flex;
+  gap: 1px;
+}
+
+.wmp-btn {
+  width: 26px;
+  height: 22px;
+  background-color: #D4D0C8;
+  border: 1px outset #fff;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0;
-  line-height: 1; /* Ensure symbols are centered */
+  font-size: 14px;
+  cursor: default;
 }
 
-.media-player-control-button:active {
-  border-top: 2px solid #000000;
-  border-left: 2px solid #000000;
-  border-right: 2px solid #FFFFFF;
-  border-bottom: 2px solid #FFFFFF;
-  padding: 1px 0 0 1px; /* Slight shift for pressed effect */
+.wmp-btn:active {
+  border: 1px inset #808080;
 }
 
-.media-player-control-button:disabled {
-    color: #808080; /* Gray out disabled button text/symbols */
-    cursor: default;
-    opacity: 0.7;
+.wmp-divider {
+  width: 2px;
+  height: 18px;
+  background-color: #808080;
+  border-right: 1px solid #fff;
+  margin: 0 4px;
 }
 
-.media-player-progress-bar-container-placeholder {
-    flex-grow: 1;
-    height: 12px;
-    border: 1px inset #808080;
-    background-color: #A0A0A0; /* Darker gray for track */
-    margin: 0 10px;
-    padding: 1px;
-}
-.media-player-progress-bar-placeholder {
-    width: 30%; /* Just a visual placeholder */
-    height: 100%;
-    background-color: #000080; /* WMP progress color */
-    border-right: 1px solid #0000CL;
+.wmp-volume-container {
+  display: flex;
+  align-items: center;
+  width: 100px;
 }
 
-.media-player-volume-placeholder {
-    display: flex;
-    align-items: center;
-    font-size: 0.9rem;
+.wmp-volume-track {
+  flex-grow: 1;
+  height: 6px;
+  background-color: #C0C0C0;
+  border: 1px inset #808080;
+  position: relative;
+}
+
+.wmp-volume-thumb {
+  width: 6px;
+  height: 10px;
+  background-color: #D4D0C8;
+  border: 1px outset #fff;
+  position: absolute;
+  top: -3px;
+  left: 70%;
+}
+
+.wmp-status-bar {
+  height: 18px;
+  background-color: #000;
+  color: #fff;
+  font-size: 10px;
+  padding: 0 4px;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid #808080;
 }
 .media-player-volume-placeholder span { /* Speaker icon */
     margin-right: 4px;
