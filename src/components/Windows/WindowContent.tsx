@@ -1,38 +1,34 @@
-
 import React from 'react';
 import { AppMeta } from '../../data/apps';
 import MyComputer from '../Apps/MyComputer';
-import Chrome from '../Apps/Chrome';
+import InternetExplorer from '../Apps/InternetExplorer';
 import Notepad from '../Apps/Notepad';
 import Paint from '../Apps/Paint';
-import Doom from '../Apps/Doom';
 import Gemini from '../Apps/Gemini';
 import Minesweeper from '../Apps/Minesweeper';
 import MediaPlayer from '../Apps/MediaPlayer';
 import PdfViewer from '../Apps/PdfViewer';
+import ControlPanel from '../Apps/ControlPanel';
 
 interface WindowContentProps {
   app: AppMeta;
+  onOpenApp?: (appId: string) => void;
 }
 
-
-const WindowContent: React.FC<WindowContentProps> = ({ app }) => {
+const WindowContent: React.FC<WindowContentProps> = ({ app, onOpenApp }) => {
   let content: React.ReactNode = null;
   switch (app.id) {
     case 'myComputer':
-      content = <MyComputer />;
+      content = <MyComputer onOpenApp={onOpenApp} />;
       break;
     case 'chrome':
-      content = <Chrome />;
+      content = <InternetExplorer />;
       break;
     case 'notepad':
       content = <Notepad />;
       break;
     case 'paint':
-      content = <Paint  />;
-      break;
-    case 'doom':
-      content = <Doom />;
+      content = <Paint />;
       break;
     case 'gemini':
       content = <Gemini />;
@@ -42,6 +38,9 @@ const WindowContent: React.FC<WindowContentProps> = ({ app }) => {
       break;
     case 'mediaPlayer':
       content = <MediaPlayer />;
+      break;
+    case 'control_panel':
+      content = <ControlPanel />;
       break;
     case 'pdfViewer':
       content = <PdfViewer file="assets/mukund.pdf" title={app.title} />;

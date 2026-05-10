@@ -122,6 +122,7 @@ const Desktop: React.FC<DesktopProps> = ({ apps, openWindows, onIconDoubleClick,
                                 onFocus={() => onWindowFocus(appId)}
                                 onClose={() => onWindowClose(app.id)} 
                                 onMinimize={() => onWindowMinimize(app.id)} 
+                                onOpenApp={onIconDoubleClick}
                             />
                         );
                     })}

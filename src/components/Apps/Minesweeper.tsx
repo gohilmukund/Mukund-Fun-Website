@@ -165,7 +165,7 @@ const Minesweeper: React.FC = () => {
 
   return (
     <div className="minesweeper95" style={{ padding: 12, minWidth: 220 }}>
-      <h2 style={{ margin: 0 }}>GemSweeper</h2>
+      <h2 style={{ margin: 0 }}>MineSweeper</h2>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, margin: '8px 0' }}>
         <span className="minesweeper-flag-count">🚩 {MINES - flagsPlaced}</span>
         <span className="minesweeper-timer">⏱️ {timer}</span>

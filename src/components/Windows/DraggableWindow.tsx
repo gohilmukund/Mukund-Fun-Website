@@ -10,9 +10,10 @@ interface DraggableWindowProps {
   onMinimize: () => void;
   isActive?: boolean;
   onFocus?: () => void;
+  onOpenApp?: (appId: string) => void;
 }
 
-const DraggableWindow: React.FC<DraggableWindowProps> = ({ app, onClose, onMinimize, isActive, onFocus }) => {
+const DraggableWindow: React.FC<DraggableWindowProps> = ({ app, onClose, onMinimize, isActive, onFocus, onOpenApp }) => {
   const windowRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ 
     x: 100 + (Math.random() * 50), 
@@ -106,7 +107,7 @@ const DraggableWindow: React.FC<DraggableWindowProps> = ({ app, onClose, onMinim
           isActive={isActive} 
         />
       </div>
-      <WindowContent app={app} />
+      <WindowContent app={app} onOpenApp={onOpenApp} />
     </div>
 );
 };

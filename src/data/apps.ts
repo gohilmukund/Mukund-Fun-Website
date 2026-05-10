@@ -12,7 +12,8 @@ export const apps: AppMeta[] = [
   { id: 'notepad', title: 'Notepad', icon: 'assets/notepad.png', width: 640, height: 480 },
   { id: 'paint', title: 'Paint', icon: 'assets/paint.png', width: 800, height: 600 },
   { id: 'gemini', title: 'Gemini App', icon: 'assets/gemini_retro.png', width: 700, height: 500 },
-  { id: 'minesweeper', title: 'MineSweeper', icon: 'assets/minesweeper.png', width: 220, height: 320 },
+  { id: 'minesweeper', title: 'MineSweeper', icon: 'assets/minesweeper.png', width: 230, height: 360 },
   { id: 'mediaPlayer', title: 'Windows Media Player', icon: 'assets/media_player.png', width: 480, height: 520 },
+  { id: 'control_panel', title: 'Control Panel', icon: 'https://win98icons.alexmeub.com/icons/png/control_panel-4.png', width: 500, height: 350 },
   { id: 'pdfViewer', title: "Mukund's Resume.pdf", icon: 'assets/acrobat.jpg', width: 640, height: 800 },
 ];
