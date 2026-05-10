@@ -14,6 +14,8 @@ interface DesktopProps {
     onIconDoubleClick: (appId: string) => void;
     onWindowClose: (appId: string) => void;
     onWindowMinimize: (appId: string) => void;
+    activeAppId: string | null;
+    onWindowFocus: (appId: string) => void;
 }
 
 
@@ -28,7 +30,7 @@ const desktopStyle: React.CSSProperties = {
     overflow: 'hidden',
 };
 
-const Desktop: React.FC<DesktopProps> = ({ apps, openWindows, onIconDoubleClick, onWindowClose, onWindowMinimize }) => {
+const Desktop: React.FC<DesktopProps> = ({ apps, openWindows, onIconDoubleClick, onWindowClose, onWindowMinimize, activeAppId, onWindowFocus }) => {
     const [_, setUserName] = useState<string>('');
     const [chatState, setChatState] = useState<'greeting' | 'asking-name' | 'chatting'>('greeting');
     const [geminiChat, setGeminiChat] = useState<any>(null);
@@ -109,10 +111,19 @@ const Desktop: React.FC<DesktopProps> = ({ apps, openWindows, onIconDoubleClick,
             </div>
             {openWindows.length > 0 && (
                 <div className="windows">
-                    {openWindows.map(appId => {
+                    {openWindows.map((appId, index) => {
                         const app = apps.find(a => a.id === appId);
                         if (!app) return null;
-                        return <DraggableWindow key={app.id} app={app} onClose={() => onWindowClose(app.id)} onMinimize={() => onWindowMinimize(app.id)} />;
+                        return (
+                            <DraggableWindow 
+                                key={app.id} 
+                                app={app} 
+                                isActive={activeAppId === appId}
+                                onFocus={() => onWindowFocus(appId)}
+                                onClose={() => onWindowClose(app.id)} 
+                                onMinimize={() => onWindowMinimize(app.id)} 
+                            />
+                        );
                     })}
                 </div>
             )}

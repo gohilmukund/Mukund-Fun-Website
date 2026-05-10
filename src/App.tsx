@@ -32,24 +32,29 @@ const App: React.FC = () => {
   const [minimizedWindows, setMinimizedWindows] = useState<string[]>([]);
   // State for start menu visibility
   const [startMenuOpen, setStartMenuOpen] = useState(false);
+  // State for the currently active/focused window
+  const [activeAppId, setActiveAppId] = useState<string | null>(null);
 
   // Open a window by app id
   const openWindow = useCallback((appId: string) => {
     setOpenWindows((prev) => prev.includes(appId) ? prev : [...prev, appId]);
     setMinimizedWindows((prev) => prev.filter(id => id !== appId)); // Restore if minimized
     setStartMenuOpen(false);
+    setActiveAppId(appId); // Set as active
   }, []);
 
   // Close a window by app id
   const closeWindow = useCallback((appId: string) => {
     setOpenWindows((prev) => prev.filter(id => id !== appId));
     setMinimizedWindows((prev) => prev.filter(id => id !== appId));
-  }, []);
+    if (activeAppId === appId) setActiveAppId(null);
+  }, [activeAppId]);
 
   // Minimize a window by app id
   const minimizeWindow = useCallback((appId: string) => {
     setMinimizedWindows((prev) => prev.includes(appId) ? prev : [...prev, appId]);
-  }, []);
+    if (activeAppId === appId) setActiveAppId(null);
+  }, [activeAppId]);
 
   // Toggle start menu
   const toggleStartMenu = useCallback(() => {
@@ -63,6 +68,7 @@ const App: React.FC = () => {
     setOpenWindows([]);
     setMinimizedWindows([]);
     setStartMenuOpen(false);
+    setActiveAppId(null);
   }, []);
 
   const onBIOSComplete = () => {
@@ -79,40 +85,59 @@ const App: React.FC = () => {
     // Optionally use the username
   };
 
-  if (bootState === 'bios') {
-    return <BIOSScreen onComplete={onBIOSComplete} />;
-  }
+  const renderContent = () => {
+    if (bootState === 'bios') {
+      return <BIOSScreen onComplete={onBIOSComplete} />;
+    }
 
-  if (bootState === 'booting') {
-    return <WinBootScreen onComplete={onBootComplete} />;
-  }
+    if (bootState === 'booting') {
+      return <WinBootScreen onComplete={onBootComplete} />;
+    }
 
-  if (bootState === 'login') {
-    return <LoginScreen onLogin={onLoginComplete} />;
-  }
+    if (bootState === 'login') {
+      return <LoginScreen onLogin={onLoginComplete} />;
+    }
+
+    return (
+      <>
+        <Desktop
+          apps={apps}
+          openWindows={openWindows.filter(id => !minimizedWindows.includes(id))}
+          onIconDoubleClick={openWindow}
+          onWindowClose={closeWindow}
+          onWindowMinimize={minimizeWindow}
+          activeAppId={activeAppId}
+          onWindowFocus={setActiveAppId}
+        />
+        <Taskbar
+          onStartClick={toggleStartMenu}
+          openWindows={openWindows}
+          minimizedWindows={minimizedWindows}
+          onTaskbarAppClick={(id) => {
+            if (minimizedWindows.includes(id) || activeAppId !== id) {
+              openWindow(id);
+            } else {
+              minimizeWindow(id);
+            }
+          }}
+          startMenuOpen={startMenuOpen}
+          activeAppId={activeAppId}
+        />
+        <StartMenu
+          open={startMenuOpen}
+          apps={apps}
+          onAppClick={openWindow}
+          onRestart={handleRestart}
+        />
+      </>
+    );
+  };
 
   return (
     <div className="desktop">
-      <Desktop
-        apps={apps}
-        openWindows={openWindows.filter(id => !minimizedWindows.includes(id))}
-        onIconDoubleClick={openWindow}
-        onWindowClose={closeWindow}
-        onWindowMinimize={minimizeWindow}
-      />
-      <Taskbar
-        onStartClick={toggleStartMenu}
-        openWindows={openWindows}
-        minimizedWindows={minimizedWindows}
-        onTaskbarAppClick={openWindow}
-        startMenuOpen={startMenuOpen}
-      />
-      <StartMenu
-        open={startMenuOpen}
-        apps={apps}
-        onAppClick={openWindow}
-        onRestart={handleRestart}
-      />
+      {/* Global CRT Overlay */}
+      <div className="crt-overlay" />
+      {renderContent()}
     </div>
   );
 };

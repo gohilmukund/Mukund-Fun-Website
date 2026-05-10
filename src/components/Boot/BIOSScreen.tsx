@@ -68,14 +68,11 @@ const BIOSScreen: React.FC<BIOSScreenProps> = ({ onComplete }) => {
     }}>
       {/* Energy Star Logo */}
       <div style={{ position: 'absolute', top: '40px', right: '60px', textAlign: 'center' }}>
-        <div style={{ color: '#fff', fontSize: '40px', borderTop: '2px solid #fff', borderLeft: '2px solid #fff', padding: '5px', lineHeight: '0.8' }}>
-          <div style={{ textAlign: 'left', fontSize: '12px' }}>EPA</div>
-          <div style={{ color: '#ffff00', fontStyle: 'italic', fontWeight: 'bold' }}>energy</div>
-          <div style={{ fontSize: '40px', color: '#ffff00', marginTop: '-15px' }}>★</div>
-        </div>
-        <div style={{ backgroundColor: '#00ff00', color: '#000', fontSize: '10px', padding: '2px', fontWeight: 'bold' }}>
-          EPA POLLUTION PREVENTER
-        </div>
+        <img 
+          src="assets/energy_star.png" 
+          alt="Energy Star" 
+          style={{ width: '150px', height: 'auto', imageRendering: 'pixelated' }} 
+        />
       </div>
       
       {lines.map((line, i) => (

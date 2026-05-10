@@ -88,17 +88,22 @@ body {
 }
 
 .window-titlebar {
-  background-color: #000080; /* Title bar color */
+  background-color: #000080; /* Active title bar */
   color: white;
-  padding: 3px 4px; /* Adjusted padding */
-  font-size: 0.8rem;
-  font-weight: bold; /* Bold title */
+  padding: 3px 4px;
+  font-size: 11px;
+  font-weight: bold;
   display: flex;
-  justify-content: space-between; /* Space between title and buttons */
-  align-items: center; /* Vertically center title and buttons */
-  cursor: grab; /* Show a grab cursor */
-  height: 22px; /* Consistent height */
+  justify-content: space-between;
+  align-items: center;
+  cursor: grab;
+  height: 18px;
   box-sizing: border-box;
+}
+
+.window-titlebar.inactive {
+  background-color: #808080; /* Inactive title bar */
+  color: #dfdfdf;
 }
 .window-titlebar:active {
   cursor: grabbing; /* Show a grabbing cursor */
@@ -1172,4 +1177,70 @@ body {
     padding: 0;
     margin: 0;
     border: none;
+}
+
+/* --- Window Focus --- */
+.window.focused .window-titlebar {
+  background-color: #000080;
+  color: white;
+}
+
+.window:not(.focused) .window-titlebar {
+  background-color: #808080;
+  color: #dfdfdf;
+}
+
+/* CRT Scanline Overlay */
+.crt-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%,
+    rgba(0, 0, 0, 0.1) 50%
+  ),
+  linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.02),
+    rgba(0, 255, 0, 0.01),
+    rgba(0, 0, 255, 0.02)
+  );
+  background-size: 100% 3px, 3px 100%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.8;
+}
+
+.crt-overlay::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: radial-gradient(
+    rgba(18, 16, 16, 0) 50%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+  opacity: 1;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+@keyframes flicker {
+  0% { opacity: 0.97; }
+  5% { opacity: 0.95; }
+  10% { opacity: 0.9; }
+  15% { opacity: 0.95; }
+  20% { opacity: 0.98; }
+  25% { opacity: 0.95; }
+  30% { opacity: 0.9; }
+  100% { opacity: 1; }
+}
+
+.crt-overlay {
+  animation: flicker 0.15s infinite;
 }
