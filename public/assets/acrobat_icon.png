@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>302 win95 - JS.ORG</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#FFE70B">
+    <link rel="icon" type="image/png" href="https://js.org/ico/favicon-32.png">
+    <link rel="icon" type="image/svg+xml" href="https://js.org/ico/favicon.svg">
+    <style>
+        html, body { height: 100%; margin: 0; background: #FFE70B; }
+        iframe { width: 100%; height: 100%; border: 0; }
+    </style>
+</head>
+<body>
+    <iframe src="https://js.org/302?win95.js" sandbox="allow-same-origin allow-scripts allow-top-navigation"></iframe>
+</body>
+</html>

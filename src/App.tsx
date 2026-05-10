@@ -3,11 +3,29 @@ import { apps } from './data/apps';
 import StartMenu from './components/Taskbar/StartMenu';
 import Desktop from './components/Desktop/Desktop';
 import Taskbar from './components/Taskbar/Taskbar';
+import { soundService } from './services/soundService';
 
 import './styles/index.css';
 
 
+import BIOSScreen from './components/Boot/BIOSScreen';
+import WinBootScreen from './components/Boot/WinBootScreen';
+import LoginScreen from './components/Boot/LoginScreen';
+
 const App: React.FC = () => {
+  // State for boot sequence: 'bios' | 'booting' | 'login' | 'ready'
+  const [bootState, setBootState] = useState<'bios' | 'booting' | 'login' | 'ready'>(() => {
+    const hasBooted = localStorage.getItem('hasBootedBefore');
+    return hasBooted ? 'ready' : 'bios';
+  });
+
+  // Play startup sound when ready
+  React.useEffect(() => {
+    if (bootState === 'ready') {
+      soundService.playStartupSound();
+    }
+  }, [bootState]);
+
   // State for open windows (array of app ids)
   const [openWindows, setOpenWindows] = useState<string[]>([]);
   // State for minimized windows (array of app ids)
@@ -38,6 +56,41 @@ const App: React.FC = () => {
     setStartMenuOpen((open) => !open);
   }, []);
 
+  // Handle Restart
+  const handleRestart = useCallback(() => {
+    localStorage.removeItem('hasBootedBefore');
+    setBootState('bios');
+    setOpenWindows([]);
+    setMinimizedWindows([]);
+    setStartMenuOpen(false);
+  }, []);
+
+  const onBIOSComplete = () => {
+    setBootState('booting');
+  };
+
+  const onBootComplete = () => {
+    setBootState('login');
+  };
+
+  const onLoginComplete = (username: string) => {
+    localStorage.setItem('hasBootedBefore', 'true');
+    setBootState('ready');
+    // Optionally use the username
+  };
+
+  if (bootState === 'bios') {
+    return <BIOSScreen onComplete={onBIOSComplete} />;
+  }
+
+  if (bootState === 'booting') {
+    return <WinBootScreen onComplete={onBootComplete} />;
+  }
+
+  if (bootState === 'login') {
+    return <LoginScreen onLogin={onLoginComplete} />;
+  }
+
   return (
     <div className="desktop">
       <Desktop
@@ -58,6 +111,7 @@ const App: React.FC = () => {
         open={startMenuOpen}
         apps={apps}
         onAppClick={openWindow}
+        onRestart={handleRestart}
       />
     </div>
   );

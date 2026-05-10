@@ -1,11 +1,12 @@
 /* Base styles */
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'MS Sans Serif', Tahoma, sans-serif;
   background-color: #008080; /* Teal background */
   margin: 0;
   padding: 0;
   overflow: hidden; /* Prevent scrollbars */
   color: black;
+  -webkit-font-smoothing: none; /* Crisper text for retro feel */
 }
 
 /* Desktop styles */
@@ -57,21 +58,21 @@ body {
 
 /* Window styles */
 .window {
-  background-color: #C0C0C0; /* Window background color - Changed to match Win95 better */
-  border-top: 2px solid #FFFFFF;
-  border-left: 2px solid #FFFFFF;
-  border-right: 2px solid #000000;
-  border-bottom: 2px solid #000000;
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4); /* More subtle shadow */
-  position: absolute; /* Absolute positioning within the desktop */
+  background-color: #C0C0C0;
+  border-top: 1px solid #dfdfdf;
+  border-left: 1px solid #dfdfdf;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+  box-shadow: inset 1px 1px 0 #fff, inset -1px -1px 0 #808080;
+  position: absolute;
   top: 50px;
   left: 100px;
-  width: 640px; /* Default width */
-  height: 400px; /* Default height */
-  display: none; /* Initially hidden */
-  flex-direction: column; /* Use flexbox for layout */
-  z-index: 10; /* Ensure windows are above desktop icons */
-  box-sizing: border-box; /* Include border in width/height */
+  width: 640px;
+  height: 400px;
+  display: none;
+  flex-direction: column;
+  z-index: 10;
+  box-sizing: border-box;
 }
 
 .window.active {
@@ -118,32 +119,33 @@ body {
 }
 
 .window-control-button {
-  width: 16px; /* Button size */
-  height: 16px;
-  background-color: #C0C0C0; /* Button background */
-  border-top: 1px solid #FFFFFF;
-  border-left: 1px solid #FFFFFF;
-  border-right: 1px solid #000000;
-  border-bottom: 1px solid #000000;
-  box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.5); /* Inner highlight */
+  width: 16px;
+  height: 14px;
+  background-color: #C0C0C0;
+  border-top: 1px solid #fff;
+  border-left: 1px solid #fff;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+  box-shadow: inset 1px 1px 0 #dfdfdf, inset -1px -1px 0 #808080;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  font-family: "Times New Roman", serif; /* More classic font for symbols */
-  font-size: 0.8rem; /* Adjust font size as needed */
+  font-family: "MS Sans Serif", sans-serif;
+  font-size: 10px;
   font-weight: bold;
-  line-height: 0;      /* Important for vertical centering of symbols */
-  padding: 0;          /* Reset padding */
+  line-height: 0;
+  padding: 0;
   color: black;
 }
 
 .window-control-button:active {
-  border-top: 1px solid #000000;
-  border-left: 1px solid #000000;
-  border-right: 1px solid #FFFFFF;
-  border-bottom: 1px solid #FFFFFF;
-  box-shadow: none; /* Remove shadow on press */
+  border-top: 1px solid #000;
+  border-left: 1px solid #000;
+  border-right: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  box-shadow: none;
+  padding: 1px 0 0 1px; /* Slight shift when pressed */
 }
 
 .window-minimize { /* Uses text symbol */ }
@@ -151,16 +153,18 @@ body {
 
 
 .window-content {
-  padding: 2px; /* Minimal padding inside window */
-  font-size: 0.9rem;
-  flex-grow: 1; /* Allow content to fill remaining space */
-  overflow: auto; /* Add scrollbars ONLY if content overflows */
-  background-color: white; /* Standard content background */
-  border: 1px inset #808080; /* Inset border for content area */
-  margin: 2px; /* Margin around the content area */
-  position: relative; /* Needed for absolute positioned elements inside */
-  display: flex; /* Make content a flex container for easier layout */
-  flex-direction: column; /* Stack children vertically */
+  padding: 2px;
+  font-size: 12px;
+  flex-grow: 1;
+  overflow: auto;
+  background-color: #fff;
+  border: 1px solid;
+  border-color: #808080 #dfdfdf #dfdfdf #808080;
+  box-shadow: inset 1px 1px 0 #000;
+  margin: 2px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Specific app content styling */
@@ -377,15 +381,16 @@ body {
 /* Taskbar styles */
 #taskbar {
   background-color: #C0C0C0;
-  border-top: 2px solid #FFFFFF;
+  border-top: 1px solid #fff;
+  box-shadow: inset 0 1px 0 #dfdfdf;
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 36px;
+  height: 30px;
   display: flex;
   align-items: center;
-  padding: 3px;
+  padding: 2px;
   z-index: 40;
   box-sizing: border-box;
 }
@@ -393,19 +398,21 @@ body {
 
 #start-button {
   background-color: #C0C0C0;
-  border-top: 2px solid #FFFFFF;
-  border-left: 2px solid #FFFFFF;
-  border-right: 2px solid #000000;
-  border-bottom: 2px solid #000000;
-  padding: 2px 8px;
-  margin-right: 5px;
+  border-top: 1px solid #fff;
+  border-left: 1px solid #fff;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+  box-shadow: inset 1px 1px 0 #dfdfdf, inset -1px -1px 0 #808080;
+  padding: 2px 4px;
+  margin-right: 4px;
   cursor: pointer;
-  font-size: 0.8rem;
+  font-family: 'MS Sans Serif', sans-serif;
+  font-size: 11px;
   font-weight: bold;
   display: flex;
   align-items: center;
   gap: 4px;
-  height: 30px;
+  height: 24px;
   box-sizing: border-box;
 }
 
